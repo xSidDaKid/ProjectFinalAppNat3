@@ -2,6 +2,7 @@ package com.example.quizzer.domaine.entité
 
 class Quiz {
     var id:Int = 0
+    var idCreateur:Int = 0
     lateinit var titre:String
     lateinit var question:String
     lateinit var choix:Array<String>
