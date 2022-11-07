@@ -1,5 +1,7 @@
 package com.example.quizzer.domaine.entité
 
+import java.util.*
+
 class Quiz {
     var id:Int = 0
     var idCreateur:Int = 0
@@ -19,6 +21,6 @@ class Quiz {
     }
 
     fun mélangerQuestion(){
-        return Collections.shuffle(reponses)
+        return Collections.shuffle(reponses.toMutableList())
     }
 }
