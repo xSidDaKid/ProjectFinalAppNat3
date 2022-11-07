@@ -62,4 +62,8 @@ class VueQuiz : Fragment(), IVueQuiz {
     override fun afficherRéponse(réponse: String) {
         TODO("Not yet implemented")
     }
+
+    override fun réinitialiser() {
+        TODO("Not yet implemented")
+    }
 }
