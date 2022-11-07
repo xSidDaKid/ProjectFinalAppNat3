@@ -29,4 +29,9 @@
         android:name="com.example.quizzer.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/creationQuiz"
+        android:name="com.example.quizzer.creationQuiz"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_vue_creation_quiz" />
 </navigation>
