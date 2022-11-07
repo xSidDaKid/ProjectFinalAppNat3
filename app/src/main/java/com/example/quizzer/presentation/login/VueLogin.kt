@@ -1,4 +1,4 @@
-package com.example.quizzer.presentation
+package com.example.quizzer.presentation.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
