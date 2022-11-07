@@ -17,4 +17,8 @@ class Quiz {
     fun getReponse(indice:Int): String {
         return reponses[indice] as String
     }
+
+    fun mélangerQuestion(){
+        return Collections.shuffle(reponses)
+    }
 }
