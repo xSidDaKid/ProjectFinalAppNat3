@@ -147,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/orange"
-                android:text="@string/creer" />
+                android:text="@string/creer"
+                android:onClick="traiterCreationQuiz"/>
         </LinearLayout>
     </LinearLayout>
 
