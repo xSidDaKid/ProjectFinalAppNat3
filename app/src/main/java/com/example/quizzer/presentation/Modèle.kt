@@ -29,6 +29,10 @@ object Modèle {
         return réponseString
     }
 
+    fun getIndexRéponse():Int{
+        return tourDesRéponses
+    }
+
     fun getRéponseParIndex(index : Int): Map<String,String>{
         return quiz.reponses.get(index)
     }

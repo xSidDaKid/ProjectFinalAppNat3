@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutQuiz"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.quizzer.presentation.quiz.VueQuiz">
+    tools:context=".presentation.quiz.VueQuiz">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -69,9 +70,8 @@
                     android:id="@+id/choix3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Button"
                     android:tag="3"
-                    />
+                    android:text="Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -84,9 +84,8 @@
                     android:id="@+id/choix4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Button"
                     android:tag="4"
-                    />
+                    android:text="Button" />
             </LinearLayout>
         </LinearLayout>
 

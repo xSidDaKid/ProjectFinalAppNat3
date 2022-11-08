@@ -6,13 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TableLayout
+import android.widget.TextView
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.quizzer.R
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.*
 
 
 class VueQuiz : Fragment(), IVueQuiz {
+
+
+    lateinit var navController : NavController;
 
     var présentateur : PrésentateurQuiz? = null
 
@@ -24,29 +29,39 @@ class VueQuiz : Fragment(), IVueQuiz {
         val vue = inflater.inflate(R.layout.fragment_quiz, container, false)
         présentateur = PrésentateurQuiz( Modèle, this)
 
-
+        présentateur?.réinitialiserQuiz()
         initialiserTexteBouttons(vue)
         attacherÉcouteurChoix( vue )
+        prochaineRéponse(vue)
+        println("111")
         return vue
     }
+
+//    override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        navController = Navigation.findNavController(view);
+//    }
+
 
     private fun attacherÉcouteurChoix( vue : View ){
 
         for( i in 1 until 5 ) {
+            println("333")
             (vue.findViewWithTag(Integer.toString(i)) as Button).setOnClickListener(
                 View.OnClickListener {
                         view -> val boutton = view as Button
                         var reponse = boutton.text.toString()
-                        //présentateur.envoyeRéponse(reponse)
-
-                    //presentateur envoi de la reponse
+                        présentateur?.envoyerRéponse(reponse,présentateur?.envoyerIndexRéponse())
+                        prochaineRéponse(vue)
+                        println("222")
                 }
             )
         }
     }
 
-    private fun prochaineRéponse(){
-        var button = view?.findViewById(R.id.reponseQuiz) as Button
+    private fun prochaineRéponse(vue : View){
+        var button = vue.findViewById(R.id.reponseQuiz) as Button
         button.text = présentateur?.envoyerProchaineRéponse()
     }
 
@@ -64,7 +79,5 @@ class VueQuiz : Fragment(), IVueQuiz {
         TODO("Not yet implemented")
     }
 
-    override fun réinitialiser() {
-        TODO("Not yet implemented")
-    }
+
 }

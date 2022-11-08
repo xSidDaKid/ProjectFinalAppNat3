@@ -10,12 +10,20 @@ class PrésentateurQuiz(var modèle: Modèle, var vue: IVueQuiz = VueQuiz()) : I
         return modèle.getChoix()
     }
 
-    fun envoyerRéponse(réponse:String, indexRéponse: Int):Boolean{
+    fun envoyerRéponse(réponse:String, indexRéponse: Int?):Boolean{
+        if(indexRéponse==null){
+            return modèle.soumettreRéponse(réponse,0)
+        }
         return modèle.soumettreRéponse(réponse,indexRéponse)
+
     }
 
     fun envoyerProchaineRéponse(): String{
         return modèle.getProchaineRéponse()
+    }
+
+    fun envoyerIndexRéponse():Int{
+        return modèle.getIndexRéponse()
     }
 
 
@@ -28,12 +36,8 @@ class PrésentateurQuiz(var modèle: Modèle, var vue: IVueQuiz = VueQuiz()) : I
         TODO("Not yet implemented")
     }
 
-    override fun réinitialiserQuiz() {
-        TODO("Not yet implemented")
-    }
 
-    private fun réinitialiserGrille(){
+    override fun réinitialiserQuiz(){
         modèle.initialiserQuizParDefaut()
-        vue.réinitialiser()
     }
 }
