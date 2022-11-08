@@ -7,8 +7,8 @@ class Quiz {
     var idCreateur:Int = 0
     lateinit var titre:String
     lateinit var question:String
-    lateinit var choix:Array<String>
-    lateinit var reponses:Array<String>
+    lateinit var choix:List<String>
+    lateinit var reponses:List<Map<String,String>>
 
 
     fun getChoix(indice:Int): String {
@@ -16,8 +16,8 @@ class Quiz {
     }
 
 
-    fun getReponse(indice:Int): String {
-        return reponses[indice] as String
+    fun getReponse(index : Int ): Map<String,String> {
+        return reponses[index]
     }
 
     fun mélangerQuestion(){
