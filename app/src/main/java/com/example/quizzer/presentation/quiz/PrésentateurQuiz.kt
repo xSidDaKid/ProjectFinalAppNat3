@@ -16,4 +16,9 @@ class PrésentateurQuiz(var modèle: Modèle, var vue: IVueQuiz = VueQuiz()) : I
     override fun réinitialiserQuiz() {
         TODO("Not yet implemented")
     }
+
+    private fun réinitialiserGrille(){
+        modèle.initialiserQuizParDefaut()
+        vue.réinitialiser()
+    }
 }

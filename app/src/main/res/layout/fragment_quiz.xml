@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QuizFragment">
+    tools:context="com.example.quizzer.presentation.quiz.VueQuiz">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -31,9 +31,10 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/choix1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:tag="1"
                     android:text="Button" />
             </LinearLayout>
 
@@ -44,9 +45,10 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/choix2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:tag="2"
                     android:text="Button" />
             </LinearLayout>
         </LinearLayout>
@@ -64,10 +66,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/choix3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Button" />
+                    android:text="Button"
+                    android:tag="3"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -77,10 +81,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/choix4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Button" />
+                    android:text="Button"
+                    android:tag="4"
+                    />
             </LinearLayout>
         </LinearLayout>
 
@@ -91,7 +97,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/scoreQuiz"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -106,7 +112,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/questionQuiz"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -121,7 +127,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/reponseQuiz"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

@@ -2,9 +2,9 @@ package com.example.quizzer.domaine.interacteur
 
 import com.example.quizzer.accesAuxDonnées.ISourceDeDonées
 
-class ObtenirReponses(var sourceDeDonées : ISourceDeDonées) {
+class ObtenirReponses() {
 
-    fun obtenirReponses() : List< Map<String,String> >{
+    fun obtenirReponses(sourceDeDonées : ISourceDeDonées) : List< Map<String,String> >{
 
         var reponses = trierReponses(sourceDeDonées.obtenirReponsesBrutes())
         return reponses
