@@ -37,7 +37,7 @@ class VueQuiz : Fragment(), IVueQuiz {
                 View.OnClickListener {
                         view -> val boutton = view as Button
                         var reponse = boutton.text.toString()
-
+                        //présentateur.envoyeRéponse(reponse)
 
                     //presentateur envoi de la reponse
                 }
@@ -45,12 +45,16 @@ class VueQuiz : Fragment(), IVueQuiz {
         }
     }
 
+    private fun prochaineRéponse(){
+        var button = view?.findViewById(R.id.reponseQuiz) as Button
+        button.text = présentateur?.envoyerProchaineRéponse()
+    }
+
     private fun initialiserTexteBouttons(vue : View){
-        // À appliquer sur le presentateur
-        var listeChoix= Modèle.getChoix()
+        var listeChoix= présentateur?.envoyerChoix()
         for( i in 1 until 5 ) {
             var boutton = vue.findViewWithTag(Integer.toString(i)) as Button
-            boutton.text= listeChoix[i-1]
+            boutton.text= listeChoix?.get(i-1)
 
         }
     }

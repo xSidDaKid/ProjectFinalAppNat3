@@ -8,7 +8,7 @@ import com.example.quizzer.domaine.interacteur.VerificationReponse
 object Modèle {
 
     private var quiz = Quiz()
-
+    var tourDesRéponses:Int = 0
 
     fun initialiserQuizParDefaut() {
         quiz.reponses = ObtenirReponses().obtenirReponses(ReponsesParDefaut())
@@ -20,6 +20,17 @@ object Modèle {
     fun soumettreRéponse(reponse: String, index: Int) : Boolean {
         var verification = VerificationReponse().verificationReponse(reponse, index, quiz)
         return verification
+    }
+
+    fun getProchaineRéponse(): String{
+        var réponse = quiz.reponses.get(tourDesRéponses)
+        tourDesRéponses++
+        var réponseString = réponse.toList().get(0).first
+        return réponseString
+    }
+
+    fun getRéponseParIndex(index : Int): Map<String,String>{
+        return quiz.reponses.get(index)
     }
 
     fun getReponses() :  List<Map<String, String>> {
