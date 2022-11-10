@@ -5,37 +5,29 @@
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/quizFragment">
 
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.quizzer.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+
     <fragment
         android:id="@+id/quizFragment"
-        android:name="com.example.quizzer.QuizFragment"
+        android:name="com.example.quizzer.presentation.quiz.VueQuiz"
         android:label="fragment_quiz"
         tools:layout="@layout/fragment_quiz" >
         <action
-            android:id="@+id/action_quizFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_quizFragment_to_creationQuiz"
+            app:destination="@id/creationQuiz" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.quizzer.registrationFragment"
+        android:name="com.example.quizzer.presentation.registration.VueRegistration"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.quizzer.LoginFragment"
+        android:name="com.example.quizzer.presentation.login.VueLogin"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/creationQuiz"
-        android:name="com.example.quizzer.creationQuiz"
+        android:name="com.example.quizzer.presentation.creationQuiz.VueCreationQuiz"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_creation_quiz" >
-        <action
-            android:id="@+id/action_creationQuiz_to_quizFragment"
-            app:destination="@id/quizFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_creation_quiz" />
 </navigation>

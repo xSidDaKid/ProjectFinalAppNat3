@@ -9,10 +9,10 @@ import com.example.quizzer.presentation.quiz.VueQuiz
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_quiz)
+        setContentView(R.layout.activity_main)
 
 
-        // Création de la vue
+     /*   // Création de la vue
         val vue = VueQuiz()
         // et du présentateur
         val présentateur = PrésentateurQuiz(Modèle, vue)
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         // Ajout du fragment
         val ft = supportFragmentManager.beginTransaction()
         ft.add(R.id.layoutQuiz, vue)
-        ft.commit()
+        ft.commit()*/
 
 
     }
