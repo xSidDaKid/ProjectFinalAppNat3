@@ -17,7 +17,7 @@ class Quiz {
 
 
     fun getReponse(index : Int ): Map<String,String> {
-        return reponses[index]
+        return reponses[index-1]
     }
 
     fun mélangerQuestion(){

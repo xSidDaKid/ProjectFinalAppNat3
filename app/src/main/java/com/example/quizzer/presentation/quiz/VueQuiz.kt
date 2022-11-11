@@ -33,7 +33,6 @@ class VueQuiz : Fragment(), IVueQuiz {
         initialiserTexteBouttons(vue)
         attacherÉcouteurChoix( vue )
         prochaineRéponse(vue)
-        println("111")
         return vue
     }
 
@@ -47,14 +46,12 @@ class VueQuiz : Fragment(), IVueQuiz {
     private fun attacherÉcouteurChoix( vue : View ){
 
         for( i in 1 until 5 ) {
-            println("333")
             (vue.findViewWithTag(Integer.toString(i)) as Button).setOnClickListener(
                 View.OnClickListener {
                         view -> val boutton = view as Button
                         var reponse = boutton.text.toString()
                         présentateur?.envoyerRéponse(reponse,présentateur?.envoyerIndexRéponse())
                         prochaineRéponse(vue)
-                        println("222")
                 }
             )
         }
@@ -66,7 +63,6 @@ class VueQuiz : Fragment(), IVueQuiz {
     }
 
     private fun initialiserTexteBouttons(vue : View){
-        print("initialiser")
         var listeChoix= présentateur?.envoyerChoix()
         for( i in 1 until 5 ) {
             var boutton = vue.findViewWithTag(Integer.toString(i)) as Button
