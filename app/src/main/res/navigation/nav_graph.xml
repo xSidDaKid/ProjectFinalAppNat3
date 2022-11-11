@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/vueMenuPrincipal">
+    app:startDestination="@id/vueLogin">
 
 
     <fragment
@@ -15,15 +15,8 @@
         android:id="@+id/registrationFragment"
         android:name="com.example.quizzer.presentation.registration.VueRegistration"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" />
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.quizzer.presentation.login.VueLogin"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_registrationFragment"
-            app:destination="@id/registrationFragment" />
+        tools:layout="@layout/fragment_registration" >
+
     </fragment>
     <fragment
         android:id="@+id/creationQuiz"
@@ -42,5 +35,14 @@
         <action
             android:id="@+id/action_vueMenuPrincipal_to_creationQuiz"
             app:destination="@id/creationQuiz" />
+    </fragment>
+    <fragment
+        android:id="@+id/vueLogin"
+        android:name="com.example.quizzer.presentation.login.VueLogin"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_vueLogin_to_vueMenuPrincipal"
+            app:destination="@id/vueMenuPrincipal" />
     </fragment>
 </navigation>
