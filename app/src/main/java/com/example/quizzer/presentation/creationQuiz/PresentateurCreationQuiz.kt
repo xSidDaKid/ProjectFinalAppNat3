@@ -8,6 +8,6 @@ class PresentateurCreationQuiz(var modele: Modèle, var vue: IVueCreation = VueC
     IPresentateurCreation {
 
     override fun traiterCreationQuiz() {
-        vue.naviguerVersQuiz();
+        vue.naviguerVersQuiz()
     }
 }

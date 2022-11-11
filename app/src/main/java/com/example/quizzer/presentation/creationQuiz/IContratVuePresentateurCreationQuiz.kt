@@ -2,10 +2,10 @@ package com.example.quizzer.presentation.creationQuiz
 
 interface IContratVuePresentateurCreationQuiz {
     interface IVueCreation {
-        fun naviguerVersQuiz();
+        fun naviguerVersQuiz()
     }
 
     interface IPresentateurCreation {
-        fun traiterCreationQuiz();
+        fun traiterCreationQuiz()
     }
 }
