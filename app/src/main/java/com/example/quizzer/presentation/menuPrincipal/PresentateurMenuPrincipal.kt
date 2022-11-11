@@ -8,4 +8,8 @@ class PresentateurMenuPrincipal(var modele: Modèle, var vue: IVueMenuPrincipal 
     override fun creerQuiz() {
         vue.naviguerVersCreationQuiz()
     }
+
+    override fun demarrerQuiz() {
+        vue.naviguerVersDemarrerQuiz()
+    }
 }

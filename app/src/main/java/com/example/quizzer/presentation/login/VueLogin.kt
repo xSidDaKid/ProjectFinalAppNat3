@@ -18,6 +18,7 @@ class VueLogin : Fragment(), IContratVuePresentateurLogin.IVueLogin {
 
     lateinit var navController: NavController;
     lateinit var btnLogin: Button
+    lateinit var btnEnregistrer: Button
     var présentateur: PresentateurLogin? = null
 
     override fun onCreateView(
@@ -28,9 +29,12 @@ class VueLogin : Fragment(), IContratVuePresentateurLogin.IVueLogin {
         présentateur = PresentateurLogin(Modèle, this)
 
         btnLogin = vue.findViewById<Button>(R.id.btnLogin)
+        btnEnregistrer = vue.findViewById<Button>(R.id.btnEnregistrer)
         attacherÉcouteurLogin()
+        attacherÉcouteurEnregistrement()
         return vue
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,9 +46,19 @@ class VueLogin : Fragment(), IContratVuePresentateurLogin.IVueLogin {
         navController.navigate(R.id.vueMenuPrincipal)
     }
 
+    override fun naviguerEnregistrer() {
+        navController.navigate(R.id.registrationFragment)
+    }
+
     private fun attacherÉcouteurLogin() {
         btnLogin.setOnClickListener {
             présentateur?.traiterMenu()
+        }
+    }
+
+    private fun attacherÉcouteurEnregistrement() {
+        btnEnregistrer.setOnClickListener {
+            présentateur?.traiterEnregistrer()
         }
     }
 }

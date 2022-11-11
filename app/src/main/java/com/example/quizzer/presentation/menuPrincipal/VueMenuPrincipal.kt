@@ -17,6 +17,7 @@ class VueMenuPrincipal : Fragment(), IContratVuePresentateurMenuPrincipal.IVueMe
 
     lateinit var navController: NavController;
     lateinit var btnCreerQuiz: Button
+    lateinit var btnDemarrer: Button
     var présentateur: PresentateurMenuPrincipal? = null
 
     override fun onCreateView(
@@ -27,7 +28,9 @@ class VueMenuPrincipal : Fragment(), IContratVuePresentateurMenuPrincipal.IVueMe
         présentateur = PresentateurMenuPrincipal(Modèle, this)
 
         btnCreerQuiz = vue.findViewById<Button>(R.id.btnCreerQuiz)
+        btnDemarrer = vue.findViewById<Button>(R.id.btnDemarrer)
         attacherÉcouteurCreerQuiz()
+        attacherÉcouteurDemarrerQuiz()
 
         return vue
     }
@@ -35,6 +38,12 @@ class VueMenuPrincipal : Fragment(), IContratVuePresentateurMenuPrincipal.IVueMe
     private fun attacherÉcouteurCreerQuiz() {
         btnCreerQuiz.setOnClickListener {
             présentateur?.creerQuiz()
+        }
+    }
+
+    private fun attacherÉcouteurDemarrerQuiz() {
+        btnDemarrer.setOnClickListener {
+            présentateur?.demarrerQuiz()
         }
     }
 
@@ -46,6 +55,10 @@ class VueMenuPrincipal : Fragment(), IContratVuePresentateurMenuPrincipal.IVueMe
 
     override fun naviguerVersCreationQuiz() {
         navController.navigate(R.id.creationQuiz)
+    }
+
+    override fun naviguerVersDemarrerQuiz() {
+        navController.navigate(R.id.quizFragment)
     }
 
 }

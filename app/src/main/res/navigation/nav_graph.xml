@@ -44,5 +44,8 @@
         <action
             android:id="@+id/action_vueLogin_to_vueMenuPrincipal"
             app:destination="@id/vueMenuPrincipal" />
+        <action
+            android:id="@+id/action_vueLogin_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
     </fragment>
 </navigation>
