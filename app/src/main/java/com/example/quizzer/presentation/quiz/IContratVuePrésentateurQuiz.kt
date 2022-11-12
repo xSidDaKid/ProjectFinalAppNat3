@@ -2,12 +2,12 @@ package com.example.quizzer.presentation.quiz
 
 interface IContratVuePrésentateurQuiz {
 
-    interface IVueQuiz{
+    interface IVueQuiz {
         fun afficherRéponse(réponse: String)
 
     }
 
-    interface IPrésentateurQuiz{
+    interface IPrésentateurQuiz {
         fun traiterRéponseSaisi(réponseChoisise: String)
 
         fun traiterQuitterQuiz()
