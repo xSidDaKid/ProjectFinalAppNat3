@@ -26,6 +26,6 @@
     <string name="enregistrer">Enregistrer</string>
 
     <!-- Quiz -->
-    <string name="score">Score: </string>
+    <string name="score">Score: 0</string>
 
 </resources>
