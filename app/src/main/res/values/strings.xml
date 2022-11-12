@@ -33,7 +33,5 @@
     <string name="email">Adresse courriel</string>
     <string name="confirmerMDP">Confirmer Mot de Passe</string>
     <string name="compteExistant">Avez deja un compte? Cliquez ici</string>
-    <string name="newCompte">Créer un nouveau compte</string>
-    <string name="newCompte">Créer un nouveau compte</string>
 
 </resources>
