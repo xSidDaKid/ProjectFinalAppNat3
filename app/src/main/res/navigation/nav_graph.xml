@@ -17,6 +17,9 @@
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
 
+        <action
+            android:id="@+id/action_registrationFragment_to_vueMenuPrincipal"
+            app:destination="@id/vueMenuPrincipal" />
     </fragment>
     <fragment
         android:id="@+id/creationQuiz"
