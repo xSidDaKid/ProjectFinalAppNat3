@@ -15,7 +15,6 @@ import com.example.quizzer.presentation.creationQuiz.PresentateurCreationQuiz
 
 class VueLogin : Fragment(), IContratVuePresentateurLogin.IVueLogin {
 
-
     lateinit var navController: NavController;
     lateinit var btnLogin: Button
     lateinit var btnEnregistrer: Button
