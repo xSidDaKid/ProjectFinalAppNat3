@@ -26,7 +26,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="a"
+                android:text=""
                 android:textSize="30dp" />
         </LinearLayout>
 
@@ -110,19 +110,24 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/scoreQuiz"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="@string/score"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:background="@color/orange"
+                />
 
         </LinearLayout>
 
