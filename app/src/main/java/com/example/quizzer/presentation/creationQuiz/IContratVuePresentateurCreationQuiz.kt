@@ -6,6 +6,11 @@ interface IContratVuePresentateurCreationQuiz {
     }
 
     interface IPresentateurCreation {
-        fun traiterCreationQuiz()
+        fun traiterCreationQuiz(
+            titre: String,
+            question: String,
+            choix: String,
+            reponse: String
+        )
     }
 }

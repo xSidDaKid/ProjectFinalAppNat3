@@ -4,6 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Creation Quiz -->
+    <string name="titre">Titre</string>
+    <string name="hintTitre">Quiz sur les fruits</string>
     <string name="question">Question</string>
     <string name="hintQuestion">Quel est la couleur de ce fruit?</string>
     <string name="choix">Choix</string>

@@ -10,10 +10,46 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- TITRE -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:textAlignment="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/titre"
+                android:textSize="30dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp">
+
+            <EditText
+                android:id="@+id/titre"
+                android:layout_width="364dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/orange"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:text="@string/hintTitre"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+        </LinearLayout>
         <!-- QUESTION -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="71dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:textAlignment="center">
 
@@ -29,7 +65,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="71dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:paddingHorizontal="20dp">
 
@@ -50,7 +86,7 @@
         <!-- Reponse -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="71dp"
+            android:layout_height="60dp"
             android:orientation="horizontal">
 
             <TextView
@@ -65,7 +101,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="71dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:paddingHorizontal="20dp">
 
@@ -86,7 +122,7 @@
         <!-- Reponse -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="71dp"
+            android:layout_height="60dp"
             android:orientation="horizontal">
 
             <TextView
@@ -102,7 +138,7 @@
         <!-- Reponse -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="111dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:paddingHorizontal="20dp">
 

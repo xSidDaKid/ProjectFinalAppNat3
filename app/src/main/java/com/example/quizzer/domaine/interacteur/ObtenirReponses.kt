@@ -4,23 +4,20 @@ import com.example.quizzer.accesAuxDonnées.ISourceDeDonées
 
 class ObtenirReponses() {
 
-    fun obtenirReponses(sourceDeDonées : ISourceDeDonées) : List< Map<String,String> >{
+    fun obtenirReponses(sourceDeDonées: ISourceDeDonées): List<Map<String, String>> {
 
         var reponses = trierReponses(sourceDeDonées.obtenirReponsesBrutes())
         return reponses
     }
 
-    private fun trierReponses( reponses:String ) : List< Map<String,String>>{
+    fun trierReponses(reponses: String): List<Map<String, String>> {
         var premierFiltre = reponses.split(",")
-        var réponsesTriés : List<Map<String,String>> = emptyList()
+        var réponsesTriés: List<Map<String, String>> = emptyList()
 
-        for(item in premierFiltre){
+        for (item in premierFiltre) {
             var deuxièmeFiltre = item.split(":")
-            réponsesTriés +=  mapOf<String,String>(deuxièmeFiltre[0] to deuxièmeFiltre[1])
-            
-
+            réponsesTriés += mapOf<String, String>(deuxièmeFiltre[0] to deuxièmeFiltre[1])
         }
-
         return réponsesTriés
     }
 }

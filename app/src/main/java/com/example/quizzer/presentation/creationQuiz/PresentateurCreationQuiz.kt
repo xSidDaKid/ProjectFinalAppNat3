@@ -7,7 +7,15 @@ import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCrea
 class PresentateurCreationQuiz(var modele: Modèle, var vue: IVueCreation = VueCreationQuiz()) :
     IPresentateurCreation {
 
-    override fun traiterCreationQuiz() {
+    override fun traiterCreationQuiz(
+        titre: String,
+        question: String,
+        choix: String,
+        reponse: String
+    ) {
+        //var réponsesTriés = trierReponses(reponse)
+        modele.ajouterQuiz(titre, question, choix, reponse)
         vue.naviguerVersQuiz()
     }
+
 }

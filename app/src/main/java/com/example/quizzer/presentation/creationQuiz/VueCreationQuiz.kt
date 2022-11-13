@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.quizzer.R
@@ -27,7 +28,7 @@ class VueCreationQuiz : Fragment(), IVueCreation {
         présentateur = PresentateurCreationQuiz(Modèle, this)
 
         btnCreer = vue.findViewById<Button>(R.id.btnCreer)
-        attacherÉcouteurQuiz()
+        attacherÉcouteurQuiz(vue)
         return vue
     }
 
@@ -41,9 +42,14 @@ class VueCreationQuiz : Fragment(), IVueCreation {
         navController.navigate(R.id.quizFragment)
     }
 
-    private fun attacherÉcouteurQuiz() {
+    private fun attacherÉcouteurQuiz(vue: View) {
         btnCreer.setOnClickListener {
-            présentateur?.traiterCreationQuiz()
+            var titre = vue.findViewById<EditText>(R.id.titre).text.toString()
+            var question = vue.findViewById<EditText>(R.id.question).text.toString()
+            var choix = vue.findViewById<EditText>(R.id.choix).text.toString()
+            var reponse = vue.findViewById<EditText>(R.id.reponse).text.toString()
+
+            présentateur?.traiterCreationQuiz(titre, question, choix, reponse)
         }
     }
 }
