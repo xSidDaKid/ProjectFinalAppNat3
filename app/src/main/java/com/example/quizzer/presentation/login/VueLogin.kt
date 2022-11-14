@@ -42,6 +42,7 @@ class VueLogin : Fragment(), IVueLogin {
     }
 
     override fun naviguerMenu() {
+        navController.popBackStack()
         navController.navigate(R.id.vueMenuPrincipal)
     }
 
