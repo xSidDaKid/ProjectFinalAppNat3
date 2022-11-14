@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -17,7 +18,7 @@ class VueLogin : Fragment(), IVueLogin {
 
     lateinit var navController: NavController;
     lateinit var btnLogin: Button
-    lateinit var btnEnregistrer: Button
+    lateinit var txtEnregistrer: TextView
     var présentateur: PresentateurLogin? = null
 
     override fun onCreateView(
@@ -28,7 +29,7 @@ class VueLogin : Fragment(), IVueLogin {
         présentateur = PresentateurLogin(Modèle, this)
 
         btnLogin = vue.findViewById<Button>(R.id.btnLogin)
-        btnEnregistrer = vue.findViewById<Button>(R.id.btnEnregistrer)
+        txtEnregistrer = vue.findViewById<TextView>(R.id.txtEnregistrer)
         attacherÉcouteurLogin(vue)
         attacherÉcouteurEnregistrement()
         return vue
@@ -65,7 +66,7 @@ class VueLogin : Fragment(), IVueLogin {
     }
 
     private fun attacherÉcouteurEnregistrement() {
-        btnEnregistrer.setOnClickListener {
+        txtEnregistrer.setOnClickListener {
             présentateur?.traiterEnregistrer()
         }
     }
