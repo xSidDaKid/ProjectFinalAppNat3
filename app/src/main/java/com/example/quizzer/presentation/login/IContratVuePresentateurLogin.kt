@@ -9,5 +9,6 @@ interface IContratVuePresentateurLogin {
     interface IPresentateurLogin {
         fun traiterMenu()
         fun traiterEnregistrer()
+        fun verifierConnexion(nomUtilisateur: String, password: String): Boolean
     }
 }

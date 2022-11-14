@@ -3,6 +3,7 @@ package com.example.quizzer.presentation
 import com.example.quizzer.accesAuxDonnées.ReponsesParDefaut
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.domaine.entité.QuizUtilisateurScore
+import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.domaine.interacteur.ObtenirReponses
 import com.example.quizzer.domaine.interacteur.VerificationReponse
 
@@ -13,6 +14,8 @@ object Modèle {
 
     private var quiz = Quiz()
     private var quizScore = QuizUtilisateurScore()
+    private var utilisateur = Utilisateur()
+
     var tourDesRéponses: Int = 0
     var reponseBrut: String = ""
 
@@ -108,4 +111,11 @@ object Modèle {
         return quizScore.score
     }
 
+    fun getnomUtilisateur(): String {
+        return utilisateur.nomUtilisateur
+    }
+
+    fun getPassword(): String {
+        return utilisateur.motDePasse
+    }
 }

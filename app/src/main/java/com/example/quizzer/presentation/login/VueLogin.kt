@@ -1,19 +1,19 @@
 package com.example.quizzer.presentation.login
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.quizzer.R
 import com.example.quizzer.presentation.Modèle
-import com.example.quizzer.presentation.creationQuiz.PresentateurCreationQuiz
+import com.example.quizzer.presentation.login.IContratVuePresentateurLogin.IVueLogin
+import com.google.android.material.textfield.TextInputEditText
 
-class VueLogin : Fragment(), IContratVuePresentateurLogin.IVueLogin {
+class VueLogin : Fragment(), IVueLogin {
 
     lateinit var navController: NavController;
     lateinit var btnLogin: Button
@@ -29,7 +29,7 @@ class VueLogin : Fragment(), IContratVuePresentateurLogin.IVueLogin {
 
         btnLogin = vue.findViewById<Button>(R.id.btnLogin)
         btnEnregistrer = vue.findViewById<Button>(R.id.btnEnregistrer)
-        attacherÉcouteurLogin()
+        attacherÉcouteurLogin(vue)
         attacherÉcouteurEnregistrement()
         return vue
     }
@@ -49,9 +49,17 @@ class VueLogin : Fragment(), IContratVuePresentateurLogin.IVueLogin {
         navController.navigate(R.id.registrationFragment)
     }
 
-    private fun attacherÉcouteurLogin() {
+    private fun attacherÉcouteurLogin(vue: View) {
         btnLogin.setOnClickListener {
-            présentateur?.traiterMenu()
+            var nomUtilisateur = vue.findViewById<TextInputEditText>(R.id.username).text.toString()
+            var password = vue.findViewById<TextInputEditText>(R.id.password).text.toString()
+            if (présentateur?.verifierConnexion(nomUtilisateur, password) == true) {
+                présentateur?.traiterMenu()
+            } else {
+                vue.findViewById<TextInputEditText>(R.id.username).setError("Invalide")
+                vue.findViewById<TextInputEditText>(R.id.password).setError("Invalide")
+                navController = Navigation.findNavController(vue);
+            }
         }
     }
 
