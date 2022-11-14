@@ -24,7 +24,7 @@
     <!-- Login -->
     <string name="username">Nom d\'utilisateur</string>
     <string name="mdp">Mot de Passe</string>
-    <string name="register">Vous n\'avez pas un comtpte?</string>
+    <string name="register">Vous n\'avez pas un comtpte? Appuyer ici</string>
     <string name="enregistrer">Enregistrer</string>
     <string name="login">Login</string>
 

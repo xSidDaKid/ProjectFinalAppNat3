@@ -1,10 +1,11 @@
 package com.example.quizzer.presentation.registration
 
 interface IContratVueRegistration {
-    interface IVueRegistration{
-
+    interface IVueRegistration {
+        fun naviguerLogin()
     }
-    interface IPrésentateurRegistration{
 
+    interface IPrésentateurRegistration {
+        fun traiterLogin()
     }
 }
