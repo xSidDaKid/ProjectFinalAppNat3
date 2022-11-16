@@ -11,7 +11,7 @@
     <string name="choix">Choix</string>
     <string name="hintChoix">Jaune</string>
     <string name="reponse">Réponse</string>
-    <string name="hintReponse">Choix:Reponse,Choix:Reponse,...</string>
+    <string name="hintReponse">Reponse:Choix,Reponse:Choix,...</string>
     <string name="hint">Séparer les choix par une virgule et la réponse par un deux point</string>
     <string name="creer">Créer</string>
 
