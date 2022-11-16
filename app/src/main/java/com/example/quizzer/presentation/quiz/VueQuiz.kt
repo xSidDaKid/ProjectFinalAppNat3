@@ -1,22 +1,22 @@
 package com.example.quizzer.presentation.quiz
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
-import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.*
+import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.IVueQuiz
 
 /**
+ * TODO: Refactoriser et à ajouter dans les méthodes dans l'interface(Contrat)
  * Vue quiz qui permet d'afficher les données et permet d'informer le Présenteur à la suite d'une action de l'utilisateur
- *
  */
 class VueQuiz : Fragment(), IVueQuiz {
 
@@ -31,10 +31,10 @@ class VueQuiz : Fragment(), IVueQuiz {
 
         var quiz = présentateur?.réinitialiserQuiz()
         initialiserTexteBouttons(vue)
-        attacherÉcouteurChoix(vue,quiz!!)
+        attacherÉcouteurChoix(vue, quiz!!)
         prochaineRéponse(vue, quiz!!)
-        afficherQuestion(vue,quiz!!)
-        afficherTitre(vue,quiz!!)
+        afficherQuestion(vue, quiz!!)
+        afficherTitre(vue, quiz!!)
         return vue
     }
 
@@ -49,15 +49,15 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun attacherÉcouteurChoix(vue: View,quiz: Quiz) {
+    private fun attacherÉcouteurChoix(vue: View, quiz: Quiz) {
 
         for (i in 1 until 5) {
             (vue.findViewWithTag(Integer.toString(i)) as Button).setOnClickListener(View.OnClickListener { view ->
                 val boutton = view as Button
                 var reponse = boutton.text.toString()
-                présentateur?.envoyerRéponse(reponse, présentateur?.envoyerIndexRéponse(),quiz)
-                prochaineRéponse(vue,quiz)
-                afficherScore(vue,quiz)
+                présentateur?.envoyerRéponse(reponse, présentateur?.envoyerIndexRéponse(), quiz)
+                prochaineRéponse(vue, quiz)
+                afficherScore(vue, quiz)
             })
         }
     }
@@ -70,12 +70,7 @@ class VueQuiz : Fragment(), IVueQuiz {
     private fun initialiserTexteBouttons(vue: View) {
         var quizListe = présentateur?.réinitialiserQuiz()
         var listeChoix = quizListe?.choix
-        //var listeChoix = présentateur?.envoyerChoix()
-/*        if (quizListe!![0] != null) {
-            listeChoix = quizListe!![0]?.choix!!
-        }else{
-            listeChoix = quizListe!![0]?.choix!!
-        }*/
+
         for (i in 1 until 5) {
             var boutton = vue.findViewWithTag(Integer.toString(i)) as Button
             boutton.text = listeChoix?.get(i - 1)
@@ -88,7 +83,7 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun prochaineRéponse(vue: View,quiz: Quiz) {
+    private fun prochaineRéponse(vue: View, quiz: Quiz) {
         var button = vue.findViewById(R.id.reponseQuiz) as Button
         button.text = présentateur?.envoyerProchaineRéponse(quiz)
     }
@@ -98,7 +93,7 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun afficherQuestion(vue: View,quiz:Quiz) {
+    private fun afficherQuestion(vue: View, quiz: Quiz) {
         var textQuestion = vue.findViewById<TextView>(R.id.questionQuiz)
         textQuestion.text = présentateur?.getQuestion(quiz)
     }
@@ -108,7 +103,7 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun afficherTitre(vue: View,quiz: Quiz) {
+    private fun afficherTitre(vue: View, quiz: Quiz) {
         var textTitre = vue.findViewById<TextView>(R.id.titreQuiz)
         textTitre.text = présentateur?.getTitre(quiz)
     }
@@ -118,14 +113,13 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun afficherScore(vue: View,quiz: Quiz) {
+    private fun afficherScore(vue: View, quiz: Quiz) {
         var textScore = vue.findViewById<TextView>(R.id.scoreQuiz)
         textScore.text = "Score: " + présentateur?.getScore(quiz).toString()
     }
 
-
     override fun afficherRéponse(réponse: String) {
         TODO("Not yet implemented")
     }
-    
+
 }

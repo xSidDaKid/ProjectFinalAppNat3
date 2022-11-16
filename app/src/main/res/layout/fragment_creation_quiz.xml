@@ -42,7 +42,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:padding="10dp"
-                android:text="@string/hintTitre"
+                android:hint="@string/hintTitre"
                 android:textAlignment="center"
                 android:textColor="@color/black" />
         </LinearLayout>
@@ -78,7 +78,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:padding="10dp"
-                android:text="@string/hintQuestion"
+                android:hint="@string/hintQuestion"
                 android:textAlignment="center"
                 android:textColor="@color/black" />
         </LinearLayout>
@@ -114,7 +114,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:padding="10dp"
-                android:text="@string/hintChoix"
+                android:hint="@string/hintChoix"
                 android:textAlignment="center"
                 android:textColor="@color/black" />
         </LinearLayout>
@@ -151,7 +151,7 @@
                 android:inputType=""
                 android:minHeight="48dp"
                 android:padding="10dp"
-                android:text="@string/hintReponse"
+                android:hint="@string/hintReponse"
                 android:textAlignment="center"
                 android:textColor="@color/black" />
         </LinearLayout>

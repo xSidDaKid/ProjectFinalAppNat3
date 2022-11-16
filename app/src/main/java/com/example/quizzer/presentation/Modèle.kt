@@ -9,41 +9,22 @@ import com.example.quizzer.domaine.interacteur.VerificationReponse
 
 /**
  * Object qui permet d'intéragir avec la base de donnée
+ * TODO: Ajout des quiz dans la BD,
+ * @IMPORTANT: Pour une raison quelconque, lors de l'ajout d'un quiz dans la liste, elle est ajouté au début de la liste et non à la fin!!!
  */
 object Modèle {
 
-   // var quiz = Quiz()
     private var quizScore = QuizUtilisateurScore()
     private var utilisateur = Utilisateur()
 
     var tourDesRéponses: Int = 0
-    var reponseBrut: String = ""
-    //var quiz1 = object : Quiz() {}
-
-    /*    val quiz1 = object {
-            val reponses = ObtenirReponses().obtenirReponses(ReponsesParDefaut())
-            val choix = listOf<String>("Jaune", "Rouge", "Orange", "Vert")
-            val titre = "Les fruits et leurs couleurs"
-            val question = "Quelle est la couleur du fruit?"
-        }
-        val list: MutableList<Int> = arr.toMutableList()*/
     var quizListe = mutableListOf<Quiz>()
 
     /**
-     * Méthode qui permet d'initialiser un quiz
+     * Méthode qui permet d'initialiser un quiz a partir d'une liste
      *
      */
     fun initialiserQuizParDefaut(): Quiz {
-        /*quiz.reponses = ObtenirReponses().obtenirReponses(ReponsesParDefaut())
-        quiz.choix = listOf<String>("Jaune", "Rouge", "Orange", "Vert")
-        quiz.titre = "Les fruits et leurs couleurs"
-        quiz.question = "Quelle est la couleur du fruit?"*/
-/*        quiz1 = object : Quiz() {
-            override var reponses = ObtenirReponses().obtenirReponses(ReponsesParDefaut())
-            override var choix = listOf<String>("Jaune", "Rouge", "Orange", "Vert")
-            override var titre = "Les fruits et leurs couleurs"
-            override var question = "Quelle est la couleur du fruit?"
-        }*/
         var newQuiz = Quiz(
             0,
             "Les fruits et leurs couleurs",
@@ -52,7 +33,6 @@ object Modèle {
             ObtenirReponses().obtenirReponses(ReponsesParDefaut())
         )
         quizListe.add(newQuiz)
-        println("\nQuiz: " + quizListe)
         return quizListe[0]
     }
 
@@ -63,7 +43,7 @@ object Modèle {
      * @param index
      * @return
      */
-    fun soumettreRéponse(reponse: String, index: Int, quiz:Quiz): Boolean {
+    fun soumettreRéponse(reponse: String, index: Int, quiz: Quiz): Boolean {
         var verification = VerificationReponse().verificationReponse(reponse, index, quiz)
         if (verification) {
             quizScore.score++
@@ -74,11 +54,10 @@ object Modèle {
     /**
      * Méthode qui permet d'ajouter un nouveau quiz à la base de donnée
      *
-     * @param titre
-     * @param question
-     * @param choix
-     * @param reponse
-     * @return
+     * @param titre Titre du Quiz
+     * @param question Question du Quiz
+     * @param choix Choix du Quiz
+     * @param reponse Réponses à associer à un quiz
      */
     fun ajouterQuiz(
         titre: String,
@@ -90,17 +69,7 @@ object Modèle {
         var choixTrier = choix.split(",")
         var newQuiz = Quiz(1, titre, question, choixTrier, reponseTrier)
 
-        /*var newQuiz = object : Quiz() {
-            override var titre = titre
-            override var question = question
-            override var choix = choixTrier
-            override var reponses = reponseTrier
-        }*/
-        //A ajouter dans la BD
-
         quizListe.add(newQuiz)
-        println("Quiz: " + quizListe.toString())
-
     }
 
     /**
@@ -113,41 +82,71 @@ object Modèle {
         return ObtenirReponses().trierReponses(reponseBrut)
     }
 
-    fun getProchaineRéponse(quiz:Quiz): String {
+    /**
+     * Méthode qui permet d'avoir la prochaine réponse
+     *
+     * @param quiz Quiz choisi
+     * @return
+     */
+    fun getProchaineRéponse(quiz: Quiz): String {
         var réponse = quiz.reponses.get(tourDesRéponses)
         tourDesRéponses++
         var réponseString = réponse.toList().get(0).first
         return réponseString
     }
 
+    /**
+     * TODO
+     *
+     * @return
+     */
     fun getIndexRéponse(): Int {
         return tourDesRéponses
     }
 
-    fun getRéponseParIndex(index: Int, quiz:Quiz): Map<String, String> {
-        return quiz.reponses.get(index)
-    }
-
-    fun getReponses(quiz:Quiz): List<Map<String, String>> {
-        return quiz.reponses
-    }
-
-    fun getChoix(quiz:Quiz): List<String> {
-        return quiz.choix
-    }
-
-    fun getTitre(quiz:Quiz): String {
+    /**
+     * Méthode qui permet d'avoir le titre du Quiz
+     *
+     * @param quiz Quiz choisi
+     * @return Le titre du Quiz
+     */
+    fun getTitre(quiz: Quiz): String {
         return quiz.titre
     }
 
-    fun getQuestion(quiz:Quiz): String {
+    /**
+     * Méthode qui permet d'avoir la question du Quiz
+     *
+     * @param quiz Quiz choisi
+     * @return La question du Quiz
+     */
+    fun getQuestion(quiz: Quiz): String {
         return quiz.question
     }
 
+    /**
+     * Méthode qui permet d'avoir le score de l'utilisateur
+     *
+     * @param quiz Quiz choisi
+     * @return Le score de l'utilisateur
+     */
     fun getScore(quiz: Quiz): Int {
-        println(quizScore.score)
         return quizScore.score
     }
+
+
+    fun getRéponseParIndex(index: Int, quiz: Quiz): Map<String, String> {
+        return quiz.reponses.get(index)
+    }
+
+    fun getReponses(quiz: Quiz): List<Map<String, String>> {
+        return quiz.reponses
+    }
+
+    fun getChoix(quiz: Quiz): List<String> {
+        return quiz.choix
+    }
+
 
     fun getnomUtilisateur(): String {
         return utilisateur.nomUtilisateur
