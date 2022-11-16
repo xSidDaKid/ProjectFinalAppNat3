@@ -1,5 +1,7 @@
 package com.example.quizzer.presentation.quiz
 
+import com.example.quizzer.domaine.entité.Quiz
+
 interface IContratVuePrésentateurQuiz {
 
     interface IVueQuiz {
@@ -12,7 +14,7 @@ interface IContratVuePrésentateurQuiz {
 
         fun traiterQuitterQuiz()
 
-        fun réinitialiserQuiz()
+        fun réinitialiserQuiz():Quiz
 
     }
 }
