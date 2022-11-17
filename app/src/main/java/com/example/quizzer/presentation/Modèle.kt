@@ -6,6 +6,7 @@ import com.example.quizzer.domaine.entité.QuizUtilisateurScore
 import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.domaine.interacteur.ObtenirReponses
 import com.example.quizzer.domaine.interacteur.VerificationReponse
+import com.example.quizzer.domaine.interacteur.VerificationReponseCreationQuiz
 
 /**
  * Object qui permet d'intéragir avec la base de donnée
@@ -66,7 +67,7 @@ object Modèle {
         reponse: String
     ) {
         var reponseTrier = getReponseTrier(reponse)
-        var choixTrier = choix.split(",")
+        var choixTrier : List<String> = choix.split(",")
         var newQuiz = Quiz(1, titre, question, choixTrier, reponseTrier)
 
         quizListe.add(newQuiz)
@@ -154,5 +155,9 @@ object Modèle {
 
     fun getPassword(): String {
         return utilisateur.motDePasse
+    }
+
+    fun veriferQuiz(choix: String, reponse: String): Boolean {
+        return VerificationReponseCreationQuiz().verificationReponseCreationQuiz(choix, reponse)
     }
 }

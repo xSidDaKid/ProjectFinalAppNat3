@@ -14,6 +14,11 @@ class PresentateurCreationQuiz(var modele: Modèle, var vue: IVueCreation = VueC
         reponse: String
     ) {
         //var réponsesTriés = trierReponses(reponse)
+
+        // Demander l'utilisateur de vérifier ses réponses dans la vue
+        if(!(modele.veriferQuiz(choix, reponse))){
+
+        }
         modele.ajouterQuiz(titre, question, choix, reponse)
         vue.naviguerVersQuiz()
     }
