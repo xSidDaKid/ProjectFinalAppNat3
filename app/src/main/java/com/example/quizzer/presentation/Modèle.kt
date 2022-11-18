@@ -157,7 +157,7 @@ object Modèle {
         return utilisateur.motDePasse
     }
 
-    fun veriferQuiz(choix: String, reponse: String): Boolean {
+    fun veriferQuiz(choix: String, reponse: String): String {
         return VerificationReponseCreationQuiz().verificationReponseCreationQuiz(choix, reponse)
     }
 }

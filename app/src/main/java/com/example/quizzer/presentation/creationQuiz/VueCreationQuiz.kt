@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.example.quizzer.MainActivity
 import com.example.quizzer.R
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz
@@ -40,6 +42,10 @@ class VueCreationQuiz : Fragment(), IVueCreation {
 
     override fun naviguerVersQuiz() {
         navController.navigate(R.id.quizFragment)
+    }
+
+    override fun afficherMessage(message : String){
+       Toast.makeText(requireActivity(),message, Toast.LENGTH_LONG).show()
     }
 
     private fun attacherÉcouteurQuiz(vue: View) {
