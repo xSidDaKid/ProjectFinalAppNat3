@@ -24,9 +24,9 @@
     <!-- Login -->
     <string name="username">Nom d\'utilisateur</string>
     <string name="mdp">Mot de Passe</string>
-    <string name="register">Vous n\'avez pas un comtpte? Appuyer ici</string>
+    <string name="register">Vous n\'avez pas un compte? Appuyez ici</string>
     <string name="enregistrer">Enregistrer</string>
-    <string name="login">Login</string>
+    <string name="login">Connexion</string>
 
     <!-- Quiz -->
     <string name="score">Score: 0</string>
@@ -35,6 +35,6 @@
     <string name="newCompte">Créer un nouveau compte</string>
     <string name="email">Adresse courriel</string>
     <string name="confirmerMDP">Confirmer Mot de Passe</string>
-    <string name="compteExistant">Avez deja un compte? Cliquez ici</string>
+    <string name="compteExistant">Avez-vous deja un compte? Cliquez ici</string>
 
 </resources>
