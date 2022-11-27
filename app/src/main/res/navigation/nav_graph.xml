@@ -51,4 +51,9 @@
             android:id="@+id/action_vueLogin_to_registrationFragment"
             app:destination="@id/registrationFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/listQuiz"
+        android:name="com.example.quizzer.presentation.listQuiz.VueListQuiz"
+        android:label="fragment_list_quiz"
+        tools:layout="@layout/fragment_list_quiz" />
 </navigation>
