@@ -4,6 +4,7 @@ interface IContratVuePresentateurMenuPrincipal {
     interface IVueMenuPrincipal {
         fun naviguerVersCreationQuiz()
         fun naviguerVersDemarrerQuiz()
+        fun naviguerVersListeQuiz()
     }
 
     interface IPresentateurMenuPrincipal {

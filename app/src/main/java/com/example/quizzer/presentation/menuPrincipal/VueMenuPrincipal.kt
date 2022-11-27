@@ -57,6 +57,10 @@ class VueMenuPrincipal : Fragment(), IContratVuePresentateurMenuPrincipal.IVueMe
         navController.navigate(R.id.creationQuiz)
     }
 
+    override fun naviguerVersListeQuiz() {
+        navController.navigate(R.id.listQuiz)
+    }
+
     override fun naviguerVersDemarrerQuiz() {
         navController.navigate(R.id.quizFragment)
     }

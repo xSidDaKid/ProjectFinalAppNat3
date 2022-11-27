@@ -28,7 +28,7 @@ class VueListQuiz : ListFragment(), IVueListQuiz {
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_list_quiz, container, false)
         présentateur = PresentateurListQuiz(Modèle, this)
-        listQuiz = vue.findViewById(R.id.listQuiz)
+        listQuiz = vue.findViewById(android.R.id.list)
         adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, présentateur!!.getListeQuiz())
         return vue
     }
