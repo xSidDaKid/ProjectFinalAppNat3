@@ -25,17 +25,17 @@ object Modèle {
      * Méthode qui permet d'initialiser un quiz a partir d'une liste
      *
      */
-  /* fun initialiserQuizParDefaut(): Quiz {
-        var newQuiz = Quiz(
+   fun initialiserQuizParDefaut(): Quiz {
+        /*var newQuiz = Quiz(
             0,
             "Les fruits et leurs couleurs",
             "Quelle est la couleur du fruit?",
             listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
             ObtenirReponses().obtenirReponses(ReponsesParDefaut())
-        )
-        quizListe.add(newQuiz)
+        )*/
+        //quizListe.add(newQuiz)
         return quizListe[0]
-    }*/
+    }
 
     /**
      * Méthode qui permet de valider une réponse et de changer le score de l'utilisateur

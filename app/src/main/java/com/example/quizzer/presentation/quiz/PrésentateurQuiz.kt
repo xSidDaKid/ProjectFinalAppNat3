@@ -42,9 +42,9 @@ class PrésentateurQuiz(var modèle: Modèle, var vue: IVueQuiz = VueQuiz()) : I
     }
 
 
-   /*override fun réinitialiserQuiz(): Quiz {
+   override fun réinitialiserQuiz(): Quiz {
         return modèle.initialiserQuizParDefaut()
-    }*/
+    }
 
     fun getQuestion(quiz:Quiz): String {
         return modèle.getQuestion(quiz)

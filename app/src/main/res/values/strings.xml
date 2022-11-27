@@ -19,7 +19,7 @@
     <string name="bonjour">Bonjour,</string>
     <string name="nouveauQuiz">Créer nouveau quiz</string>
     <string name="rejoindreQuiz">Rejoindre un nouveau quiz</string>
-    <string name="demarrerQuiz">Démarrer un quiz existant</string>
+    <string name="listeQuiz">Voir la liste de mes quiz</string>
 
     <!-- Login -->
     <string name="username">Nom d\'utilisateur</string>
