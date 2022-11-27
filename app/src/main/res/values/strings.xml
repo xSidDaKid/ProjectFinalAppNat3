@@ -10,9 +10,9 @@
     <string name="hintQuestion">Quel est la couleur de ce fruit?</string>
     <string name="choix">Choix</string>
     <string name="hintChoix">Jaune</string>
-    <string name="reponse">Réponse</string>
+    <string name="reponse">Réponses</string>
     <string name="hintReponse">Reponse:Choix,Reponse:Choix,...</string>
-    <string name="hint">Séparer les choix par une virgule et la réponse par un deux point</string>
+    <string name="hint">Séparer les réponses par une virgule</string>
     <string name="creer">Créer</string>
 
     <!-- Menu Principal -->
@@ -35,6 +35,6 @@
     <string name="newCompte">Créer un nouveau compte</string>
     <string name="email">Adresse courriel</string>
     <string name="confirmerMDP">Confirmer Mot de Passe</string>
-    <string name="compteExistant">Avez-vous deja un compte? Cliquez ici</string>
+    <string name="compteExistant">Avez-vous déjà un compte? Cliquez ici</string>
 
 </resources>

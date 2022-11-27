@@ -63,13 +63,17 @@ object Modèle {
     fun ajouterQuiz(
         titre: String,
         question: String,
-        choix: String,
-        reponse: String
+        choix: List<Any>,
+        reponse: List<Any>
     ) {
-        var reponseTrier = getReponseTrier(reponse)
-        var choixTrier : List<String> = choix.split(",")
-        var newQuiz = Quiz(1, titre, question, choixTrier, reponseTrier)
-
+        //var reponseTrier = getReponseTrier(reponse)
+        //var choixTrier : List<String> = choix.split(",")
+        var reponseTrier: List<Map<String, String>> = emptyList()
+        reponseTrier += mapOf(reponse[0].toString() to choix[0].toString())
+        reponseTrier += mapOf(reponse[1].toString() to choix[1].toString())
+        reponseTrier += mapOf(reponse[2].toString() to choix[2].toString())
+        reponseTrier += mapOf(reponse[3].toString() to choix[3].toString())
+        var newQuiz = Quiz(1, titre, question, choix as List<String>, reponseTrier)
         quizListe.add(newQuiz)
     }
 
@@ -90,10 +94,14 @@ object Modèle {
      * @return
      */
     fun getProchaineRéponse(quiz: Quiz): String {
-        var réponse = quiz.reponses.get(tourDesRéponses)
-        tourDesRéponses++
-        var réponseString = réponse.toList().get(0).first
-        return réponseString
+        if (tourDesRéponses >= quiz.reponses.size)
+            return ""
+        else {
+            var réponse = quiz.reponses.get(tourDesRéponses)
+            tourDesRéponses++
+            var réponseString = réponse.toList().get(0).first
+            return réponseString
+        }
     }
 
     /**

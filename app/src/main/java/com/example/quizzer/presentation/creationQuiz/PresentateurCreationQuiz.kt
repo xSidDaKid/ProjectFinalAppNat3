@@ -1,8 +1,10 @@
 package com.example.quizzer.presentation.creationQuiz
 
+import com.example.quizzer.R
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IVueCreation
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IPresentateurCreation
+import com.google.android.material.textfield.TextInputEditText
 
 class PresentateurCreationQuiz(var modele: Modèle, var vue: IVueCreation = VueCreationQuiz()) :
     IPresentateurCreation {
@@ -10,10 +12,11 @@ class PresentateurCreationQuiz(var modele: Modèle, var vue: IVueCreation = VueC
     override fun traiterCreationQuiz(
         titre: String,
         question: String,
-        choix: String,
-        reponse: String
+        choix: List<String>,
+        reponse: List<String>
     ) {
-        //var réponsesTriés = trierReponses(reponse)
+
+     /*   //var réponsesTriés = trierReponses(reponse)
 
         // Demander l'utilisateur de vérifier ses réponses dans la vue
         var message = modele.veriferQuiz(choix, reponse)
@@ -24,6 +27,11 @@ class PresentateurCreationQuiz(var modele: Modèle, var vue: IVueCreation = VueC
             modele.ajouterQuiz(titre, question, choix, reponse)
             vue.naviguerVersQuiz()
         }
+*/
+
+
+            modele.ajouterQuiz(titre, question, choix, reponse)
+            vue.naviguerVersQuiz()
 
     }
 
