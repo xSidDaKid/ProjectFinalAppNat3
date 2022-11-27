@@ -29,12 +29,12 @@ class VueQuiz : Fragment(), IVueQuiz {
         val vue = inflater.inflate(R.layout.fragment_quiz, container, false)
         présentateur = PrésentateurQuiz(Modèle, this)
 
-        var quiz = présentateur?.réinitialiserQuiz()
-        initialiserTexteBouttons(vue)
+        //var quiz = présentateur?.réinitialiserQuiz()
+       /* initialiserTexteBouttons(vue)
         attacherÉcouteurChoix(vue, quiz!!)
         prochaineRéponse(vue, quiz!!)
         afficherQuestion(vue, quiz!!)
-        afficherTitre(vue, quiz!!)
+        afficherTitre(vue, quiz!!)*/
         return vue
     }
 
@@ -68,14 +68,14 @@ class VueQuiz : Fragment(), IVueQuiz {
      * @param vue Vue Quiz
      */
     private fun initialiserTexteBouttons(vue: View) {
-        var quizListe = présentateur?.réinitialiserQuiz()
-        var listeChoix = quizListe?.choix
+     /*   //var quizListe = présentateur?.réinitialiserQuiz()
+        //var listeChoix = quizListe?.choix
 
         for (i in 1 until 5) {
             var boutton = vue.findViewWithTag(Integer.toString(i)) as Button
             boutton.text = listeChoix?.get(i - 1)
 
-        }
+        }*/
     }
 
     /**

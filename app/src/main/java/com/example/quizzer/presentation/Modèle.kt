@@ -25,7 +25,7 @@ object Modèle {
      * Méthode qui permet d'initialiser un quiz a partir d'une liste
      *
      */
-    fun initialiserQuizParDefaut(): Quiz {
+  /* fun initialiserQuizParDefaut(): Quiz {
         var newQuiz = Quiz(
             0,
             "Les fruits et leurs couleurs",
@@ -35,7 +35,7 @@ object Modèle {
         )
         quizListe.add(newQuiz)
         return quizListe[0]
-    }
+    }*/
 
     /**
      * Méthode qui permet de valider une réponse et de changer le score de l'utilisateur
@@ -63,17 +63,22 @@ object Modèle {
     fun ajouterQuiz(
         titre: String,
         question: String,
-        choix: List<Any>,
-        reponse: List<Any>
+        choix: List<String>,
+        reponse: List<String>
     ) {
-        //var reponseTrier = getReponseTrier(reponse)
-        //var choixTrier : List<String> = choix.split(",")
+        var compteur = 0
         var reponseTrier: List<Map<String, String>> = emptyList()
-        reponseTrier += mapOf(reponse[0].toString() to choix[0].toString())
-        reponseTrier += mapOf(reponse[1].toString() to choix[1].toString())
-        reponseTrier += mapOf(reponse[2].toString() to choix[2].toString())
-        reponseTrier += mapOf(reponse[3].toString() to choix[3].toString())
-        var newQuiz = Quiz(1, titre, question, choix as List<String>, reponseTrier)
+
+        while (compteur < choix.size) {
+        var reponseTrierChoix: List<String> = ObtenirReponses().trierReponses2(reponse[compteur])
+            for (item in reponseTrierChoix) {
+                reponseTrier += mapOf(item to choix[compteur])
+            }
+            compteur++
+        }
+
+        var newQuiz = Quiz(1, titre, question, choix, reponseTrier)
+        println(newQuiz)
         quizListe.add(newQuiz)
     }
 
@@ -83,9 +88,12 @@ object Modèle {
      * @param reponseBrut Réponse brut du créateur du quiz avec les , et :
      * @return
      */
-    fun getReponseTrier(reponseBrut: String): List<Map<String, String>> {
+    /*fun getReponseTrier(reponseBrut: String): List<Map<String, String>> {
         return ObtenirReponses().trierReponses(reponseBrut)
-    }
+    }*/
+   /* fun getReponseTrier(reponseBrut: List<String>): List<String> {
+        return ObtenirReponses().trierReponses(reponseBrut)
+    }*/
 
     /**
      * Méthode qui permet d'avoir la prochaine réponse

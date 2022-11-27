@@ -14,7 +14,7 @@ interface IContratVuePrésentateurQuiz {
 
         fun traiterQuitterQuiz()
 
-        fun réinitialiserQuiz():Quiz
+        //fun réinitialiserQuiz():Quiz
 
     }
 }

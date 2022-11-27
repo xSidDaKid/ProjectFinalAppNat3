@@ -16,22 +16,22 @@ class PresentateurCreationQuiz(var modele: Modèle, var vue: IVueCreation = VueC
         reponse: List<String>
     ) {
 
-     /*   //var réponsesTriés = trierReponses(reponse)
+        /*   //var réponsesTriés = trierReponses(reponse)
 
-        // Demander l'utilisateur de vérifier ses réponses dans la vue
-        var message = modele.veriferQuiz(choix, reponse)
+           // Demander l'utilisateur de vérifier ses réponses dans la vue
+           var message = modele.veriferQuiz(choix, reponse)
 
-        if(message != ""){
-            vue.afficherMessage(message)
-        }else{
-            modele.ajouterQuiz(titre, question, choix, reponse)
-            vue.naviguerVersQuiz()
-        }
-*/
+           if(message != ""){
+               vue.afficherMessage(message)
+           }else{
+               modele.ajouterQuiz(titre, question, choix, reponse)
+               vue.naviguerVersQuiz()
+           }
+   */
 
-
-            modele.ajouterQuiz(titre, question, choix, reponse)
-            vue.naviguerVersQuiz()
+        //var réponsesTriés = modele.getReponseTrier(reponse)
+        modele.ajouterQuiz(titre, question, choix, reponse)
+        vue.naviguerVersQuiz()
 
     }
 
