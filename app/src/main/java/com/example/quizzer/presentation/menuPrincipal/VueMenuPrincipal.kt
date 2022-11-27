@@ -43,7 +43,7 @@ class VueMenuPrincipal : Fragment(), IContratVuePresentateurMenuPrincipal.IVueMe
 
     private fun attacherÉcouteurDemarrerQuiz() {
         btnDemarrer.setOnClickListener {
-            présentateur?.demarrerQuiz()
+            //présentateur?.demarrerQuiz()
         }
     }
 
