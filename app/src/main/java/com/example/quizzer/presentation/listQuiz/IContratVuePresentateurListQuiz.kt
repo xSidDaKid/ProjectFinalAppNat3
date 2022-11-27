@@ -6,6 +6,7 @@ interface IContratVuePresentateurListQuiz {
     interface IVueListQuiz{
         fun naviguerVersQuiz(id: Int)
         fun initialiserListeQuiz()
+        fun attacherÉcouteurAuxQuiz()
     }
 
     interface IPresentateurListQuiz{
