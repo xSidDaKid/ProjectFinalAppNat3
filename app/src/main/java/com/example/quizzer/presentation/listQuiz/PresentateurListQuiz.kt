@@ -9,8 +9,8 @@ class PresentateurListQuiz(
     var vue: IVueListQuiz = VueListQuiz()
 ) : IPresentateurListQuiz {
 
-    override fun getListeQuiz(): List<Quiz> {
-        return modele.getListeQuiz()
+    override fun getListeQuiz(): Array<Quiz> {
+        return modele.getListeQuiz().toTypedArray()
     }
 
 }

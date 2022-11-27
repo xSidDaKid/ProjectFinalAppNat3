@@ -21,6 +21,12 @@ object Modèle {
     var tourDesRéponses: Int = 0
     var quizListe = mutableListOf<Quiz>()
 
+
+    init {
+        quizListe.add(Quiz(1, "Test", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+        quizListe.add(Quiz(2, "Test2", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+        quizListe.add(Quiz(3, "Test", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+    }
     /**
      * Méthode qui permet d'initialiser un quiz a partir d'une liste
      *

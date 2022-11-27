@@ -9,7 +9,7 @@ interface IContratVuePresentateurListQuiz {
     }
 
     interface IPresentateurListQuiz{
-        fun  getListeQuiz(): List<Quiz>
+        fun  getListeQuiz(): Array<Quiz>
 
     }
 }

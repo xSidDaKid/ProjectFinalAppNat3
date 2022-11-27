@@ -19,7 +19,8 @@ class VueListQuiz : ListFragment(), IVueListQuiz {
 
     lateinit var navController: NavController
     lateinit var listQuiz: ListView
-    lateinit var adapter: ArrayAdapter<Quiz>;
+    lateinit var adapter: ArrayAdapter<Quiz>
+    lateinit var adapters: ArrayAdapter<String>
     var présentateur: PresentateurListQuiz? = null
 
     override fun onCreateView(
@@ -29,7 +30,7 @@ class VueListQuiz : ListFragment(), IVueListQuiz {
         val vue = inflater.inflate(R.layout.fragment_list_quiz, container, false)
         présentateur = PresentateurListQuiz(Modèle, this)
         listQuiz = vue.findViewById(android.R.id.list)
-        adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, présentateur!!.getListeQuiz())
+        initialiserListeQuiz()
         return vue
     }
 
@@ -42,7 +43,8 @@ class VueListQuiz : ListFragment(), IVueListQuiz {
     }
 
     override fun initialiserListeQuiz() {
-        adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, présentateur!!.getListeQuiz())
-        listQuiz.adapter = adapter
+        adapter = ArrayAdapter<Quiz>(requireContext(), android.R.layout.simple_list_item_1, présentateur!!.getListeQuiz())
+        this.listQuiz.adapter = adapter
+
     }
 }
