@@ -135,6 +135,10 @@ object Modèle {
         return quizScore.score
     }
 
+    fun getListeQuiz(): List<Quiz>{
+        return quizListe
+    }
+
 
     fun getRéponseParIndex(index: Int, quiz: Quiz): Map<String, String> {
         return quiz.reponses.get(index)

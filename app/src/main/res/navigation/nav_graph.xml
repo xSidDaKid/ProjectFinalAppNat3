@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_vueMenuPrincipal_to_creationQuiz"
             app:destination="@id/creationQuiz" />
+        <action
+            android:id="@+id/action_vueMenuPrincipal_to_listQuiz"
+            app:destination="@id/listQuiz" />
     </fragment>
     <fragment
         android:id="@+id/vueLogin"
@@ -55,5 +58,9 @@
         android:id="@+id/listQuiz"
         android:name="com.example.quizzer.presentation.listQuiz.VueListQuiz"
         android:label="fragment_list_quiz"
-        tools:layout="@layout/fragment_list_quiz" />
+        tools:layout="@layout/fragment_list_quiz" >
+        <action
+            android:id="@+id/action_listQuiz_to_quizFragment"
+            app:destination="@id/quizFragment" />
+    </fragment>
 </navigation>
