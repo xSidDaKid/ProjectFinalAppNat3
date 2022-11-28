@@ -1,13 +1,10 @@
 package com.example.quizzer.presentation.creationQuiz
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TableLayout
-import android.widget.TableRow
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -16,9 +13,11 @@ import com.example.quizzer.R
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IVueCreation
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 
-
+/**
+ * Classe qui permet de montrer l'interface pour créer un quiz et envoyer les données au présentateur
+ *
+ */
 class VueCreationQuiz : Fragment(), IVueCreation {
 
     lateinit var navController: NavController;
@@ -44,15 +43,29 @@ class VueCreationQuiz : Fragment(), IVueCreation {
         navController = Navigation.findNavController(view);
     }
 
+    /**
+     * Méthode qui affiche le quiz après la création du quiz
+     *
+     */
     override fun naviguerVersQuiz() {
-        //navController.popBackStack()
+        navController.popBackStack()
         navController.navigate(R.id.quizFragment)
     }
 
+    /**
+     * TODO
+     *
+     * @param message
+     */
     override fun afficherMessage(message: String) {
         Toast.makeText(requireActivity(), message, Toast.LENGTH_LONG).show()
     }
 
+    /**
+     * Méthode qui vérifie si les champs ne sont pas vide, puis envoie les données au présentateur
+     *
+     * @param vue Vue de Création d'un quiz
+     */
     override fun attacherÉcouteurQuiz(vue: View) {
         btnCreer.setOnClickListener {
 
