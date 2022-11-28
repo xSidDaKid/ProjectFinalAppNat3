@@ -85,7 +85,11 @@ class VueQuiz : Fragment(), IVueQuiz {
      */
     private fun prochaineRéponse(vue: View, quiz: Quiz) {
         var button = vue.findViewById(R.id.reponseQuiz) as Button
-        button.text = présentateur?.envoyerProchaineRéponse(quiz)
+        var text = présentateur?.envoyerProchaineRéponse(quiz)
+        if (text != "")
+            button.text = text
+        else
+            navController.navigate(R.id.vueMenuPrincipal)
     }
 
     /**
