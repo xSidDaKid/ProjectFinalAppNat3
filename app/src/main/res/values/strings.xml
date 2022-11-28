@@ -10,23 +10,23 @@
     <string name="hintQuestion">Quel est la couleur de ce fruit?</string>
     <string name="choix">Choix</string>
     <string name="hintChoix">Jaune</string>
-    <string name="reponse">Réponse</string>
+    <string name="reponse">Réponses</string>
     <string name="hintReponse">Reponse:Choix,Reponse:Choix,...</string>
-    <string name="hint">Séparer les choix par une virgule et la réponse par un deux point</string>
+    <string name="hint">Séparer les réponses par une virgule</string>
     <string name="creer">Créer</string>
 
     <!-- Menu Principal -->
     <string name="bonjour">Bonjour,</string>
     <string name="nouveauQuiz">Créer nouveau quiz</string>
     <string name="rejoindreQuiz">Rejoindre un nouveau quiz</string>
-    <string name="demarrerQuiz">Démarrer un quiz existant</string>
+    <string name="listeQuiz">Voir la liste de mes quiz</string>
 
     <!-- Login -->
     <string name="username">Nom d\'utilisateur</string>
     <string name="mdp">Mot de Passe</string>
-    <string name="register">Vous n\'avez pas un comtpte? Appuyer ici</string>
+    <string name="register">Vous n\'avez pas un compte? Appuyez ici</string>
     <string name="enregistrer">Enregistrer</string>
-    <string name="login">Login</string>
+    <string name="login">Connexion</string>
 
     <!-- Quiz -->
     <string name="score">Score: 0</string>
@@ -35,6 +35,7 @@
     <string name="newCompte">Créer un nouveau compte</string>
     <string name="email">Adresse courriel</string>
     <string name="confirmerMDP">Confirmer Mot de Passe</string>
-    <string name="compteExistant">Avez deja un compte? Cliquez ici</string>
+    <string name="compteExistant">Avez-vous déjà un compte? Cliquez ici</string>
+    <string name="listePermission">Voir mes permissions</string>
 
 </resources>
