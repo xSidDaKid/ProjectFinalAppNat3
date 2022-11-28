@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Quizzer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Creation Quiz -->
+    <string name="titre">Title</string>
+    <string name="hintTitre">Quiz on fruits</string>
+    <string name="question">Question</string>
+    <string name="hintQuestion">What is the color of this fruit?</string>
+    <string name="choix">Choices</string>
+    <string name="hintChoix">Yellow</string>
+    <string name="reponse">Answers</string>
+    <string name="hintReponse">Answer:Choice,Answer:Choice,...</string>
+    <string name="hint">Separate answers with a comma</string>
+    <string name="creer">Create</string>
+
+    <!-- Menu Principal -->
+    <string name="bonjour">Hello,</string>
+    <string name="nouveauQuiz">Create new quiz</string>
+    <string name="rejoindreQuiz">Join a new quiz</string>
+    <string name="listeQuiz">List of my quizzes</string>
+
+    <!-- Login -->
+    <string name="username">Username</string>
+    <string name="mdp">Password</string>
+    <string name="register">Don\'t have an account? Press here</string>
+    <string name="enregistrer">Register</string>
+    <string name="login">Login</string>
+
+    <!-- Quiz -->
+    <string name="score">Score: 0</string>
+
+    <!-- Registration -->
+    <string name="newCompte">Create a new account</string>
+    <string name="email">Email address</string>
+    <string name="confirmerMDP">Confirm Password</string>
+    <string name="compteExistant">Do you already have an account? Click here</string>
+    <string name="listePermission">See my invitations</string>
+
+</resources>
