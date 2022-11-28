@@ -81,7 +81,7 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
     }
 
     override fun naviguerVersDemarrerQuiz() {
-        navController.navigate(R.id.quizFragment)
+        navController.navigate(R.id.listQuiz)
     }
 
 }

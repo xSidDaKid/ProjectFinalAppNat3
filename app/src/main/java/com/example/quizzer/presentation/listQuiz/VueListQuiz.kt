@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.ListFragment
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
@@ -40,12 +41,14 @@ class VueListQuiz : Fragment(), IVueListQuiz {
         return vue
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view);
     }
 
-    override fun naviguerVersQuiz(id: Int) {
-        TODO("Not yet implemented")
+    override fun naviguerVersQuiz() {
+        navController.navigate(R.id.quizFragment)
     }
 
     override fun initialiserListeQuiz() {
@@ -57,6 +60,7 @@ class VueListQuiz : Fragment(), IVueListQuiz {
     override fun attacherÉcouteurAuxQuiz() {
         listQuiz.setOnItemClickListener { parent, view, position, id ->
             Toast.makeText(requireActivity(), "clicked : $position", Toast.LENGTH_SHORT).show()
+            présentateur?.getQuiz(position)
         }
     }
 }

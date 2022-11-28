@@ -21,13 +21,23 @@ object Modèle {
     var tourDesRéponses: Int = 0
     var quizListe = mutableListOf<Quiz>()
     var utilisateurListe = mutableListOf<Utilisateur>()
+    var indexQuizListe : Int = 0
 
 
     init {
         quizListe.add(Quiz(1, "Test", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
         quizListe.add(Quiz(2, "Test2", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
-        quizListe.add(Quiz(3, "Test", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+        quizListe.add(Quiz(3, "Test3", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+        var newQuiz = Quiz(
+            0,
+            "Les fruits et leurs couleurs",
+            "Quelle est la couleur du fruit?",
+            listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
+            ObtenirReponses().obtenirReponses(ReponsesParDefaut())
+        )
+        quizListe.add(newQuiz)
     }
+
     /**
      * Méthode qui permet d'initialiser un quiz a partir d'une liste
      *
@@ -41,9 +51,12 @@ object Modèle {
             ObtenirReponses().obtenirReponses(ReponsesParDefaut())
         )*/
         //quizListe.add(newQuiz)
-        return quizListe[0]
+        return quizListe[indexQuizListe]
     }
 
+    fun setIndexQuiz(quizIndex: Int){
+        indexQuizListe = quizIndex
+    }
     /**
      * Méthode qui permet de valider une réponse et de changer le score de l'utilisateur
      *

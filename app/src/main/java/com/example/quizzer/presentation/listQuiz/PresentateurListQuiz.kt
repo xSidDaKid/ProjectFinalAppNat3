@@ -13,4 +13,9 @@ class PresentateurListQuiz(
         return modele.getListeQuiz().toTypedArray()
     }
 
+    override fun getQuiz(listePosition: Int) {
+        modele.setIndexQuiz(listePosition)
+        vue.naviguerVersQuiz()
+    }
+
 }
