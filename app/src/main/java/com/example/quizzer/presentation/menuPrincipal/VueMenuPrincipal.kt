@@ -60,8 +60,12 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
      */
     override fun attacherÉcouteurDemarrerQuiz() {
         btnDemarrer.setOnClickListener {
-            //présentateur?.demarrerQuiz()
+            présentateur?.demarrerListeQuiz()
         }
+    }
+
+    override fun attacherÉcouteurListQuiz() {
+
     }
 
     /**
