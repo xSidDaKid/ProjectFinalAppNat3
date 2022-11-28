@@ -16,16 +16,17 @@ import com.example.quizzer.domaine.interacteur.VerificationReponseCreationQuiz
 object Modèle {
 
     private var quizScore = QuizUtilisateurScore()
-    private var utilisateur = Utilisateur()
+    //private var utilisateur = Utilisateur()
 
     var tourDesRéponses: Int = 0
     var quizListe = mutableListOf<Quiz>()
+    var utilisateurListe = mutableListOf<Utilisateur>()
 
     /**
      * Méthode qui permet d'initialiser un quiz a partir d'une liste
      *
      */
-   fun initialiserQuizParDefaut(): Quiz {
+    fun initialiserQuizParDefaut(): Quiz {
         /*var newQuiz = Quiz(
             0,
             "Les fruits et leurs couleurs",
@@ -70,7 +71,8 @@ object Modèle {
         var reponseTrier: List<Map<String, String>> = emptyList()
 
         while (compteur < choix.size) {
-        var reponseTrierChoix: List<String> = ObtenirReponses().trierReponses2(reponse[compteur])
+            var reponseTrierChoix: List<String> =
+                ObtenirReponses().trierReponses2(reponse[compteur])
             for (item in reponseTrierChoix) {
                 reponseTrier += mapOf(item to choix[compteur])
             }
@@ -78,8 +80,19 @@ object Modèle {
         }
 
         var newQuiz = Quiz(1, titre, question, choix, reponseTrier)
-        println(newQuiz)
         quizListe.add(newQuiz)
+    }
+
+    /**
+     * Méthode qui permet d'ajouter un nouveau utilisateur à la base de donnée
+     *
+     * @param email Email de l'utilisateur
+     * @param username Nom d'utilisateur de l'utilisateur
+     * @param mdp Mot de passe de l'utilisateur
+     */
+    fun ajouterUtilisateur(email: String, username: String, mdp: String) {
+        var newUtilisateur = Utilisateur(1, email, username, mdp)
+        utilisateurListe.add(newUtilisateur)
     }
 
     /**
@@ -91,9 +104,9 @@ object Modèle {
     /*fun getReponseTrier(reponseBrut: String): List<Map<String, String>> {
         return ObtenirReponses().trierReponses(reponseBrut)
     }*/
-   /* fun getReponseTrier(reponseBrut: List<String>): List<String> {
-        return ObtenirReponses().trierReponses(reponseBrut)
-    }*/
+    /* fun getReponseTrier(reponseBrut: List<String>): List<String> {
+         return ObtenirReponses().trierReponses(reponseBrut)
+     }*/
 
     /**
      * Méthode qui permet d'avoir la prochaine réponse
@@ -151,6 +164,23 @@ object Modèle {
         return quizScore.score
     }
 
+    /**
+     * Méthode qui vérifie si l'utilisateur existe dans la BD
+     *
+     * @param nomUtilisateur Nom de l'utilisateur
+     * @param password Mot de passe de l'utilisateur
+     * @return True s'il existe; False s'il n'existe pas
+     */
+    fun getUilisateur(nomUtilisateur: String, password: String): Boolean {
+        for (item in utilisateurListe) {
+            if (item.nomUtilisateur == nomUtilisateur) {
+                if (item.motDePasse == password) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 
     fun getRéponseParIndex(index: Int, quiz: Quiz): Map<String, String> {
         return quiz.reponses.get(index)
@@ -165,15 +195,17 @@ object Modèle {
     }
 
 
-    fun getnomUtilisateur(): String {
+    fun getnomUtilisateur(utilisateur: Utilisateur): String {
         return utilisateur.nomUtilisateur
     }
 
-    fun getPassword(): String {
+    fun getPassword(utilisateur: Utilisateur): String {
         return utilisateur.motDePasse
     }
 
     fun veriferQuiz(choix: String, reponse: String): String {
         return VerificationReponseCreationQuiz().verificationReponseCreationQuiz(choix, reponse)
     }
+
+
 }
