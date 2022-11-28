@@ -6,7 +6,7 @@ import com.example.quizzer.presentation.login.IContratVuePresentateurLogin.*
 /**
  * Classe qui permet de communiquer avec le modèle
  *
- * @property modele Objet qui permet de communiquer avec l"API
+ * @property modele Objet qui permet de communiquer avec l'API
  * @property vue L'interface qui envoie les données à traiter
  */
 class PresentateurLogin(

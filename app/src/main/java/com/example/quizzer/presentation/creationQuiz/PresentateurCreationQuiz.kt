@@ -7,7 +7,7 @@ import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCrea
 /**
  * Classe qui permet de communiquer avec le modèle
  *
- * @property modele Objet qui permet de communiquer avec l"API
+ * @property modele Objet qui permet de communiquer avec l'API
  * @property vue L'interface qui envoie les données à traiter
  */
 class PresentateurCreationQuiz(var modele: Modèle, var vue: IVueCreation = VueCreationQuiz()) :

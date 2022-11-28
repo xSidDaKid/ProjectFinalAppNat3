@@ -1,7 +1,6 @@
 package com.example.quizzer.presentation.registration
 
 import android.os.Bundle
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

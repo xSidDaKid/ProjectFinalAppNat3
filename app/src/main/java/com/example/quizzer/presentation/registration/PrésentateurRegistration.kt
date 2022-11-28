@@ -7,7 +7,7 @@ import com.example.quizzer.presentation.registration.IContratVueRegistration.IVu
 /**
  * Classe qui permet de communiquer avec le modèle
  *
- * @property modèle Objet qui permet de communiquer avec l"API
+ * @property modèle Objet qui permet de communiquer avec l'API
  * @property vue L'interface qui envoie les données à traiter
  */
 class PrésentateurRegistration(var modèle: Modèle, var vue: IVueRegistration = VueRegistration()) :
