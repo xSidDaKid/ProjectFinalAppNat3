@@ -12,6 +12,7 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.ListFragment
 import androidx.navigation.NavController
 import com.example.quizzer.R
@@ -20,7 +21,7 @@ import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.*
 import com.example.quizzer.presentation.login.PresentateurLogin
 
-class VueListQuiz : ListFragment(), IVueListQuiz {
+class VueListQuiz : Fragment(), IVueListQuiz {
 
     lateinit var navController: NavController
     lateinit var listQuiz: ListView
@@ -51,21 +52,11 @@ class VueListQuiz : ListFragment(), IVueListQuiz {
         adapter = ArrayAdapter<Quiz>(requireContext(), android.R.layout.simple_list_item_1, présentateur!!.getListeQuiz())
         this.listQuiz.adapter = adapter
         Log.d("Test1", "Initializing list quiz")
-
     }
 
     override fun attacherÉcouteurAuxQuiz() {
-        Log.d("Test3", "Looking if it even gets here")
-       // this.listQuiz.onItemClickListener = AdapterView.OnItemClickListener {
-        //        parent, view, position, id ->
-       //     Toast.makeText(requireActivity(),"Clicked item : $position", Toast.LENGTH_LONG).show()
-       //     Log.d("Test2", "Adding on Item Click listener")
-       // }
-        this.listQuiz.onItemClickListener = object : OnItemClickListener{
-            override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                Toast.makeText(requireActivity(), "Clicked item : $p1", Toast.LENGTH_LONG).show()
-                Log.d("Test2", "Adding on Item Click listener")
-            }
+        listQuiz.setOnItemClickListener { parent, view, position, id ->
+            Toast.makeText(requireActivity(), "clicked : $position", Toast.LENGTH_SHORT).show()
         }
     }
 }
