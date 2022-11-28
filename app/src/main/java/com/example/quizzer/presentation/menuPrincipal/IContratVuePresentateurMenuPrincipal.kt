@@ -8,12 +8,14 @@ interface IContratVuePresentateurMenuPrincipal {
     interface IVueMenuPrincipal {
         fun naviguerVersCreationQuiz()
         fun naviguerVersDemarrerQuiz()
+        fun naviguerVersListeQuiz()
         fun attacherÉcouteurCreerQuiz()
         fun attacherÉcouteurDemarrerQuiz()
+        fun attacherÉcouteurListQuiz()
     }
 
     interface IPresentateurMenuPrincipal {
         fun creerQuiz()
-        fun demarrerQuiz()
+        fun demarrerListeQuiz()
     }
 }

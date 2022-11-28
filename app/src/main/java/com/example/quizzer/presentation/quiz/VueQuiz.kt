@@ -28,7 +28,6 @@ class VueQuiz : Fragment(), IVueQuiz {
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_quiz, container, false)
         présentateur = PrésentateurQuiz(Modèle, this)
-
         var quiz = présentateur?.réinitialiserQuiz()
         initialiserTexteBouttons(vue)
         attacherÉcouteurChoix(vue, quiz!!)
@@ -41,7 +40,7 @@ class VueQuiz : Fragment(), IVueQuiz {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view)
     }
 
     /**

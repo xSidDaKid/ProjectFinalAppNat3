@@ -26,7 +26,7 @@ class PresentateurMenuPrincipal(
      * TODO
      *
      */
-    override fun demarrerQuiz() {
+    override fun demarrerListeQuiz() {
         vue.naviguerVersDemarrerQuiz()
     }
 }

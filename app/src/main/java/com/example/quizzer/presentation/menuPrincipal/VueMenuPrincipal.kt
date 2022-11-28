@@ -60,8 +60,12 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
      */
     override fun attacherÉcouteurDemarrerQuiz() {
         btnDemarrer.setOnClickListener {
-            //présentateur?.demarrerQuiz()
+            présentateur?.demarrerListeQuiz()
         }
+    }
+
+    override fun attacherÉcouteurListQuiz() {
+
     }
 
     /**
@@ -72,12 +76,12 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
         navController.navigate(R.id.creationQuiz)
     }
 
-    /**
-     * TODO
-     *
-     */
+    override fun naviguerVersListeQuiz() {
+        navController.navigate(R.id.listQuiz)
+    }
+
     override fun naviguerVersDemarrerQuiz() {
-        navController.navigate(R.id.quizFragment)
+        navController.navigate(R.id.listQuiz)
     }
 
 }
