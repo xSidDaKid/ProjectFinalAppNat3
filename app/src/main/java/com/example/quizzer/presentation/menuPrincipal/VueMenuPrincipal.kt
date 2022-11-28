@@ -1,5 +1,6 @@
 package com.example.quizzer.presentation.menuPrincipal
 
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -66,9 +67,14 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
      */
     override fun attacherÉcouteurDemarrerQuiz() {
         btnDemarrer.setOnClickListener {
-            //présentateur?.demarrerQuiz()
+            présentateur?.demarrerListeQuiz()
         }
     }
+
+    override fun attacherÉcouteurListQuiz() {
+
+    }
+
 
 
     override fun attacherÉcouteurVoirPermission() {
@@ -86,12 +92,12 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
         navController.navigate(R.id.creationQuiz)
     }
 
-    /**
-     * TODO
-     *
-     */
+    override fun naviguerVersListeQuiz() {
+        navController.navigate(R.id.listQuiz)
+    }
+
     override fun naviguerVersDemarrerQuiz() {
-        navController.navigate(R.id.quizFragment)
+        navController.navigate(R.id.listQuiz)
     }
 
     override fun naviguerVersVoirPermission() {

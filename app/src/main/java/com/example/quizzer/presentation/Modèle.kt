@@ -23,7 +23,11 @@ object Modèle {
     var quizListe = mutableListOf<Quiz>()
     var utilisateurListe = mutableListOf<Utilisateur>()
     var mapPermission = mapOf<String,PermissionScore>()
+    var indexQuizListe : Int = 0
     init {
+        quizListe.add(Quiz(1, "Test", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+        quizListe.add(Quiz(2, "Test2", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+        quizListe.add(Quiz(3, "Test3", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
         var newQuiz1 = Quiz(
             0,
             "Les fruits et leurs couleurs",
@@ -36,6 +40,9 @@ object Modèle {
             "quiz2?",
             listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
             ObtenirReponses().obtenirReponses(ReponsesParDefaut()))
+
+        quizListe.add(newQuiz1)
+        quizListe.add(newQuiz2)
         var user1 = Utilisateur("a@mail.com","bob","mdp")
         var user2 = Utilisateur("b@mail.com","marc","mdp")
 
@@ -61,9 +68,12 @@ object Modèle {
             ObtenirReponses().obtenirReponses(ReponsesParDefaut())
         )*/
         //quizListe.add(newQuiz)
-        return quizListe[0]
+        return quizListe[indexQuizListe]
     }
 
+    fun setIndexQuiz(quizIndex: Int){
+        indexQuizListe = quizIndex
+    }
     /**
      * Méthode qui permet de valider une réponse et de changer le score de l'utilisateur
      *
@@ -127,12 +137,9 @@ object Modèle {
      * @param reponseBrut Réponse brut du créateur du quiz avec les , et :
      * @return
      */
-    /*fun getReponseTrier(reponseBrut: String): List<Map<String, String>> {
+    fun getReponseTrier(reponseBrut: String): List<Map<String, String>> {
         return ObtenirReponses().trierReponses(reponseBrut)
-    }*/
-    /* fun getReponseTrier(reponseBrut: List<String>): List<String> {
-         return ObtenirReponses().trierReponses(reponseBrut)
-     }*/
+    }
 
     /**
      * Méthode qui permet d'avoir la prochaine réponse
@@ -190,6 +197,10 @@ object Modèle {
         return quizScore.score
     }
 
+    fun getListeQuiz(): List<Quiz>{
+        return quizListe
+    }
+
     /**
      * Méthode qui vérifie si l'utilisateur existe dans la BD
      *
@@ -236,6 +247,4 @@ object Modèle {
     fun veriferQuiz(choix: String, reponse: String): String {
         return VerificationReponseCreationQuiz().verificationReponseCreationQuiz(choix, reponse)
     }
-
-
 }

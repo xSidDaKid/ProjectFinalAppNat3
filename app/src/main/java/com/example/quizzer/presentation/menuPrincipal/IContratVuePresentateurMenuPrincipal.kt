@@ -12,11 +12,13 @@ interface IContratVuePresentateurMenuPrincipal {
         fun attacherÉcouteurCreerQuiz()
         fun attacherÉcouteurDemarrerQuiz()
         fun attacherÉcouteurVoirPermission()
+        fun naviguerVersListeQuiz()
+        fun attacherÉcouteurListQuiz()
     }
 
     interface IPresentateurMenuPrincipal {
         fun creerQuiz()
-        fun demarrerQuiz()
         fun voirPermissions()
+        fun demarrerListeQuiz()
     }
 }
