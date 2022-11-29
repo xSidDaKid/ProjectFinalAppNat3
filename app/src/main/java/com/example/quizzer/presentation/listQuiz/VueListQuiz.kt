@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentController
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -51,7 +53,7 @@ class VueListQuiz : Fragment(), IVueListQuiz {
      *
      */
     override fun naviguerVersQuiz() {
-        findNavController().popBackStack()
+        findNavController().popBackStack(R.id.vueMenuPrincipal,false)
         findNavController().navigate(R.id.quizFragment)
     }
 
@@ -76,6 +78,7 @@ class VueListQuiz : Fragment(), IVueListQuiz {
     override fun attacherÉcouteurAuxQuiz() {
         listQuiz.setOnItemClickListener { parent, view, position, id ->
             Toast.makeText(requireActivity(), "clicked : $position", Toast.LENGTH_SHORT).show()
+            présentateur?.reinitialiserReponse()
             présentateur?.getQuiz(position)
         }
     }

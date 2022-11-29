@@ -35,4 +35,11 @@ class PresentateurListQuiz(
         vue.naviguerVersQuiz()
     }
 
+    /**
+     * Méthode qui réinitialiser les réponses d'un quiz
+     *
+     */
+    override fun reinitialiserReponse() {
+        modele.reinitialiserReponse()
+    }
 }

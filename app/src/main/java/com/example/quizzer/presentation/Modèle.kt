@@ -238,7 +238,7 @@ object Modèle {
      * Méthode qui permet de réinitialiser le tour des réponses
      *
      */
-    fun quiter() {
+    fun reinitialiserReponse() {
         tourDesRéponses = 0
     }
 

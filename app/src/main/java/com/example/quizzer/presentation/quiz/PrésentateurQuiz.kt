@@ -95,7 +95,7 @@ class PrésentateurQuiz(var modèle: Modèle, var vue: IVueQuiz = VueQuiz()) : I
      *
      */
     override fun quitter() {
-        modèle.quiter()
+        modèle.reinitialiserReponse()
     }
 
 }

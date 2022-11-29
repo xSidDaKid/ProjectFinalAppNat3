@@ -16,6 +16,6 @@ interface IContratVuePresentateurListQuiz {
     interface IPresentateurListQuiz{
         fun  getListeQuiz(): Array<Quiz>
         fun getQuiz(listePosition: Int)
-
+        fun reinitialiserReponse()
     }
 }
