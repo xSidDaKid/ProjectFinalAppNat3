@@ -89,4 +89,13 @@ class PrésentateurQuiz(var modèle: Modèle, var vue: IVueQuiz = VueQuiz()) : I
     override fun getScore(quiz: Quiz): Int {
         return modèle.getScore(quiz)
     }
+
+    /**
+     * Méthode qui permet de quitter un quiz
+     *
+     */
+    override fun quitter() {
+        modèle.quiter()
+    }
+
 }

@@ -49,7 +49,8 @@ class VueListQuiz : Fragment(), IVueListQuiz {
     }
 
     override fun naviguerVersQuiz() {
-        findNavController().navigate(R.id.action_listQuiz_to_quizFragment)
+        findNavController().popBackStack()
+        findNavController().navigate(R.id.quizFragment)
     }
 
     override fun initialiserListeQuiz() {

@@ -106,10 +106,7 @@ object Modèle {
      * @param reponse Réponses à associer à un quiz
      */
     fun ajouterQuiz(
-        titre: String,
-        question: String,
-        choix: List<String>,
-        reponse: List<String>
+        titre: String, question: String, choix: List<String>, reponse: List<String>
     ) {
         var compteur = 0
         var reponseTrier: List<Map<String, String>> = emptyList()
@@ -162,7 +159,7 @@ object Modèle {
         var réponseString = ""
         if (tourDesRéponses >= quiz.reponses.size) {
             tourDesRéponses = 0
-        }else {
+        } else {
             var réponse = quiz.reponses.get(tourDesRéponses)
             tourDesRéponses++
             var réponseString = réponse.toList().get(0).first
@@ -210,6 +207,11 @@ object Modèle {
         return quizScore.score
     }
 
+    /**
+     * Méthode qui permet d'avoir la liste des quiz
+     *
+     * @return Liste des quiz
+     */
     fun getListeQuiz(): List<Quiz> {
         return quizListe
     }
@@ -232,6 +234,14 @@ object Modèle {
         return false
     }
 
+    /**
+     * Méthode qui permet de réinitialiser le tour des réponses
+     *
+     */
+    fun quiter() {
+        tourDesRéponses = 0
+    }
+
     fun getRéponseParIndex(index: Int, quiz: Quiz): Map<String, String> {
         return quiz.reponses.get(index)
     }
@@ -244,7 +254,6 @@ object Modèle {
         return quiz.choix
     }
 
-
     fun getnomUtilisateur(utilisateur: Utilisateur): String {
         return utilisateur.nomUtilisateur
     }
@@ -256,6 +265,4 @@ object Modèle {
     fun veriferQuiz(choix: String, reponse: String): String {
         return VerificationReponseCreationQuiz().verificationReponseCreationQuiz(choix, reponse)
     }
-
-
 }

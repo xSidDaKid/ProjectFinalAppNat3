@@ -30,6 +30,7 @@
 
     <!-- Quiz -->
     <string name="score">Score: 0</string>
+    <string name="quitter">Quit</string>
 
     <!-- Registration -->
     <string name="newCompte">Create a new account</string>

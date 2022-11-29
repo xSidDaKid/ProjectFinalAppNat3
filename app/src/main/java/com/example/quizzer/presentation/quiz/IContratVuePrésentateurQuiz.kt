@@ -1,5 +1,6 @@
 package com.example.quizzer.presentation.quiz
 
+import android.view.View
 import com.example.quizzer.domaine.entité.Quiz
 
 /**
@@ -9,8 +10,13 @@ import com.example.quizzer.domaine.entité.Quiz
 interface IContratVuePrésentateurQuiz {
 
     interface IVueQuiz {
-        fun afficherRéponse(réponse: String)
-
+        fun attacherÉcouteurChoix(vue: View, quiz: Quiz)
+        fun initialiserTexteBouttons(vue: View)
+        fun prochaineRéponse(vue: View, quiz: Quiz)
+        fun afficherQuestion(vue: View, quiz: Quiz)
+        fun afficherTitre(vue: View, quiz: Quiz)
+        fun afficherScore(vue: View, quiz: Quiz)
+        fun attacherÉcouteurQuitter(vue: View)
     }
 
     interface IPrésentateurQuiz {
@@ -21,5 +27,6 @@ interface IContratVuePrésentateurQuiz {
         fun getQuestion(quiz: Quiz): String
         fun getTitre(quiz: Quiz): String
         fun getScore(quiz: Quiz): Int
+        fun quitter()
     }
 }

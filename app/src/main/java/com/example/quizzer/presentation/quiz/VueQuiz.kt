@@ -23,6 +23,7 @@ class VueQuiz : Fragment(), IVueQuiz {
 
     //lateinit var navController: NavController;
     var présentateur: PrésentateurQuiz? = null
+    lateinit var btnQuitter: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -30,11 +31,13 @@ class VueQuiz : Fragment(), IVueQuiz {
         val vue = inflater.inflate(R.layout.fragment_quiz, container, false)
         présentateur = PrésentateurQuiz(Modèle, this)
         var quiz = présentateur?.réinitialiserQuiz()
+        btnQuitter = vue.findViewById<Button>(R.id.btnQuitter)
         initialiserTexteBouttons(vue)
         attacherÉcouteurChoix(vue, quiz!!)
         prochaineRéponse(vue, quiz!!)
         afficherQuestion(vue, quiz!!)
         afficherTitre(vue, quiz!!)
+        attacherÉcouteurQuitter(vue)
         return vue
     }
 
@@ -49,7 +52,7 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun attacherÉcouteurChoix(vue: View, quiz: Quiz) {
+    override fun attacherÉcouteurChoix(vue: View, quiz: Quiz) {
 
         for (i in 1 until 5) {
             (vue.findViewWithTag(Integer.toString(i)) as Button).setOnClickListener(View.OnClickListener { view ->
@@ -67,7 +70,7 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun initialiserTexteBouttons(vue: View) {
+    override fun initialiserTexteBouttons(vue: View) {
         var quizListe = présentateur?.réinitialiserQuiz()
         var listeChoix = quizListe?.choix
 
@@ -83,7 +86,7 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun prochaineRéponse(vue: View, quiz: Quiz) {
+    override fun prochaineRéponse(vue: View, quiz: Quiz) {
         var button = vue.findViewById(R.id.reponseQuiz) as Button
         var text = présentateur?.envoyerProchaineRéponse(quiz)
         if (text != "")
@@ -97,7 +100,7 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun afficherQuestion(vue: View, quiz: Quiz) {
+    override fun afficherQuestion(vue: View, quiz: Quiz) {
         var textQuestion = vue.findViewById<TextView>(R.id.questionQuiz)
         textQuestion.text = présentateur?.getQuestion(quiz)
     }
@@ -107,7 +110,7 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun afficherTitre(vue: View, quiz: Quiz) {
+    override fun afficherTitre(vue: View, quiz: Quiz) {
         var textTitre = vue.findViewById<TextView>(R.id.titreQuiz)
         textTitre.text = présentateur?.getTitre(quiz)
     }
@@ -117,13 +120,20 @@ class VueQuiz : Fragment(), IVueQuiz {
      *
      * @param vue Vue Quiz
      */
-    private fun afficherScore(vue: View, quiz: Quiz) {
+    override fun afficherScore(vue: View, quiz: Quiz) {
         var textScore = vue.findViewById<TextView>(R.id.scoreQuiz)
         textScore.text = "Score: " + présentateur?.getScore(quiz).toString()
     }
 
-    override fun afficherRéponse(réponse: String) {
-        TODO("Not yet implemented")
+    /**
+     * Méthode qui permet de quitter un quiz
+     *
+     * @param vue Le quiz
+     */
+    override fun attacherÉcouteurQuitter(vue: View) {
+        btnQuitter.setOnClickListener {
+            présentateur?.quitter()
+            findNavController().navigate(R.id.vueMenuPrincipal)
+        }
     }
-
 }
