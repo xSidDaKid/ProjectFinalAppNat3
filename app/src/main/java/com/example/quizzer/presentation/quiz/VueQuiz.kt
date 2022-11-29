@@ -16,7 +16,6 @@ import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.IVueQuiz
 
 /**
- * TODO: Refactoriser et à ajouter dans les méthodes dans l'interface(Contrat)
  * Vue quiz qui permet d'afficher les données et permet d'informer le Présenteur à la suite d'une action de l'utilisateur
  */
 class VueQuiz : Fragment(), IVueQuiz {

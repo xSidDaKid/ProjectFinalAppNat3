@@ -1,28 +1,26 @@
 package com.example.quizzer.presentation.listQuiz
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.ListFragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
-import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.*
-import com.example.quizzer.presentation.login.PresentateurLogin
+import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IVueListQuiz
 
+/**
+ * Vue liste quiz qui permet d'afficher les données et permet d'informer le Présenteur à la suite d'une action de l'utilisateur
+ *
+ */
 class VueListQuiz : Fragment(), IVueListQuiz {
 
     lateinit var navController: NavController
@@ -48,17 +46,33 @@ class VueListQuiz : Fragment(), IVueListQuiz {
         navController = Navigation.findNavController(view);
     }
 
+    /**
+     * Méthode qui permet de diriger l'utilisateur vers la vue du quiz
+     *
+     */
     override fun naviguerVersQuiz() {
         findNavController().popBackStack()
         findNavController().navigate(R.id.quizFragment)
     }
 
+    /**
+     * Méthode qui permet d'afficher la liste des quiz
+     *
+     */
     override fun initialiserListeQuiz() {
-        adapter = ArrayAdapter<Quiz>(requireContext(), android.R.layout.simple_list_item_1, présentateur!!.getListeQuiz())
+        adapter = ArrayAdapter<Quiz>(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            présentateur!!.getListeQuiz()
+        )
         this.listQuiz.adapter = adapter
         Log.d("Test1", "Initializing list quiz")
     }
 
+    /**
+     * Méthode qui permet savoir quel quiz l'utilisateur a choisi
+     *
+     */
     override fun attacherÉcouteurAuxQuiz() {
         listQuiz.setOnItemClickListener { parent, view, position, id ->
             Toast.makeText(requireActivity(), "clicked : $position", Toast.LENGTH_SHORT).show()
