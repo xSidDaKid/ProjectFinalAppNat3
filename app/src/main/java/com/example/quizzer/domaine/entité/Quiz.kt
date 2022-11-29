@@ -2,7 +2,13 @@ package com.example.quizzer.domaine.entité
 
 import java.util.*
 
-class Quiz (val id: Int, val titre: String, val question: String, val choix: List<String>, val reponses: List<Map<String, String>>){
+class Quiz(
+    val id: Int,
+    val titre: String,
+    val question: String,
+    val choix: List<String>,
+    val reponses: List<Map<String, String>>
+) {
     /*var id: Int = 0
     var idCreateur: Int = 0
     open lateinit var titre: String
@@ -16,7 +22,6 @@ class Quiz (val id: Int, val titre: String, val question: String, val choix: Lis
         question = ""
         titre = ""
     }*/
-
     fun getChoix(indice: Int): String {
         return this.choix[indice] as String
     }
@@ -31,6 +36,6 @@ class Quiz (val id: Int, val titre: String, val question: String, val choix: Lis
     }
 
     override fun toString(): String {
-        return "\nTitre: " + titre + "|Question: " + question + "|Choix: " + choix + "|" + "|Reponse: " + reponses
+        return "Titre: " + titre + "\nQuestion: " + question
     }
 }

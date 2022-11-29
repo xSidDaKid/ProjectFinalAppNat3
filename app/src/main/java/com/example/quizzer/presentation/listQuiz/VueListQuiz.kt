@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.ListFragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
@@ -48,7 +49,7 @@ class VueListQuiz : Fragment(), IVueListQuiz {
     }
 
     override fun naviguerVersQuiz() {
-        navController.navigate(R.id.quizFragment)
+        findNavController().navigate(R.id.action_listQuiz_to_quizFragment)
     }
 
     override fun initialiserListeQuiz() {

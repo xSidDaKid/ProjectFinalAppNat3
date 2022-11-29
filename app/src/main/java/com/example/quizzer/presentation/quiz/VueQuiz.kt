@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
@@ -20,7 +21,7 @@ import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.IVueQu
  */
 class VueQuiz : Fragment(), IVueQuiz {
 
-    lateinit var navController: NavController;
+    //lateinit var navController: NavController;
     var présentateur: PrésentateurQuiz? = null
 
     override fun onCreateView(
@@ -40,7 +41,7 @@ class VueQuiz : Fragment(), IVueQuiz {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view)
+        Navigation.findNavController(view)
     }
 
     /**
@@ -88,7 +89,7 @@ class VueQuiz : Fragment(), IVueQuiz {
         if (text != "")
             button.text = text
         else
-            navController.navigate(R.id.vueMenuPrincipal)
+            findNavController().navigate(R.id.vueMenuPrincipal)
     }
 
     /**

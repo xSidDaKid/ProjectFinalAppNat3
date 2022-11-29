@@ -10,16 +10,19 @@
         android:id="@+id/quizFragment"
         android:name="com.example.quizzer.presentation.quiz.VueQuiz"
         android:label="fragment_quiz"
-        tools:layout="@layout/fragment_quiz" />
+        tools:layout="@layout/fragment_quiz" >
+        <action
+            android:id="@+id/action_quizFragment_to_vueMenuPrincipal"
+            app:destination="@id/vueMenuPrincipal" />
+    </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.quizzer.presentation.registration.VueRegistration"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
-
         <action
-            android:id="@+id/action_registrationFragment_to_vueMenuPrincipal"
-            app:destination="@id/vueMenuPrincipal" />
+            android:id="@+id/action_registrationFragment_to_vueLogin"
+            app:destination="@id/vueLogin" />
     </fragment>
     <fragment
         android:id="@+id/creationQuiz"
@@ -27,8 +30,8 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_creation_quiz" >
         <action
-            android:id="@+id/action_creationQuiz_to_quizFragment"
-            app:destination="@id/quizFragment" />
+            android:id="@+id/action_creationQuiz_to_vueMenuPrincipal"
+            app:destination="@id/vueMenuPrincipal" />
     </fragment>
     <fragment
         android:id="@+id/vueMenuPrincipal"

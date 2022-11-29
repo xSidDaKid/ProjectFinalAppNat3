@@ -21,13 +21,37 @@ object Modèle {
     var tourDesRéponses: Int = 0
     var quizListe = mutableListOf<Quiz>()
     var utilisateurListe = mutableListOf<Utilisateur>()
-    var indexQuizListe : Int = 0
+    var indexQuizListe: Int = 0
 
 
     init {
-        quizListe.add(Quiz(1, "Test", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
-        quizListe.add(Quiz(2, "Test2", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
-        quizListe.add(Quiz(3, "Test3", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+        quizListe.add(
+            Quiz(
+                1,
+                "Test",
+                "Lol",
+                listOf("1", "2", "3", "4"),
+                listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))
+            )
+        )
+        quizListe.add(
+            Quiz(
+                2,
+                "Test2",
+                "Lol",
+                listOf("1", "2", "3", "4"),
+                listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))
+            )
+        )
+        quizListe.add(
+            Quiz(
+                3,
+                "Test3",
+                "Lol",
+                listOf("1", "2", "3", "4"),
+                listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))
+            )
+        )
         var newQuiz = Quiz(
             0,
             "Les fruits et leurs couleurs",
@@ -54,9 +78,10 @@ object Modèle {
         return quizListe[indexQuizListe]
     }
 
-    fun setIndexQuiz(quizIndex: Int){
+    fun setIndexQuiz(quizIndex: Int) {
         indexQuizListe = quizIndex
     }
+
     /**
      * Méthode qui permet de valider une réponse et de changer le score de l'utilisateur
      *
@@ -134,14 +159,16 @@ object Modèle {
      * @return
      */
     fun getProchaineRéponse(quiz: Quiz): String {
-        if (tourDesRéponses >= quiz.reponses.size)
-            return ""
-        else {
+        var réponseString = ""
+        if (tourDesRéponses >= quiz.reponses.size) {
+            tourDesRéponses = 0
+        }else {
             var réponse = quiz.reponses.get(tourDesRéponses)
             tourDesRéponses++
             var réponseString = réponse.toList().get(0).first
             return réponseString
         }
+        return réponseString
     }
 
     /**
@@ -183,7 +210,7 @@ object Modèle {
         return quizScore.score
     }
 
-    fun getListeQuiz(): List<Quiz>{
+    fun getListeQuiz(): List<Quiz> {
         return quizListe
     }
 
