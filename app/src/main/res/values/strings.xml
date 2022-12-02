@@ -37,5 +37,6 @@
     <string name="confirmerMDP">Confirmer Mot de Passe</string>
     <string name="compteExistant">Avez-vous déjà un compte? Cliquez ici</string>
     <string name="listePermission">Voir mes permissions</string>
+    <string name="ajouter">Ajouter</string>
 
 </resources>
