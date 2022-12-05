@@ -1,6 +1,8 @@
 package com.example.quizzer.presentation.menuPrincipal
 
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,8 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
     lateinit var navController: NavController;
     lateinit var btnCreerQuiz: Button
     lateinit var btnDemarrer: Button
+    lateinit var btnPermission: Button
+
     var présentateur: PresentateurMenuPrincipal? = null
 
     override fun onCreateView(
@@ -30,10 +34,13 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
         val vue = inflater.inflate(R.layout.fragment_menu_principal, container, false)
         présentateur = PresentateurMenuPrincipal(Modèle, this)
 
+        btnPermission = vue.findViewById(R.id.btnPermission)
         btnCreerQuiz = vue.findViewById<Button>(R.id.btnCreerQuiz)
         btnDemarrer = vue.findViewById<Button>(R.id.btnDemarrer)
         attacherÉcouteurCreerQuiz()
         attacherÉcouteurDemarrerQuiz()
+        attacherÉcouteurVoirPermission()
+        Log.d("test1","created")
 
         return vue
     }
@@ -68,8 +75,17 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
 
     }
 
+
+
+    override fun attacherÉcouteurVoirPermission() {
+        Log.d("test1","attached")
+        btnPermission.setOnClickListener {
+            présentateur?.voirPermissions()
+            Log.d("test1","pressed")
+        }
+    }
     /**
-     * Méthode qui redirige vers la page pour créer un compte
+     * Méthode qui redirige vers la page pour créer un quiz
      *
      */
     override fun naviguerVersCreationQuiz() {
@@ -82,6 +98,11 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
 
     override fun naviguerVersDemarrerQuiz() {
         navController.navigate(R.id.listQuiz)
+    }
+
+    override fun naviguerVersVoirPermission() {
+        navController.navigate(R.id.permissionFragment)
+        Log.d("test1","ici")
     }
 
 }

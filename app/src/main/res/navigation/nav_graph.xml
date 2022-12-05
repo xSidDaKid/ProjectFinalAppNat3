@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_vueMenuPrincipal_to_listQuiz"
             app:destination="@id/listQuiz" />
+        <action
+            android:id="@+id/action_vueMenuPrincipal_to_permissionFragment3"
+            app:destination="@id/permissionFragment" />
     </fragment>
     <fragment
         android:id="@+id/vueLogin"
@@ -66,4 +69,9 @@
             android:id="@+id/action_listQuiz_to_quizFragment"
             app:destination="@id/quizFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/permissionFragment"
+        android:name="com.example.quizzer.presentation.permission.VuePermission"
+        android:label="fragment_permission"
+        tools:layout="@layout/fragment_permission" />
 </navigation>

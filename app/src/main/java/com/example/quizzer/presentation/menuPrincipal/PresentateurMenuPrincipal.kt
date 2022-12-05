@@ -22,11 +22,16 @@ class PresentateurMenuPrincipal(
         vue.naviguerVersCreationQuiz()
     }
 
+
     /**
      * TODO
      *
      */
     override fun demarrerListeQuiz() {
         vue.naviguerVersDemarrerQuiz()
+    }
+
+    override fun voirPermissions() {
+        vue.naviguerVersVoirPermission()
     }
 }

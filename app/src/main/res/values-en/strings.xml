@@ -38,4 +38,6 @@
     <string name="confirmerMDP">Confirm Password</string>
     <string name="compteExistant">Do you already have an account? Click here</string>
 
+    <string name="listePermission">See my invitations</string>
+    <string name="ajouter">Ajouter</string>
 </resources>
