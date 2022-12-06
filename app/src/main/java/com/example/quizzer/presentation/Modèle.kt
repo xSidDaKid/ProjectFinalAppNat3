@@ -1,6 +1,9 @@
 package com.example.quizzer.presentation
 
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.quizzer.accesAuxDonnées.ISourceDeDonées
 import com.example.quizzer.accesAuxDonnées.ReponsesParDefaut
+import com.example.quizzer.accesAuxDonnées.SourceAPI
 import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.domaine.entité.QuizUtilisateurScore
@@ -8,6 +11,7 @@ import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.domaine.interacteur.ObtenirReponses
 import com.example.quizzer.domaine.interacteur.VerificationReponse
 import com.example.quizzer.domaine.interacteur.VerificationReponseCreationQuiz
+import java.net.URL
 
 /**
  * Object qui permet d'intéragir avec la base de donnée
@@ -18,6 +22,7 @@ object Modèle {
 
     private var quizScore = QuizUtilisateurScore()
     //private var utilisateur = Utilisateur()
+    var sourceDeDonne:ISourceDeDonées=SourceAPI()
 
     var utilisateurConnecte=Utilisateur("bobo@mail.com","bobby","root")
     var tourDesRéponses: Int = 0
@@ -30,35 +35,36 @@ object Modèle {
         quizListe.add(Quiz( "Test", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
         quizListe.add(Quiz( "Test2", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
         quizListe.add(Quiz( "Test3", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
-        var newQuiz1 = Quiz(
-            "Les fruits et leurs couleurs",
-            "Quelle est la couleur du fruit?",
-            listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
-            ObtenirReponses().obtenirReponses(ReponsesParDefaut()))
-        var newQuiz2 = Quiz(
-            "Les fruits et leurs couleurs numero2",
-            "quiz2?",
-            listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
-            ObtenirReponses().obtenirReponses(ReponsesParDefaut()))
-
-        quizListe.add(newQuiz1)
-        quizListe.add(newQuiz2)
+//        var newQuiz1 = Quiz(
+//            "Les fruits et leurs couleurs",
+//            "Quelle est la couleur du fruit?",
+//            listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
+//            ObtenirReponses().obtenirReponses(ReponsesParDefaut()))
+//        var newQuiz2 = Quiz(
+//            "Les fruits et leurs couleurs numero2",
+//            "quiz2?",
+//            listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
+//            ObtenirReponses().obtenirReponses(ReponsesParDefaut()))
+//
+//        quizListe.add(newQuiz1)
+//        quizListe.add(newQuiz2)
         var user1 = Utilisateur("a@mail.com","bob","mdp")
         var user2 = Utilisateur("b@mail.com","marc","mdp")
         var user3 = utilisateurConnecte
 
+        chercherPermissions()
 
-        var permission1 = PermissionScore(user1,newQuiz1,0)
-        var permission2 = PermissionScore(user1,newQuiz2,0)
-        var permission3 = PermissionScore(user3,newQuiz2,5)
-        var permission4 = PermissionScore(user3,newQuiz1,2)
-        var permission5 = PermissionScore(user3,newQuiz2,10)
-
-        permissionListe.add(permission1)
-        permissionListe.add(permission2)
-        permissionListe.add(permission3)
-        permissionListe.add(permission4)
-        permissionListe.add(permission5)
+//        var permission1 = PermissionScore(user1,newQuiz1,0)
+//        var permission2 = PermissionScore(user1,newQuiz2,0)
+//        var permission3 = PermissionScore(user3,newQuiz2,5)
+//        var permission4 = PermissionScore(user3,newQuiz1,2)
+//        var permission5 = PermissionScore(user3,newQuiz2,10)
+//
+//        permissionListe.add(permission1)
+//        permissionListe.add(permission2)
+//        permissionListe.add(permission3)
+//        permissionListe.add(permission4)
+//        permissionListe.add(permission5)
 //        mapPermission+= ("1" to permission1)
 //        mapPermission+=("2" to permission2)
 //        mapPermission+=("3" to permission3)
@@ -293,8 +299,11 @@ object Modèle {
             }
 
         }
-        return listeFiltré
+        return permissionListe
     }
 
+    fun chercherPermissions(){
+        permissionListe= sourceDeDonne.obtenirPermissions()
+    }
 
 }
