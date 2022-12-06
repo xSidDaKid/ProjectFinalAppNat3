@@ -1,29 +1,23 @@
 package com.example.quizzer.presentation.permission
 
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.example.quizzer.MainActivity
 import com.example.quizzer.R
-import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.permission.IContratVuePresentateurPermission.IVuePermission
-import java.security.Permission
 
 
 class VuePermission : Fragment(), IVuePermission {
@@ -61,19 +55,42 @@ class VuePermission : Fragment(), IVuePermission {
     fun attacherÉcouteurAuxQuiz() {
         listPermission.setOnItemClickListener { parent, view, position, id ->
             présentateur?.dialogPermission(position)
+            Toast.makeText(requireActivity(), "clicked : $position", Toast.LENGTH_SHORT).show()
+
         }
     }
 
+    fun afficherToast(message:String){
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
+    }
 
+    fun creerPermission(email:String,position: Int){
+        présentateur?.creerPermission(email,position)
+    }
 
-    override fun montrerDialog() {
-        var dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(requireView())
-        var input = dialog.findViewById(R.id.txtCourriel) as EditText
-        var btnAjouter = dialog.findViewById(R.id.btnAjouter) as Button
-        dialog.show()
+    override fun montrerDialog(position:Int) {
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Veuillez écrire le email")
+        var inputEmail:String=""
+        val input = EditText(requireContext())
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        builder.setView(input)
+        builder.setPositiveButton(
+            "Ajouter"
+        ) { dialog, which ->  creerPermission(input.text.toString(),position) }
+        builder.setNegativeButton(
+            "Annuler"
+        ) { dialog, which -> dialog.cancel() }
+
+        builder.show()
+//        var dialog = Dialog(requireActivity())
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//        dialog.setCancelable(true)
+//        dialog.setContentView(R.layout.dialog_permission)
+//        var input = dialog.findViewById(R.id.txtCourriel) as EditText
+//        var btnAjouter = dialog.findViewById(R.id.btnAjouter) as Button
+//        dialog.show()
 
 
 //        return activity?.let {

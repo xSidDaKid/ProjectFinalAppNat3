@@ -3,7 +3,6 @@ package com.example.quizzer.domaine.entité
 import java.util.*
 
 class Quiz(
-    val id: Int,
     val titre: String,
     val question: String,
     val choix: List<String>,

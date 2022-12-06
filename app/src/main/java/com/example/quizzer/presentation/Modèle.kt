@@ -19,24 +19,24 @@ object Modèle {
     private var quizScore = QuizUtilisateurScore()
     //private var utilisateur = Utilisateur()
 
+    var utilisateurConnecte=Utilisateur("bobo@mail.com","bobby","root")
     var tourDesRéponses: Int = 0
     var quizListe = mutableListOf<Quiz>()
     var utilisateurListe = mutableListOf<Utilisateur>()
     var mapPermission = mapOf<String,PermissionScore>()
+    var permissionListe = mutableListOf<PermissionScore>()
     var indexQuizListe : Int = 0
     init {
-        quizListe.add(Quiz(1, "Test", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
-        quizListe.add(Quiz(2, "Test2", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
-        quizListe.add(Quiz(3, "Test3", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+        quizListe.add(Quiz( "Test", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+        quizListe.add(Quiz( "Test2", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
+        quizListe.add(Quiz( "Test3", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
         var newQuiz1 = Quiz(
-            0,
             "Les fruits et leurs couleurs",
             "Quelle est la couleur du fruit?",
             listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
             ObtenirReponses().obtenirReponses(ReponsesParDefaut()))
         var newQuiz2 = Quiz(
-            0,
-            "Les fruits et leurs couleurs",
+            "Les fruits et leurs couleurs numero2",
             "quiz2?",
             listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
             ObtenirReponses().obtenirReponses(ReponsesParDefaut()))
@@ -45,14 +45,23 @@ object Modèle {
         quizListe.add(newQuiz2)
         var user1 = Utilisateur("a@mail.com","bob","mdp")
         var user2 = Utilisateur("b@mail.com","marc","mdp")
+        var user3 = utilisateurConnecte
+
 
         var permission1 = PermissionScore(user1,newQuiz1,0)
         var permission2 = PermissionScore(user1,newQuiz2,0)
-        var permission3 = PermissionScore(user2,newQuiz2,0)
+        var permission3 = PermissionScore(user3,newQuiz2,5)
+        var permission4 = PermissionScore(user3,newQuiz1,2)
+        var permission5 = PermissionScore(user3,newQuiz2,10)
 
-        mapPermission+= ("1" to permission1)
-        mapPermission+=("2" to permission2)
-        mapPermission+=("3" to permission3)
+        permissionListe.add(permission1)
+        permissionListe.add(permission2)
+        permissionListe.add(permission3)
+        permissionListe.add(permission4)
+        permissionListe.add(permission5)
+//        mapPermission+= ("1" to permission1)
+//        mapPermission+=("2" to permission2)
+//        mapPermission+=("3" to permission3)
     }
 
     /**
@@ -115,7 +124,7 @@ object Modèle {
             compteur++
         }
 
-        var newQuiz = Quiz(1, titre, question, choix, reponseTrier)
+        var newQuiz = Quiz( titre, question, choix, reponseTrier)
         quizListe.add(newQuiz)
     }
 
@@ -261,6 +270,30 @@ object Modèle {
 
     fun veriferQuiz(choix: String, reponse: String): String {
         return VerificationReponseCreationQuiz().verificationReponseCreationQuiz(choix, reponse)
+    }
+
+    fun ajouterPermission(email: String, position: Int) {
+        var utilisateurTrouve:Utilisateur
+        var quizTrouve:Quiz
+        quizTrouve= quizListe.get(position)
+        for(utilisateur in utilisateurListe){
+            if (utilisateur.courriel==email){
+                utilisateurTrouve=utilisateur
+                var permission = PermissionScore(utilisateurTrouve,quizTrouve,0)
+                permissionListe.add(permission)
+            }
+        }
+    }
+
+    fun getListePermissionParEmail(): MutableList<PermissionScore> {
+        var listeFiltré= mutableListOf<PermissionScore>()
+        for (permission in permissionListe){
+            if(permission.utilisateur.courriel== utilisateurConnecte.courriel){
+                listeFiltré.add(permission)
+            }
+
+        }
+        return listeFiltré
     }
 
 

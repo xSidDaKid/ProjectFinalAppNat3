@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_vueMenuPrincipal_to_permissionFragment3"
             app:destination="@id/permissionFragment" />
+        <action
+            android:id="@+id/action_vueMenuPrincipal_to_scoreFragment"
+            app:destination="@id/scoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/vueLogin"
@@ -74,4 +77,9 @@
         android:name="com.example.quizzer.presentation.permission.VuePermission"
         android:label="fragment_permission"
         tools:layout="@layout/fragment_permission" />
+    <fragment
+        android:id="@+id/scoreFragment"
+        android:name="com.example.quizzer.presentation.score.VueScore"
+        android:label="fragment_score"
+        tools:layout="@layout/fragment_score" />
 </navigation>

@@ -26,7 +26,11 @@ class PresentateurPermission(var modèle:Modèle, var vue:IVuePermission = VuePe
 
     override fun dialogPermission(position: Int) {
 
-        vue.montrerDialog()
+        vue.montrerDialog(position)
+    }
+
+    override fun creerPermission(email: String, position: Int) {
+        modèle.ajouterPermission(email,position)
     }
 
 

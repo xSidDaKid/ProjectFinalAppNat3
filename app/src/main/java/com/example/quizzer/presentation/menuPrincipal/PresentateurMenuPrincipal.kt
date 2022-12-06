@@ -31,6 +31,10 @@ class PresentateurMenuPrincipal(
         vue.naviguerVersDemarrerQuiz()
     }
 
+    override fun voirScore() {
+        vue.naviguerVersListeScore()
+    }
+
     override fun voirPermissions() {
         vue.naviguerVersVoirPermission()
     }

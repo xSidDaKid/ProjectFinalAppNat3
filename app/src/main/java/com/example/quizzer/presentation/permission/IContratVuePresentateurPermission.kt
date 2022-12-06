@@ -7,7 +7,7 @@ import com.example.quizzer.domaine.entité.Quiz
 interface IContratVuePresentateurPermission {
 
     interface IVuePermission{
-        fun montrerDialog()
+        fun montrerDialog(position: Int)
 
     }
 
@@ -16,5 +16,6 @@ interface IContratVuePresentateurPermission {
         fun getPermission(position: Int): PermissionScore
         fun getListeQuiz(): Array<Quiz>
         fun dialogPermission(position: Int)
+        fun creerPermission(email: String, position: Int)
     }
 }

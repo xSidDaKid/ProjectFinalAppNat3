@@ -24,6 +24,7 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
     lateinit var btnCreerQuiz: Button
     lateinit var btnDemarrer: Button
     lateinit var btnPermission: Button
+    lateinit var btnScore:Button
 
     var présentateur: PresentateurMenuPrincipal? = null
 
@@ -37,9 +38,11 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
         btnPermission = vue.findViewById(R.id.btnPermission)
         btnCreerQuiz = vue.findViewById<Button>(R.id.btnCreerQuiz)
         btnDemarrer = vue.findViewById<Button>(R.id.btnDemarrer)
+        btnScore =vue.findViewById(R.id.btnScore)
         attacherÉcouteurCreerQuiz()
         attacherÉcouteurDemarrerQuiz()
         attacherÉcouteurVoirPermission()
+        attacherÉcouteurVoirScore()
         Log.d("test1","created")
 
         return vue
@@ -77,11 +80,15 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
 
 
 
+    override fun attacherÉcouteurVoirScore(){
+        btnScore.setOnClickListener{
+            présentateur?.voirScore()
+        }
+    }
+
     override fun attacherÉcouteurVoirPermission() {
-        Log.d("test1","attached")
         btnPermission.setOnClickListener {
             présentateur?.voirPermissions()
-            Log.d("test1","pressed")
         }
     }
     /**
@@ -104,5 +111,7 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
         navController.navigate(R.id.permissionFragment)
         Log.d("test1","ici")
     }
-
+    override fun naviguerVersListeScore() {
+        navController.navigate(R.id.scoreFragment)
+    }
 }
