@@ -48,6 +48,7 @@ class PresentateurListQuiz(
 
             }
             catch(e: java.lang.Exception ){
+                e.printStackTrace()
                 vue.afficherMessageErreur( e.toString())
             }
         }
