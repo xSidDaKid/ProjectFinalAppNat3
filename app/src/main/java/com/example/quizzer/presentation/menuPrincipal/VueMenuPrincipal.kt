@@ -33,7 +33,7 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
         savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_menu_principal, container, false)
-        présentateur = PresentateurMenuPrincipal(Modèle, this)
+        présentateur = PresentateurMenuPrincipal( this)
 
         btnPermission = vue.findViewById(R.id.btnPermission)
         btnCreerQuiz = vue.findViewById<Button>(R.id.btnCreerQuiz)

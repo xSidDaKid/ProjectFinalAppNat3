@@ -3,6 +3,7 @@ package com.example.quizzer.presentation.creationQuiz
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IPresentateurCreation
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IVueCreation
+import com.example.quizzer.presentation.modèle
 
 /**
  * Classe qui permet de communiquer avec le modèle
@@ -10,7 +11,7 @@ import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCrea
  * @property modele Objet qui permet de communiquer avec l'API
  * @property vue L'interface qui envoie les données à traiter
  */
-class PresentateurCreationQuiz(var modele: Modèle, var vue: IVueCreation = VueCreationQuiz()) :
+class PresentateurCreationQuiz(var vue: IVueCreation = VueCreationQuiz()) :
     IPresentateurCreation {
 
     /**
@@ -24,7 +25,7 @@ class PresentateurCreationQuiz(var modele: Modèle, var vue: IVueCreation = VueC
     override fun traiterCreationQuiz(
         titre: String, question: String, choix: List<String>, reponse: List<String>
     ) {
-        modele.ajouterQuiz(titre, question, choix, reponse)
+        modèle.ajouterQuiz(titre, question, choix, reponse)
         vue.naviguerVersQuiz()
     }
 

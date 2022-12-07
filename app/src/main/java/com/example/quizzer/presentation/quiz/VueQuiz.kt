@@ -28,7 +28,7 @@ class VueQuiz : Fragment(), IVueQuiz {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_quiz, container, false)
-        présentateur = PrésentateurQuiz(Modèle, this)
+        présentateur = PrésentateurQuiz( this)
         var quiz = présentateur?.réinitialiserQuiz()
         btnQuitter = vue.findViewById<Button>(R.id.btnQuitter)
         initialiserTexteBouttons(vue)

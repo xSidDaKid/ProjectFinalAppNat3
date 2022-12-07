@@ -30,7 +30,7 @@ class VueLogin : Fragment(), IVueLogin {
         savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_login, container, false)
-        présentateur = PresentateurLogin(Modèle, this)
+        présentateur = PresentateurLogin( this)
 
         btnLogin = vue.findViewById<Button>(R.id.btnLogin)
         txtEnregistrer = vue.findViewById<TextView>(R.id.txtEnregistrer)

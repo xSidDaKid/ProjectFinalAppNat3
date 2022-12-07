@@ -8,9 +8,10 @@ import com.example.quizzer.domaine.entité.Quiz
  */
 interface IContratVuePresentateurListQuiz {
     interface IVueListQuiz{
-        fun initialiserListeQuiz()
+        fun initialiserListeQuiz(liste:Array<Quiz>?)
         fun attacherÉcouteurAuxQuiz()
         fun naviguerVersQuiz()
+        fun afficherMessageErreur(s: String)
     }
 
     interface IPresentateurListQuiz{

@@ -1,5 +1,6 @@
 package com.example.quizzer.presentation
 
+import android.util.Log
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.quizzer.accesAuxDonnées.ISourceDeDonées
 import com.example.quizzer.accesAuxDonnées.ReponsesParDefaut
@@ -18,11 +19,11 @@ import java.net.URL
  * TODO: Ajout des quiz dans la BD,
  * @IMPORTANT: Pour une raison quelconque, lors de l'ajout d'un quiz dans la liste, elle est ajouté au début de la liste et non à la fin!!!
  */
-object Modèle {
+class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
 
     private var quizScore = QuizUtilisateurScore()
     //private var utilisateur = Utilisateur()
-    var sourceDeDonne:ISourceDeDonées=SourceAPI()
+
 
     var utilisateurConnecte=Utilisateur("bobo@mail.com","bobby","root")
     var tourDesRéponses: Int = 0
@@ -32,27 +33,10 @@ object Modèle {
     var permissionListe = mutableListOf<PermissionScore>()
     var indexQuizListe : Int = 0
     init {
-        quizListe.add(Quiz( "Test", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
-        quizListe.add(Quiz( "Test2", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
-        quizListe.add(Quiz( "Test3", "Lol", listOf("1", "2", "3", "4"), listOf(mapOf("1" to "hello", "2" to "test", "3" to "lol"))))
-//        var newQuiz1 = Quiz(
-//            "Les fruits et leurs couleurs",
-//            "Quelle est la couleur du fruit?",
-//            listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
-//            ObtenirReponses().obtenirReponses(ReponsesParDefaut()))
-//        var newQuiz2 = Quiz(
-//            "Les fruits et leurs couleurs numero2",
-//            "quiz2?",
-//            listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
-//            ObtenirReponses().obtenirReponses(ReponsesParDefaut()))
-//
-//        quizListe.add(newQuiz1)
-//        quizListe.add(newQuiz2)
         var user1 = Utilisateur("a@mail.com","bob","mdp")
         var user2 = Utilisateur("b@mail.com","marc","mdp")
         var user3 = utilisateurConnecte
 
-        chercherPermissions()
 
 //        var permission1 = PermissionScore(user1,newQuiz1,0)
 //        var permission2 = PermissionScore(user1,newQuiz2,0)
@@ -220,6 +204,11 @@ object Modèle {
      * @return Liste des quiz
      */
     fun getListeQuiz(): List<Quiz> {
+        quizListe=sourceDeDonne.obtenirQuiz()
+        return quizListe
+    }
+
+    fun getListeQuizSync(): List<Quiz> {
         return quizListe
     }
 
@@ -299,11 +288,14 @@ object Modèle {
             }
 
         }
+        return listeFiltré
+    }
+
+    fun chercherPermissions(): MutableList<PermissionScore> {
+        Log.d("testapi","chercherPermission")
+        permissionListe= sourceDeDonne.obtenirPermissions()
         return permissionListe
     }
 
-    fun chercherPermissions(){
-        permissionListe= sourceDeDonne.obtenirPermissions()
-    }
-
 }
+var modèle = Modèle()

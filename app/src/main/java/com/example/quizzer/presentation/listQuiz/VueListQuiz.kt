@@ -35,9 +35,8 @@ class VueListQuiz : Fragment(), IVueListQuiz {
         savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_list_quiz, container, false)
-        présentateur = PresentateurListQuiz(Modèle, this)
+        présentateur = PresentateurListQuiz(this)
         listQuiz = vue.findViewById(android.R.id.list)
-        initialiserListeQuiz()
         attacherÉcouteurAuxQuiz()
         return vue
     }
@@ -46,6 +45,7 @@ class VueListQuiz : Fragment(), IVueListQuiz {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view);
+        initialiserListeQuiz(présentateur?.getListeQuiz())
     }
 
     /**
@@ -61,14 +61,15 @@ class VueListQuiz : Fragment(), IVueListQuiz {
      * Méthode qui permet d'afficher la liste des quiz
      *
      */
-    override fun initialiserListeQuiz() {
+    override fun initialiserListeQuiz(liste:Array<Quiz>?) {
         adapter = ArrayAdapter<Quiz>(
             requireContext(),
             android.R.layout.simple_list_item_1,
-            présentateur!!.getListeQuiz()
+            liste!!
         )
         this.listQuiz.adapter = adapter
         Log.d("Test1", "Initializing list quiz")
+        Log.d("testapiquiz","liste")
     }
 
     /**
@@ -81,5 +82,10 @@ class VueListQuiz : Fragment(), IVueListQuiz {
             présentateur?.reinitialiserReponse()
             présentateur?.getQuiz(position)
         }
+    }
+
+    override fun afficherMessageErreur(s: String) {
+        Toast.makeText(requireActivity(), s, Toast.LENGTH_LONG).show()
+        Log.d("erreur",s)
     }
 }

@@ -31,7 +31,7 @@ class VuePermission : Fragment(), IVuePermission {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_permission, container, false)
-        présentateur = PresentateurPermission(Modèle,this)
+        présentateur = PresentateurPermission(this)
         listPermission = vue.findViewById(android.R.id.list)
         initialiserListeQuiz()
         attacherÉcouteurAuxQuiz()
@@ -46,7 +46,7 @@ class VuePermission : Fragment(), IVuePermission {
 
     fun initialiserListeQuiz() {
         Log.d("testArray","creer array")
-        adapter = ArrayAdapter<Quiz>(requireContext(), android.R.layout.simple_list_item_1, présentateur!!.getListeQuiz())
+        adapter = ArrayAdapter<Quiz>(requireContext(), android.R.layout.simple_list_item_1, présentateur!!.getListeQuizSync())
         Log.d("testArray","creer array1")
         this.listPermission.adapter = adapter
         Log.d("testArray","creer array2")

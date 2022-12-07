@@ -2,6 +2,7 @@ package com.example.quizzer.presentation.quiz
 
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
+import com.example.quizzer.presentation.modèle
 import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.IPrésentateurQuiz
 import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.IVueQuiz
 
@@ -11,7 +12,7 @@ import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.IVueQu
  * @property modèle Objet qui permet de recevoir les données de l'API
  * @property vue Vue Quiz
  */
-class PrésentateurQuiz(var modèle: Modèle, var vue: IVueQuiz = VueQuiz()) : IPrésentateurQuiz {
+class PrésentateurQuiz( var vue: IVueQuiz = VueQuiz()) : IPrésentateurQuiz {
 
 /*    fun envoyerChoix(): List<String> {
         return modèle.getChoix()

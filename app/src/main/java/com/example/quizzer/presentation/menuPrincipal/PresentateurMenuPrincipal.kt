@@ -10,7 +10,6 @@ import com.example.quizzer.presentation.menuPrincipal.IContratVuePresentateurMen
  * @property vue L'interface qui envoie les données à traiter
  */
 class PresentateurMenuPrincipal(
-    var modele: Modèle,
     var vue: IVueMenuPrincipal = VueMenuPrincipal()
 ) : IPresentateurMenuPrincipal {
 

@@ -2,8 +2,10 @@ package com.example.quizzer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.quizzer.accesAuxDonnées.SourceAPI
 import com.example.quizzer.presentation.Modèle
+import com.example.quizzer.presentation.modèle
 import com.example.quizzer.presentation.quiz.PrésentateurQuiz
 import com.example.quizzer.presentation.quiz.VueQuiz
 import java.net.URL
@@ -12,8 +14,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.d("testapi","oncreate")
+        modèle.sourceDeDonne = SourceAPI(this)
 
-        Modèle.sourceDeDonne = SourceAPI(this)
      /*   // Création de la vue
         val vue = VueQuiz()
         // et du présentateur

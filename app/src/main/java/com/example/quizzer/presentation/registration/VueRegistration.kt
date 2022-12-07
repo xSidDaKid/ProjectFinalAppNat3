@@ -28,7 +28,7 @@ class VueRegistration : Fragment(), IVueRegistration {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_registration, container, false)
-        présentateur = PrésentateurRegistration(Modèle, this)
+        présentateur = PrésentateurRegistration( this)
 
         txtConnexion = vue.findViewById<TextView>(R.id.connexion)
         btnEnregistrer = vue.findViewById<Button>(R.id.btnEnregistrer)

@@ -2,15 +2,15 @@ package com.example.quizzer.presentation.login
 
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.login.IContratVuePresentateurLogin.*
+import com.example.quizzer.presentation.modèle
 
 /**
  * Classe qui permet de communiquer avec le modèle
  *
- * @property modele Objet qui permet de communiquer avec l'API
+ * @property modèle Objet qui permet de communiquer avec l'API
  * @property vue L'interface qui envoie les données à traiter
  */
 class PresentateurLogin(
-    var modele: Modèle,
     var vue: IVueLogin = VueLogin()
 ) : IPresentateurLogin {
 
@@ -38,7 +38,7 @@ class PresentateurLogin(
      * @return True s'il existe; False s'il n'existe pas
      */
     override fun verifierConnexion(nomUtilisateur: String, password: String): Boolean {
-        return modele.getUilisateur(nomUtilisateur, password)
+        return modèle.getUilisateur(nomUtilisateur, password)
     }
 
 

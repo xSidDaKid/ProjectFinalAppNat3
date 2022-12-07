@@ -3,10 +3,10 @@ package com.example.quizzer.domaine.entité
 import java.util.*
 
 class Quiz(
-    val titre: String,
-    val question: String,
-    val choix: List<String>,
-    val reponses: List<Map<String, String>>
+    var titre: String,
+    var question: String,
+    var choix: List<String>,
+    var reponses: List<Map<String, String>>
 ) {
     /*var id: Int = 0
     var idCreateur: Int = 0

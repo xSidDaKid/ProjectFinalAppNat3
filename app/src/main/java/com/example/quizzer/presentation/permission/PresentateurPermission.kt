@@ -3,11 +3,12 @@ package com.example.quizzer.presentation.permission
 import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
+import com.example.quizzer.presentation.modèle
 import com.example.quizzer.presentation.permission.IContratVuePresentateurPermission.IPresentateurPermission
 import com.example.quizzer.presentation.permission.IContratVuePresentateurPermission.IVuePermission
 
 
-class PresentateurPermission(var modèle:Modèle, var vue:IVuePermission = VuePermission()) : IPresentateurPermission{
+class PresentateurPermission( var vue:IVuePermission = VuePermission()) : IPresentateurPermission{
 
 
     override fun getTousPermissionsList(): Array<Pair<String, PermissionScore>> {
@@ -24,6 +25,9 @@ class PresentateurPermission(var modèle:Modèle, var vue:IVuePermission = VuePe
         return modèle.getListeQuiz().toTypedArray()
     }
 
+    fun getListeQuizSync(): Array<Quiz> {
+        return modèle.getListeQuizSync().toTypedArray()
+    }
     override fun dialogPermission(position: Int) {
 
         vue.montrerDialog(position)

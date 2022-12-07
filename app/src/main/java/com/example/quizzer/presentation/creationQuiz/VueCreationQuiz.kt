@@ -30,7 +30,7 @@ class VueCreationQuiz : Fragment(), IVueCreation {
         savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_creation_quiz, container, false)
-        présentateur = PresentateurCreationQuiz(Modèle, this)
+        présentateur = PresentateurCreationQuiz(this)
 
         btnCreer = vue.findViewById<Button>(R.id.btnCreer)
         attacherÉcouteurQuiz(vue)
