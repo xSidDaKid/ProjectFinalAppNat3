@@ -208,6 +208,16 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
         return quizListe
     }
 
+    /**
+     * Méthode qui permet d'avoir la liste des utilisateurs
+     *
+     * @return Liste des utilisateurs
+     */
+    fun getListeUtilisateur(): List<Utilisateur> {
+        utilisateurListe=sourceDeDonne.obtenirUtilisateurs()
+        return utilisateurListe
+    }
+
     fun getListeQuizSync(): List<Quiz> {
         return quizListe
     }
