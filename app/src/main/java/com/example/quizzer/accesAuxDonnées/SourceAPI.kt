@@ -21,6 +21,7 @@ import java.io.StringReader
 
 
 class SourceAPI (var ctx:Context):ISourceDeDonées {
+
     var urlSource = URL("http://10.0.2.2:64473/Service1.svc")
     //var urlSource = URL("https://d669f856-a4c9-423f-8375-1a565c31c4e8.mock.pstmn.io")
     override fun obtenirReponsesBrutes(): String {
@@ -118,6 +119,7 @@ class SourceAPI (var ctx:Context):ISourceDeDonées {
 
         }
         jsonRead.endObject()
-        return Quiz(titre,question,ObtenirReponses().trierReponses2(choix),ObtenirReponses().trierReponses(reponseString))
+        var quiz1 =  Quiz(titre,question,ObtenirReponses().trierReponses2(choix),ObtenirReponses().trierReponses(reponseString))
+        return quiz1
     }
 }
