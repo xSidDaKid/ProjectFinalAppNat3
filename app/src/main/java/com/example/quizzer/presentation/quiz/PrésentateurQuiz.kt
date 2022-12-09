@@ -57,7 +57,7 @@ class PrésentateurQuiz( var vue: IVueQuiz = VueQuiz()) : IPrésentateurQuiz {
      *
      * @return Le quiz choisi
      */
-    override fun réinitialiserQuiz(): Quiz {
+    override fun réinitialiserQuiz(): Quiz? {
         return modèle.initialiserQuizParDefaut()
     }
 

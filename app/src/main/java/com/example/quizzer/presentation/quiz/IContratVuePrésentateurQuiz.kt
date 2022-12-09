@@ -23,7 +23,7 @@ interface IContratVuePrésentateurQuiz {
         fun envoyerRéponse(réponse: String, indexRéponse: Int?, quiz: Quiz): Boolean
         fun envoyerProchaineRéponse(quiz: Quiz): String
         fun envoyerIndexRéponse(): Int
-        fun réinitialiserQuiz(): Quiz
+        fun réinitialiserQuiz(): Quiz?
         fun getQuestion(quiz: Quiz): String
         fun getTitre(quiz: Quiz): String
         fun getScore(quiz: Quiz): Int

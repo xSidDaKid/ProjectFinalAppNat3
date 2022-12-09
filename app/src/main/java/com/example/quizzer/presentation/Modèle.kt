@@ -30,7 +30,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     var permissionListe = mutableListOf<PermissionScore>()
     var indexQuizListe: Int = 0
 
-    var mapQuiz = mapOf<Int, PermissionScore>()
+    var mapQuiz = mapOf<Int, Quiz>()
 
     init {
         var user1 = Utilisateur("a@mail.com", "bob", "mdp")
@@ -58,7 +58,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * Méthode qui permet d'initialiser un quiz a partir d'une liste
      *
      */
-    fun initialiserQuizParDefaut(): Quiz {
+    fun initialiserQuizParDefaut(): Quiz? {
         /*var newQuiz = Quiz(
             0,
             "Les fruits et leurs couleurs",
@@ -67,7 +67,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
             ObtenirReponses().obtenirReponses(ReponsesParDefaut())
         )*/
         //quizListe.add(newQuiz)
-        return quizListe[indexQuizListe]
+
+        return mapQuiz.getValue(indexQuizListe + 1)
     }
 
     fun setIndexQuiz(quizIndex: Int) {
@@ -206,7 +207,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @return Liste des quiz
      */
     fun getListeQuiz(): Map<Int, Quiz> {
-        return sourceDeDonne.obtenirQuiz()
+        mapQuiz = sourceDeDonne.obtenirQuiz()
+        return mapQuiz
     }
 
     /**
