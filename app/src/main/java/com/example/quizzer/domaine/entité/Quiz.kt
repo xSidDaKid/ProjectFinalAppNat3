@@ -25,6 +25,22 @@ class Quiz(
         return this.choix[indice] as String
     }
 
+    fun getChoixPourJson():String{
+        var string:String=""
+        for(item in choix){
+            string+=item+","
+        }
+        return string.dropLast(1)
+    }
+
+    fun getReponsePourJson():String{
+        var string:String=""
+        for(item in reponses){
+            string+= item.toList().get(0).first+";"+item.toList().get(0).second+","
+        }
+
+        return string.dropLast(1)
+    }
 
     fun getReponse(index: Int): Map<String, String> {
         return reponses[index - 1]

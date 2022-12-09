@@ -10,4 +10,5 @@ interface ISourceDeDonées {
     fun obtenirUtilisateurs(): MutableList<Utilisateur>
     fun obtenirPermissions(): MutableList<PermissionScore>
     fun obtenirQuiz(): MutableList<Quiz>
+    fun postQuiz(quiz: Quiz, id: Int)
 }

@@ -10,19 +10,23 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.domaine.interacteur.ObtenirReponses
+import com.example.quizzer.presentation.modèle
 import com.google.gson.Gson
+import org.json.JSONObject
 import java.io.StringReader
 
 
 class SourceAPI (var ctx:Context):ISourceDeDonées {
 
     var urlSource = URL("http://10.0.2.2:64473/Service1.svc")
+
     //var urlSource = URL("https://d669f856-a4c9-423f-8375-1a565c31c4e8.mock.pstmn.io")
     override fun obtenirReponsesBrutes(): String {
         TODO("Not yet implemented")
@@ -35,42 +39,47 @@ class SourceAPI (var ctx:Context):ISourceDeDonées {
     override fun obtenirPermissions(): MutableList<PermissionScore> {
         val queue = Volley.newRequestQueue(ctx)
         val promesse: RequestFuture<String> = RequestFuture.newFuture()
-        val requête = StringRequest(Request.Method.GET, urlSource.toString()+"/Permission", promesse, promesse)
+        val requête = StringRequest(
+            Request.Method.GET,
+            urlSource.toString() + "/Permission",
+            promesse,
+            promesse
+        )
         queue.add(requête);
         var listPerm = reponseJsonToPermission(promesse.get())
         return listPerm
     }
 
-    fun reponseJsonToPermission(json:String):MutableList<PermissionScore>{
+    fun reponseJsonToPermission(json: String): MutableList<PermissionScore> {
         var list = mutableListOf<PermissionScore>()
-        Log.d("testapi","debut15")
+        Log.d("testapi", "debut15")
         var gson = Gson()
-        Log.d("testapi","debut2")
+        Log.d("testapi", "debut2")
         list = gson.fromJson(json, mutableListOf<PermissionScore>()::class.java)
-        Log.d("testapi","debut3")
+        Log.d("testapi", "debut3")
         return list
     }
 
     override fun obtenirQuiz(): MutableList<Quiz> {
-        Log.d("testapi","debutquiz")
+        Log.d("testapi", "debutquiz")
 
         val queue = Volley.newRequestQueue(ctx)
-        Log.d("testapi","debutquiz2")
+        Log.d("testapi", "debutquiz2")
 
         val promesse: RequestFuture<String> = RequestFuture.newFuture()
-        Log.d("testapi","debutquiz3")
-        val requête = StringRequest(Request.Method.GET, urlSource.toString()+"/Quiz", promesse, promesse)
+        Log.d("testapi", "debutquiz3")
+        val requête =
+            StringRequest(Request.Method.GET, urlSource.toString() + "/Quiz", promesse, promesse)
         queue.add(requête);
 
-        Log.d("testapi","debutquiz4")
+        Log.d("testapi", "debutquiz4")
 
         return reponseJsonToQuiz(promesse.get())
 
 
-
     }
 
-    fun reponseJsonToQuiz(json:String):MutableList<Quiz>{
+    fun reponseJsonToQuiz(json: String): MutableList<Quiz> {
 //        Log.d("testapi","debutquiz5")
 //
         var list = mutableListOf<Quiz>()
@@ -78,8 +87,6 @@ class SourceAPI (var ctx:Context):ISourceDeDonées {
 //        Log.d("testapi","debutquiz6")
 //        list = gson.fromJson(json, arrayOf<Quiz>()::class.java)
 //        Log.d("testapi","debutquiz7")
-
-
 
 
         var jsonRead = JsonReader(StringReader(json))
@@ -91,35 +98,78 @@ class SourceAPI (var ctx:Context):ISourceDeDonées {
         return list
     }
 
-    fun readQuizJson(jsonRead: JsonReader):Quiz{
-        var choix:String=""
-        var question:String=""
-        var reponseString:String=""
-        var titre:String=""
+    fun readQuizJson(jsonRead: JsonReader): Quiz {
+        var choix: String = ""
+        var question: String = ""
+        var reponseString: String = ""
+        var titre: String = ""
 
         jsonRead.beginObject()
-        while(jsonRead.hasNext()){
+        while (jsonRead.hasNext()) {
             var cle = jsonRead.nextName()
-            when (cle){
-                "choix"->{
+            when (cle) {
+                "choix" -> {
                     choix = jsonRead.nextString()
                 }
-                "question"->{
+                "question" -> {
                     question = jsonRead.nextString()
                 }
-                "reponses"->{
+                "reponses" -> {
                     reponseString = jsonRead.nextString()
                 }
-                "titre"->{
+                "titre" -> {
                     titre = jsonRead.nextString()
-                }else->{
+                }
+                else -> {
                     jsonRead.skipValue()
                 }
             }
 
         }
         jsonRead.endObject()
-        var quiz1 =  Quiz(titre,question,ObtenirReponses().trierReponses2(choix),ObtenirReponses().trierReponses(reponseString))
+        var quiz1 = Quiz(
+            titre,
+            question,
+            ObtenirReponses().trierReponses2(choix),
+            ObtenirReponses().trierReponses(reponseString)
+        )
         return quiz1
+    }
+
+    override fun postQuiz(quiz: Quiz, id: Int) {
+
+
+
+            var choix = quiz.getChoixPourJson()
+            var id = "1"
+            var question = quiz.question
+            var reponse= quiz.getReponsePourJson()
+            var titre = quiz.titre
+
+        val queue = Volley.newRequestQueue(ctx)
+        val requête = object : StringRequest(Request.Method.POST,urlSource.toString() + "/AddQuizParam/"+titre+"/"+choix+"/"+id+"/"+reponse+"/"+question,
+            { response ->
+                var strResp = response.toString()
+                Log.d("API", strResp)
+            },
+            { error ->
+                Log.d("API", "error => ${error.networkResponse.statusCode}")
+            }
+        ) {}
+//        {
+//            override fun getParams(): Map<String, String> {
+//                val params: MutableMap<String, String> = HashMap()
+//                params["choix"] = quiz.getChoixPourJson()
+//                params["idCreateurQuiz"] = "1"
+//                params["question"] = quiz.question
+//                params["reponses"] = quiz.getReponsePourJson()
+//                params["titre"] = quiz.titre
+//                return params
+//            }
+//
+//
+//        }
+        queue.add(requête)
+        Log.d("post",requête.toString())
     }
 }

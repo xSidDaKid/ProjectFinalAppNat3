@@ -24,4 +24,8 @@ class ReponsesParDefaut:ISourceDeDonées{
         return mutableListOf()
     }
 
+    override fun postQuiz(quiz: Quiz, id: Int) {
+        TODO("Not yet implemented")
+    }
+
 }

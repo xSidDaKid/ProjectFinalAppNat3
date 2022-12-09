@@ -9,8 +9,10 @@ import android.view.View
 interface IContratVuePresentateurCreationQuiz {
     interface IVueCreation {
         fun naviguerVersQuiz()
+        fun naviguerVersMenu()
         fun afficherMessage(message: String)
         fun attacherÉcouteurQuiz(vue: View)
+        fun afficherMessageErreur(string: String)
     }
 
     interface IPresentateurCreation {

@@ -115,6 +115,7 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
         }
 
         var newQuiz = Quiz( titre, question, choix, reponseTrier)
+        sourceDeDonne.postQuiz(newQuiz,2)
         quizListe.add(newQuiz)
     }
 

@@ -1,6 +1,7 @@
 package com.example.quizzer.presentation.creationQuiz
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +51,11 @@ class VueCreationQuiz : Fragment(), IVueCreation {
     override fun naviguerVersQuiz() {
         navController.popBackStack()
         navController.navigate(R.id.quizFragment)
+    }
+
+    override fun naviguerVersMenu() {
+        navController.popBackStack()
+        navController.navigate(R.id.vueMenuPrincipal)
     }
 
     /**
@@ -102,5 +108,9 @@ class VueCreationQuiz : Fragment(), IVueCreation {
                 présentateur?.traiterCreationQuiz(titre, question, choix, reponse)
             }
         }
+    }
+    override fun afficherMessageErreur(s: String) {
+        Toast.makeText(requireActivity(), s, Toast.LENGTH_LONG).show()
+        Log.d("erreur",s)
     }
 }

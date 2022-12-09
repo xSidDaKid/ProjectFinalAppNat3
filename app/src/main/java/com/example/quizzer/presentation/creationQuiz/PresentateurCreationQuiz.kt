@@ -4,6 +4,7 @@ import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IPresentateurCreation
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IVueCreation
 import com.example.quizzer.presentation.modèle
+import kotlinx.coroutines.*
 
 /**
  * Classe qui permet de communiquer avec le modèle
@@ -25,8 +26,27 @@ class PresentateurCreationQuiz(var vue: IVueCreation = VueCreationQuiz()) :
     override fun traiterCreationQuiz(
         titre: String, question: String, choix: List<String>, reponse: List<String>
     ) {
-        modèle.ajouterQuiz(titre, question, choix, reponse)
-        vue.naviguerVersQuiz()
+
+        GlobalScope.launch(Dispatchers.Main) {
+
+            //Ce bloc est exécuté dans le fil IO
+            var job = async(SupervisorJob() + Dispatchers.IO) {
+                //cette opération est longue
+                modèle.ajouterQuiz(titre, question, choix, reponse)
+            }
+
+
+            try{
+
+                vue.afficherMessageErreur( "Ajout réussi")
+
+            }
+            catch(e: java.lang.Exception ){
+                vue.afficherMessageErreur( "ici")
+            }
+        }
+
+        vue.naviguerVersMenu()
     }
 
 }
