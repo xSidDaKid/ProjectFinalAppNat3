@@ -255,7 +255,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
 
 
             var choix = quiz.getChoixPourJson()
-            var id = "1"
+            var id = id
             var question = quiz.question
             var reponse= quiz.getReponsePourJson()
             var titre = quiz.titre
@@ -270,19 +270,6 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
                 Log.d("API", "error => ${error.networkResponse.statusCode}")
             }
         ) {}
-//        {
-//            override fun getParams(): Map<String, String> {
-//                val params: MutableMap<String, String> = HashMap()
-//                params["choix"] = quiz.getChoixPourJson()
-//                params["idCreateurQuiz"] = "1"
-//                params["question"] = quiz.question
-//                params["reponses"] = quiz.getReponsePourJson()
-//                params["titre"] = quiz.titre
-//                return params
-//            }
-//
-//
-//        }
         queue.add(requête)
         Log.d("post",requête.toString())
     }
