@@ -26,6 +26,9 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
     var urlSource = URL("http://10.0.2.2:64473/Service1.svc")
     //var urlSource = URL("https://d669f856-a4c9-423f-8375-1a565c31c4e8.mock.pstmn.io")
 
+    var mapUser = emptyMap<Int, Utilisateur>()
+    var mapQuiz = emptyMap<Int, Quiz>()
+    var mapPermissionScore = emptyMap<Int, PermissionScore>()
 
     override fun obtenirReponsesBrutes(): String {
         TODO("Not yet implemented")
@@ -50,7 +53,6 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
     }
 
     private fun reponseJsonToUser(json: String): Map<Int, Utilisateur> {
-        var mapUser = emptyMap<Int, Utilisateur>()
         var jsonRead = JsonReader(StringReader(json))
 
         jsonRead.beginArray()
@@ -107,7 +109,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
      *
      * @return
      */
-    override fun obtenirPermissions(): MutableList<PermissionScore> {
+    override fun obtenirPermissions(): Map<Int, PermissionScore> {
         val queue = Volley.newRequestQueue(ctx)
         val promesse: RequestFuture<String> = RequestFuture.newFuture()
         val requête = StringRequest(
@@ -120,52 +122,53 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         return reponseJsonToPermission(promesse.get())
     }
 
-    fun reponseJsonToPermission(json: String): MutableList<PermissionScore> {
-        var list = mutableListOf<PermissionScore>()
+    fun reponseJsonToPermission(json: String): Map<Int, PermissionScore> {
         var jsonRead = JsonReader(StringReader(json))
 
         jsonRead.beginArray()
 
         while (jsonRead.hasNext()) {
-            //list.add(readPermissionJson(jsonRead))
+            var pair = readPermissionJson(jsonRead)
+            mapPermissionScore += (pair.first to pair.second)
         }
         jsonRead.endArray()
 
-        return list
+        return mapPermissionScore
     }
 
-    private fun readPermissionJson(jsonRead: JsonReader): String {
-        /*  var idQuiz: Int = 0
-          var idUtilisateur: Int = 0
-          var score: Int = 0
+    private fun readPermissionJson(jsonRead: JsonReader): Pair<Int, PermissionScore> {
+        var idQuiz: Int = 0
+        var idUtilisateur: Int = 0
+        var score: Int = 0
 
-          jsonRead.beginObject()
-          while (jsonRead.hasNext()) {
-              var cle = jsonRead.nextName()
-              when (cle) {
-                  "idQuiz" -> {
-                      idQuiz = jsonRead.nextInt()
-                  }
-                  "idUtilisateur" -> {
-                      idUtilisateur = jsonRead.nextInt()
-                  }
-                  "score" -> {
-                      score = jsonRead.nextInt()
-                  }
-                  else -> {
-                      jsonRead.skipValue()
-                  }
-              }
+        jsonRead.beginObject()
+        while (jsonRead.hasNext()) {
+            var cle = jsonRead.nextName()
+            when (cle) {
+                "idQuiz" -> {
+                    idQuiz = jsonRead.nextInt()
+                }
+                "idUtilisateur" -> {
+                    idUtilisateur = jsonRead.nextInt()
+                }
+                "score" -> {
+                    score = jsonRead.nextInt()
+                }
+                else -> {
+                    jsonRead.skipValue()
+                }
+            }
 
-          }
-          jsonRead.endObject()
-          return PermissionScore(
-              idQuiz,
-              idUtilisateur,
-              score
+        }
+        jsonRead.endObject()
+        return Pair(
+            1, PermissionScore(
+                mapUser.get(idUtilisateur),
+                mapQuiz.get(idQuiz),
+                score
 
-          )*/
-        return ""
+            )
+        )
     }
 
     /**
@@ -183,7 +186,6 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
     }
 
     fun reponseJsonToQuiz(json: String): Map<Int, Quiz> {
-        var mapQuiz = emptyMap<Int, Quiz>()
         var jsonRead = JsonReader(StringReader(json))
 
         jsonRead.beginArray()

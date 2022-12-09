@@ -301,7 +301,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     fun getListePermissionParEmail(): MutableList<PermissionScore> {
         var listeFiltré = mutableListOf<PermissionScore>()
         for (permission in permissionListe) {
-            if (permission.utilisateur.courriel == utilisateurConnecte.courriel) {
+            if (permission.utilisateur?.courriel == utilisateurConnecte.courriel) {
                 listeFiltré.add(permission)
             }
 
@@ -311,7 +311,10 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
 
     fun chercherPermissions(): MutableList<PermissionScore> {
         Log.d("testapi", "chercherPermission")
-        permissionListe = sourceDeDonne.obtenirPermissions()
+        var mapPermissionScore = sourceDeDonne.obtenirPermissions()
+        for (item in mapPermissionScore) {
+            permissionListe.add(item.value)
+        }
         return permissionListe
     }
 
