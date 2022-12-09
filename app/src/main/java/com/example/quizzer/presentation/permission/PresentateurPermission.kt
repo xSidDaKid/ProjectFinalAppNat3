@@ -21,8 +21,8 @@ class PresentateurPermission( var vue:IVuePermission = VuePermission()) : IPrese
         return liste[position].second
     }
 
-    override fun getListeQuiz(): Array<Quiz> {
-        return modèle.getListeQuiz().toTypedArray()
+    override fun getListeQuiz(): Map<Int,Quiz> {
+        return modèle.getListeQuiz()
     }
 
     fun getListeQuizSync(): Array<Quiz> {

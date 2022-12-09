@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentController
@@ -28,6 +29,8 @@ class VueListQuiz : Fragment(), IVueListQuiz {
     lateinit var navController: NavController
     lateinit var listQuiz: ListView
     lateinit var adapter: ArrayAdapter<Quiz>
+    lateinit var loading: ProgressBar
+
     var présentateur: PresentateurListQuiz? = null
 
     override fun onCreateView(
@@ -37,6 +40,7 @@ class VueListQuiz : Fragment(), IVueListQuiz {
         val vue = inflater.inflate(R.layout.fragment_list_quiz, container, false)
         présentateur = PresentateurListQuiz(this)
         listQuiz = vue.findViewById(android.R.id.list)
+        loading = vue.findViewById(R.id.loading)
         attacherÉcouteurAuxQuiz()
         return vue
     }
@@ -68,6 +72,7 @@ class VueListQuiz : Fragment(), IVueListQuiz {
             liste!!
         )
         this.listQuiz.adapter = adapter
+        loading.setVisibility(View.GONE)
         Log.d("Test1", "Initializing list quiz")
         Log.d("testapiquiz","liste")
     }
@@ -87,5 +92,9 @@ class VueListQuiz : Fragment(), IVueListQuiz {
     override fun afficherMessageErreur(s: String) {
         Toast.makeText(requireActivity(), s, Toast.LENGTH_LONG).show()
         Log.d("erreur",s)
+    }
+
+    override fun afficherLoading() {
+        loading.setVisibility(View.VISIBLE)
     }
 }

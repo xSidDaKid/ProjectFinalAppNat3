@@ -3,24 +3,16 @@ package com.example.quizzer.accesAuxDonnées
 import android.content.Context
 import android.util.JsonReader
 import android.util.Log
-import com.example.quizzer.domaine.entité.Utilisateur
-import java.net.URL
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.RequestFuture;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.android.volley.Request
+import com.android.volley.toolbox.RequestFuture
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
+import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.domaine.interacteur.ObtenirReponses
-import com.example.quizzer.presentation.modèle
-import com.google.gson.Gson
-import org.json.JSONObject
 import java.io.StringReader
+import java.net.URL
 
 
 class SourceAPI(var ctx: Context) : ISourceDeDonées {
@@ -192,7 +184,6 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         return reponseJsonToQuiz(promesse.get())
 
 
-
     }
 
     fun reponseJsonToQuiz(json: String): Map<Int, Quiz> {
@@ -215,19 +206,19 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         var idCreateurQuiz: Int = 0
 
         jsonRead.beginObject()
-        while(jsonRead.hasNext()){
+        while (jsonRead.hasNext()) {
             var cle = jsonRead.nextName()
-            when (cle){
-                "choix"->{
+            when (cle) {
+                "choix" -> {
                     choix = jsonRead.nextString()
                 }
-                "question"->{
+                "question" -> {
                     question = jsonRead.nextString()
                 }
-                "reponses"->{
+                "reponses" -> {
                     reponseString = jsonRead.nextString()
                 }
-                "titre"->{
+                "titre" -> {
                     titre = jsonRead.nextString()
                 }
                 "idCreateurQuiz" -> {
@@ -250,18 +241,22 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         )
     }
 
+    /**
+     * Méthode qui permet l'ajout d'un quiz à la BD
+     *
+     * @param quiz Le quiz a ajouté
+     * @param id ID de l'utilisateur
+     */
     override fun postQuiz(quiz: Quiz, id: Int) {
-
-
-
-            var choix = quiz.getChoixPourJson()
-            var id = id
-            var question = quiz.question
-            var reponse= quiz.getReponsePourJson()
-            var titre = quiz.titre
+        var choix = quiz.getChoixPourJson()
+        var id = id
+        var question = quiz.question
+        var reponse = quiz.getReponsePourJson()
+        var titre = quiz.titre
 
         val queue = Volley.newRequestQueue(ctx)
-        val requête = object : StringRequest(Request.Method.POST,urlSource.toString() + "/AddQuizParam/"+titre+"/"+choix+"/"+id+"/"+reponse+"/"+question,
+        val requête = object : StringRequest(Request.Method.POST,
+            urlSource.toString() + "/AddQuizParam/" + titre + "/" + choix + "/" + id + "/" + reponse + "/" + question,
             { response ->
                 var strResp = response.toString()
                 Log.d("API", strResp)
@@ -271,6 +266,6 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
             }
         ) {}
         queue.add(requête)
-        Log.d("post",requête.toString())
+        Log.d("post", requête.toString())
     }
 }

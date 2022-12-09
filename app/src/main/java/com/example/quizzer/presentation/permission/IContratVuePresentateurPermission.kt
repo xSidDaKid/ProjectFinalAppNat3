@@ -14,7 +14,7 @@ interface IContratVuePresentateurPermission {
     interface IPresentateurPermission{
         fun getTousPermissionsList(): Array<Pair<String, PermissionScore>>
         fun getPermission(position: Int): PermissionScore
-        fun getListeQuiz(): Array<Quiz>
+        fun getListeQuiz(): Map<Int, Quiz>
         fun dialogPermission(position: Int)
         fun creerPermission(email: String, position: Int)
     }
