@@ -16,7 +16,7 @@
     <string name="creer">Créer</string>
 
     <!-- Menu Principal -->
-    <string name="bonjour">Bonjour,</string>
+    <string name="bonjour">Bonjour, </string>
     <string name="nouveauQuiz">Créer nouveau quiz</string>
     <string name="rejoindreQuiz">Rejoindre un nouveau quiz</string>
     <string name="listeQuiz">Voir la liste de mes quiz</string>

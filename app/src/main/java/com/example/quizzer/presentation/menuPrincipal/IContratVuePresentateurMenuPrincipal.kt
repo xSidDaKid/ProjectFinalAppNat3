@@ -1,5 +1,7 @@
 package com.example.quizzer.presentation.menuPrincipal
 
+import com.example.quizzer.domaine.entité.Utilisateur
+
 /**
  * Interface qui permet à la vue de communiquer avec le présentateur et au présentateur de communiquer avec le modèle
  * Vue <--> Présentateur ET Présentateur <--> Modèle
@@ -16,6 +18,7 @@ interface IContratVuePresentateurMenuPrincipal {
         fun attacherÉcouteurListQuiz()
         fun naviguerVersListeScore()
         fun attacherÉcouteurVoirScore()
+        fun obtenirNomUtilisateur()
     }
 
     interface IPresentateurMenuPrincipal {
@@ -23,5 +26,6 @@ interface IContratVuePresentateurMenuPrincipal {
         fun voirPermissions()
         fun demarrerListeQuiz()
         fun voirScore()
+        fun getNomUtilisateur(): String
     }
 }

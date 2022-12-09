@@ -1,7 +1,9 @@
 package com.example.quizzer.presentation.menuPrincipal
 
+import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.menuPrincipal.IContratVuePresentateurMenuPrincipal.*
+import com.example.quizzer.presentation.modèle
 
 /**
  * Classe qui permet de communiquer avec le modèle
@@ -13,6 +15,9 @@ class PresentateurMenuPrincipal(
     var vue: IVueMenuPrincipal = VueMenuPrincipal()
 ) : IPresentateurMenuPrincipal {
 
+    override fun getNomUtilisateur():String{
+        return modèle.getnomUtilisateur()
+    }
     /**
      * Méthode qui permet de rediriger vers la page de création d'un quiz
      *

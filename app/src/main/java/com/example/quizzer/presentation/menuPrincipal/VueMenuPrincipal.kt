@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.quizzer.R
+import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.menuPrincipal.IContratVuePresentateurMenuPrincipal.IVueMenuPrincipal
 
@@ -24,7 +27,8 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
     lateinit var btnCreerQuiz: Button
     lateinit var btnDemarrer: Button
     lateinit var btnPermission: Button
-    lateinit var btnScore:Button
+    lateinit var btnScore: Button
+    lateinit var nom: TextView
 
     var présentateur: PresentateurMenuPrincipal? = null
 
@@ -33,17 +37,21 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
         savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_menu_principal, container, false)
-        présentateur = PresentateurMenuPrincipal( this)
+        présentateur = PresentateurMenuPrincipal(this)
+
+        nom = vue.findViewById(R.id.nom)
 
         btnPermission = vue.findViewById(R.id.btnPermission)
         btnCreerQuiz = vue.findViewById<Button>(R.id.btnCreerQuiz)
         btnDemarrer = vue.findViewById<Button>(R.id.btnDemarrer)
-        btnScore =vue.findViewById(R.id.btnScore)
+        btnScore = vue.findViewById(R.id.btnScore)
+
         attacherÉcouteurCreerQuiz()
         attacherÉcouteurDemarrerQuiz()
         attacherÉcouteurVoirPermission()
         attacherÉcouteurVoirScore()
-        Log.d("test1","created")
+        obtenirNomUtilisateur()
+        Log.d("test1", "created")
 
         return vue
     }
@@ -79,11 +87,14 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
     }
 
 
-
-    override fun attacherÉcouteurVoirScore(){
-        btnScore.setOnClickListener{
+    override fun attacherÉcouteurVoirScore() {
+        btnScore.setOnClickListener {
             présentateur?.voirScore()
         }
+    }
+
+    override fun obtenirNomUtilisateur() {
+        nom.append(présentateur?.getNomUtilisateur())
     }
 
     override fun attacherÉcouteurVoirPermission() {
@@ -91,6 +102,7 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
             présentateur?.voirPermissions()
         }
     }
+
     /**
      * Méthode qui redirige vers la page pour créer un quiz
      *
@@ -109,8 +121,9 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
 
     override fun naviguerVersVoirPermission() {
         navController.navigate(R.id.permissionFragment)
-        Log.d("test1","ici")
+        Log.d("test1", "ici")
     }
+
     override fun naviguerVersListeScore() {
         navController.navigate(R.id.scoreFragment)
     }

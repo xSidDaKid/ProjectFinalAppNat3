@@ -34,6 +34,7 @@ class VueLogin : Fragment(), IVueLogin {
 
         btnLogin = vue.findViewById<Button>(R.id.btnLogin)
         txtEnregistrer = vue.findViewById<TextView>(R.id.txtEnregistrer)
+        initialiserListeUtilisateur()
         attacherÉcouteurLogin(vue)
         attacherÉcouteurEnregistrement()
         return vue
@@ -72,9 +73,11 @@ class VueLogin : Fragment(), IVueLogin {
             var nomUtilisateur = vue.findViewById<TextInputEditText>(R.id.username).text.toString()
             var password = vue.findViewById<TextInputEditText>(R.id.password).text.toString()
             //IF TO BE DELETED
-            if (nomUtilisateur == "" && password == "") {
+            /*if (nomUtilisateur == "" && password == "") {
+                //présentateur?.verifierConnexion(nomUtilisateur, password)
                 présentateur?.traiterMenu()
-            } else if (présentateur?.verifierConnexion(nomUtilisateur, password) == true) {
+            } else*/
+            if (présentateur?.verifierConnexion(nomUtilisateur, password) == true) {
                 présentateur?.traiterMenu()
             } else {
                 vue.findViewById<TextInputEditText>(R.id.username).setError("Invalide")
@@ -92,5 +95,9 @@ class VueLogin : Fragment(), IVueLogin {
         txtEnregistrer.setOnClickListener {
             présentateur?.traiterEnregistrer()
         }
+    }
+
+    override fun initialiserListeUtilisateur() {
+        présentateur?.getListeUtilisateur()
     }
 }

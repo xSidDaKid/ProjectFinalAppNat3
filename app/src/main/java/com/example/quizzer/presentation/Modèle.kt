@@ -12,9 +12,7 @@ import com.example.quizzer.domaine.interacteur.VerificationReponse
 import com.example.quizzer.domaine.interacteur.VerificationReponseCreationQuiz
 
 /**
- * Object qui permet d'intéragir avec la base de donnée
- * TODO: Ajout des quiz dans la BD,
- * @IMPORTANT: Pour une raison quelconque, lors de l'ajout d'un quiz dans la liste, elle est ajouté au début de la liste et non à la fin!!!
+ * Classe qui permet d'intéragir avec la base de donnée
  */
 class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
 
@@ -22,7 +20,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     //private var utilisateur = Utilisateur()
 
 
-    var utilisateurConnecte = Utilisateur("bobo@mail.com", "bobby", "root")
+    var utilisateurConnecte = Utilisateur("", "", "")
     var tourDesRéponses: Int = 0
     var quizListe = mutableListOf<Quiz>()
     var utilisateurListe = mutableListOf<Utilisateur>()
@@ -31,6 +29,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     var indexQuizListe: Int = 0
 
     var mapQuiz = mapOf<Int, Quiz>()
+    var mapUser = mapOf<Int, Utilisateur>()
 
     init {
         var user1 = Utilisateur("a@mail.com", "bob", "mdp")
@@ -98,12 +97,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @param choix Choix du Quiz
      * @param reponse Réponses à associer à un quiz
      */
-    fun ajouterQuiz(
-        titre: String,
-        question: String,
-        choix: List<String>,
-        reponse: List<String>
-    ) {
+    fun ajouterQuiz(titre: String, question: String, choix: List<String>, reponse: List<String>) {
         var compteur = 0
         var reponseTrier: List<Map<String, String>> = emptyList()
 
@@ -216,12 +210,9 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      *
      * @return Liste des utilisateurs
      */
-    fun getListeUtilisateur(): List<Utilisateur> {
-        var mapUser = sourceDeDonne.obtenirUtilisateurs()
-        for (item in mapUser) {
-            utilisateurListe.add(item.value)
-        }
-        return utilisateurListe
+    fun getListeUtilisateur(): Map<Int, Utilisateur> {
+        mapUser = sourceDeDonne.obtenirUtilisateurs()
+        return mapUser
     }
 
     fun getListeQuizSync(): List<Quiz> {
@@ -229,21 +220,14 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     }
 
     /**
-     * Méthode qui vérifie si l'utilisateur existe dans la BD
+     * Méthode qui sauvegarde les informations sur l'utilisateur apres la connexion
      *
      * @param nomUtilisateur Nom de l'utilisateur
      * @param password Mot de passe de l'utilisateur
      * @return True s'il existe; False s'il n'existe pas
      */
-    fun getUilisateur(nomUtilisateur: String, password: String): Boolean {
-        for (item in utilisateurListe) {
-            if (item.nomUtilisateur == nomUtilisateur) {
-                if (item.motDePasse == password) {
-                    return true
-                }
-            }
-        }
-        return false
+    fun getUilisateur(utilisateur: Utilisateur) {
+        utilisateurConnecte = utilisateur
     }
 
     fun getTousPermission(): Map<String, PermissionScore> {
@@ -271,8 +255,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     }
 
 
-    fun getnomUtilisateur(utilisateur: Utilisateur): String {
-        return utilisateur.nomUtilisateur
+    fun getnomUtilisateur(): String {
+        return utilisateurConnecte.nomUtilisateur
     }
 
     fun getPassword(utilisateur: Utilisateur): String {
