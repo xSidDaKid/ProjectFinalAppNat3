@@ -41,4 +41,6 @@
     <string name="ajouter">Ajouter</string>
     <string name="scoreBtn">voir mes points</string>
 
+    <!-- Alerte -->
+    <string name="internet">Pas d\'internet</string>
 </resources>

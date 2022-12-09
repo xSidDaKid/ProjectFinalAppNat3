@@ -14,6 +14,8 @@ interface IContratVuePresentateurLogin {
         fun attacherÉcouteurLogin(vue: View)
         fun attacherÉcouteurEnregistrement()
         fun initialiserListeUtilisateur()
+        fun checkInternet():Boolean
+
     }
 
     interface IPresentateurLogin {

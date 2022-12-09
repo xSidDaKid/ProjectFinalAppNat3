@@ -41,4 +41,7 @@
     <string name="listePermission">See my invitations</string>
     <string name="ajouter">Add</string>
     <string name="scoreBtn">See my scores</string>
+
+    <!-- Alerte -->
+    <string name="internet">No internet</string>
 </resources>
