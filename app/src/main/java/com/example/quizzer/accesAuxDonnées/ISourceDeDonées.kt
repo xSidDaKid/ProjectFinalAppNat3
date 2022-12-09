@@ -9,5 +9,5 @@ interface ISourceDeDonées {
     fun obtenirReponsesBrutes(): String
     fun obtenirUtilisateurs(): MutableList<Utilisateur>
     fun obtenirPermissions(): MutableList<PermissionScore>
-    fun obtenirQuiz(): MutableList<Quiz>
+    fun obtenirQuiz(): Map<Int, Quiz>
 }

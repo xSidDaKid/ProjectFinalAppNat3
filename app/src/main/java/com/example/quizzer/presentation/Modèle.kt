@@ -19,22 +19,23 @@ import java.net.URL
  * TODO: Ajout des quiz dans la BD,
  * @IMPORTANT: Pour une raison quelconque, lors de l'ajout d'un quiz dans la liste, elle est ajouté au début de la liste et non à la fin!!!
  */
-class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
+class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
 
     private var quizScore = QuizUtilisateurScore()
     //private var utilisateur = Utilisateur()
 
 
-    var utilisateurConnecte=Utilisateur("bobo@mail.com","bobby","root")
+    var utilisateurConnecte = Utilisateur("bobo@mail.com", "bobby", "root")
     var tourDesRéponses: Int = 0
     var quizListe = mutableListOf<Quiz>()
     var utilisateurListe = mutableListOf<Utilisateur>()
-    var mapPermission = mapOf<String,PermissionScore>()
+    var mapPermission = mapOf<String, PermissionScore>()
     var permissionListe = mutableListOf<PermissionScore>()
-    var indexQuizListe : Int = 0
+    var indexQuizListe: Int = 0
+
     init {
-        var user1 = Utilisateur("a@mail.com","bob","mdp")
-        var user2 = Utilisateur("b@mail.com","marc","mdp")
+        var user1 = Utilisateur("a@mail.com", "bob", "mdp")
+        var user2 = Utilisateur("b@mail.com", "marc", "mdp")
         var user3 = utilisateurConnecte
 
 
@@ -70,9 +71,10 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
         return quizListe[indexQuizListe]
     }
 
-    fun setIndexQuiz(quizIndex: Int){
+    fun setIndexQuiz(quizIndex: Int) {
         indexQuizListe = quizIndex
     }
+
     /**
      * Méthode qui permet de valider une réponse et de changer le score de l'utilisateur
      *
@@ -114,7 +116,7 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
             compteur++
         }
 
-        var newQuiz = Quiz( titre, question, choix, reponseTrier)
+        var newQuiz = Quiz(titre, question, choix, reponseTrier)
         quizListe.add(newQuiz)
     }
 
@@ -126,7 +128,7 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
      * @param mdp Mot de passe de l'utilisateur
      */
     fun ajouterUtilisateur(email: String, username: String, mdp: String) {
-        var newUtilisateur = Utilisateur( email, username, mdp)
+        var newUtilisateur = Utilisateur(email, username, mdp)
         utilisateurListe.add(newUtilisateur)
     }
 
@@ -204,7 +206,10 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
      * @return Liste des quiz
      */
     fun getListeQuiz(): List<Quiz> {
-        quizListe=sourceDeDonne.obtenirQuiz()
+        var mapQuiz = sourceDeDonne.obtenirQuiz()
+        for (item in mapQuiz){
+            quizListe.add(item.value)
+        }
         return quizListe
     }
 
@@ -214,7 +219,7 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
      * @return Liste des utilisateurs
      */
     fun getListeUtilisateur(): List<Utilisateur> {
-        utilisateurListe=sourceDeDonne.obtenirUtilisateurs()
+        utilisateurListe = sourceDeDonne.obtenirUtilisateurs()
         return utilisateurListe
     }
 
@@ -278,22 +283,22 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
     }
 
     fun ajouterPermission(email: String, position: Int) {
-        var utilisateurTrouve:Utilisateur
-        var quizTrouve:Quiz
-        quizTrouve= quizListe.get(position)
-        for(utilisateur in utilisateurListe){
-            if (utilisateur.courriel==email){
-                utilisateurTrouve=utilisateur
-                var permission = PermissionScore(utilisateurTrouve,quizTrouve,0)
+        var utilisateurTrouve: Utilisateur
+        var quizTrouve: Quiz
+        quizTrouve = quizListe.get(position)
+        for (utilisateur in utilisateurListe) {
+            if (utilisateur.courriel == email) {
+                utilisateurTrouve = utilisateur
+                var permission = PermissionScore(utilisateurTrouve, quizTrouve, 0)
                 permissionListe.add(permission)
             }
         }
     }
 
     fun getListePermissionParEmail(): MutableList<PermissionScore> {
-        var listeFiltré= mutableListOf<PermissionScore>()
-        for (permission in permissionListe){
-            if(permission.utilisateur.courriel== utilisateurConnecte.courriel){
+        var listeFiltré = mutableListOf<PermissionScore>()
+        for (permission in permissionListe) {
+            if (permission.utilisateur.courriel == utilisateurConnecte.courriel) {
                 listeFiltré.add(permission)
             }
 
@@ -302,10 +307,11 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
     }
 
     fun chercherPermissions(): MutableList<PermissionScore> {
-        Log.d("testapi","chercherPermission")
-        permissionListe= sourceDeDonne.obtenirPermissions()
+        Log.d("testapi", "chercherPermission")
+        permissionListe = sourceDeDonne.obtenirPermissions()
         return permissionListe
     }
 
 }
+
 var modèle = Modèle()

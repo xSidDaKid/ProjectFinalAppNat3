@@ -18,6 +18,7 @@ import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.domaine.interacteur.ObtenirReponses
 import com.google.gson.Gson
 import java.io.StringReader
+import java.security.Permission
 
 
 class SourceAPI(var ctx: Context) : ISourceDeDonées {
@@ -94,6 +95,11 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         )
     }
 
+    /**
+     * Méthode qui permet d'obtenir la liste des permissions
+     *
+     * @return
+     */
     override fun obtenirPermissions(): MutableList<PermissionScore> {
         val queue = Volley.newRequestQueue(ctx)
         val promesse: RequestFuture<String> = RequestFuture.newFuture()
@@ -103,19 +109,56 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
             promesse,
             promesse
         )
-        queue.add(requête);
-        var listPerm = reponseJsonToPermission(promesse.get())
-        return listPerm
+        queue.add(requête)
+        return reponseJsonToPermission(promesse.get())
     }
 
     fun reponseJsonToPermission(json: String): MutableList<PermissionScore> {
         var list = mutableListOf<PermissionScore>()
-        Log.d("testapi", "debut15")
-        var gson = Gson()
-        Log.d("testapi", "debut2")
-        list = gson.fromJson(json, mutableListOf<PermissionScore>()::class.java)
-        Log.d("testapi", "debut3")
+        var jsonRead = JsonReader(StringReader(json))
+
+        jsonRead.beginArray()
+
+        while (jsonRead.hasNext()) {
+            //list.add(readPermissionJson(jsonRead))
+        }
+        jsonRead.endArray()
+
         return list
+    }
+
+    private fun readPermissionJson(jsonRead: JsonReader): String {
+      /*  var idQuiz: Int = 0
+        var idUtilisateur: Int = 0
+        var score: Int = 0
+
+        jsonRead.beginObject()
+        while (jsonRead.hasNext()) {
+            var cle = jsonRead.nextName()
+            when (cle) {
+                "idQuiz" -> {
+                    idQuiz = jsonRead.nextInt()
+                }
+                "idUtilisateur" -> {
+                    idUtilisateur = jsonRead.nextInt()
+                }
+                "score" -> {
+                    score = jsonRead.nextInt()
+                }
+                else -> {
+                    jsonRead.skipValue()
+                }
+            }
+
+        }
+        jsonRead.endObject()
+        return PermissionScore(
+            idQuiz,
+            idUtilisateur,
+            score
+
+        )*/
+        return ""
     }
 
     /**
@@ -123,7 +166,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
      *
      * @return Liste des quiz
      */
-    override fun obtenirQuiz(): MutableList<Quiz> {
+    override fun obtenirQuiz(): Map<Int, Quiz> {
         val queue = Volley.newRequestQueue(ctx)
         val promesse: RequestFuture<String> = RequestFuture.newFuture()
         val requête =
@@ -132,25 +175,29 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         return reponseJsonToQuiz(promesse.get())
     }
 
-    fun reponseJsonToQuiz(json: String): MutableList<Quiz> {
+    fun reponseJsonToQuiz(json: String): Map<Int, Quiz> {
         var list = mutableListOf<Quiz>()
         var jsonRead = JsonReader(StringReader(json))
+        var mapQuiz = emptyMap<Int, Quiz>()
 
         jsonRead.beginArray()
 
         while (jsonRead.hasNext()) {
-            list.add(readQuizJson(jsonRead))
+            var pair = readQuizJson(jsonRead)
+            //list.add(readQuizJson(jsonRead))
+            mapQuiz += (pair.first to pair.second)
         }
         jsonRead.endArray()
 
-        return list
+        return mapQuiz
     }
 
-    fun readQuizJson(jsonRead: JsonReader): Quiz {
+    fun readQuizJson(jsonRead: JsonReader): Pair<Int, Quiz> {
         var choix: String = ""
         var question: String = ""
         var reponseString: String = ""
         var titre: String = ""
+        var idCreateurQuiz: Int = 0
 
         jsonRead.beginObject()
         while (jsonRead.hasNext()) {
@@ -168,6 +215,9 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
                 "titre" -> {
                     titre = jsonRead.nextString()
                 }
+                "idCreateurQuiz" -> {
+                    idCreateurQuiz = jsonRead.nextInt()
+                }
                 else -> {
                     jsonRead.skipValue()
                 }
@@ -175,11 +225,13 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
 
         }
         jsonRead.endObject()
-        return Quiz(
-            titre,
-            question,
-            ObtenirReponses().trierReponses2(choix),
-            ObtenirReponses().trierReponses(reponseString)
+        return Pair(
+            idCreateurQuiz, Quiz(
+                titre,
+                question,
+                ObtenirReponses().trierReponses2(choix),
+                ObtenirReponses().trierReponses(reponseString)
+            )
         )
     }
 

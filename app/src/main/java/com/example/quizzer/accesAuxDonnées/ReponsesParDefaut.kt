@@ -20,8 +20,9 @@ class ReponsesParDefaut:ISourceDeDonées{
         return mutableListOf()
     }
 
-    override fun obtenirQuiz(): MutableList<Quiz> {
-        return mutableListOf()
+    override fun obtenirQuiz(): Map<Int, Quiz> {
+        TODO("Not yet implemented")
     }
+
 
 }
