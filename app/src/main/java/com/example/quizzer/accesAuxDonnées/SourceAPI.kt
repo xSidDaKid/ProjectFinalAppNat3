@@ -161,6 +161,11 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
 
         }
         jsonRead.endObject()
+
+        if (mapUser.get(idQuiz) == null) {
+            obtenirQuiz()
+        }
+        
         return Pair(
             1, PermissionScore(
                 mapUser.get(idUtilisateur),
