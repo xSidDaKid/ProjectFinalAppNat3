@@ -36,7 +36,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
      *
      * @return Liste des utilisateurs
      */
-    override fun obtenirUtilisateurs(): MutableList<Utilisateur> {
+    override fun obtenirUtilisateurs(): Map<Int, Utilisateur> {
         val queue = Volley.newRequestQueue(ctx)
         val promesse: RequestFuture<String> = RequestFuture.newFuture()
         val requête = StringRequest(
@@ -49,24 +49,26 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         return reponseJsonToUser(promesse.get())
     }
 
-    private fun reponseJsonToUser(json: String): MutableList<Utilisateur> {
-        var list = mutableListOf<Utilisateur>()
+    private fun reponseJsonToUser(json: String): Map<Int, Utilisateur> {
+        var mapUser = emptyMap<Int, Utilisateur>()
         var jsonRead = JsonReader(StringReader(json))
 
         jsonRead.beginArray()
 
         while (jsonRead.hasNext()) {
-            list.add(readUserJson(jsonRead))
+            var pair = readUserJson(jsonRead)
+            mapUser += (pair.first to pair.second)
         }
         jsonRead.endArray()
 
-        return list
+        return mapUser
     }
 
-    private fun readUserJson(jsonRead: JsonReader): Utilisateur {
+    private fun readUserJson(jsonRead: JsonReader): Pair<Int, Utilisateur> {
         var courriel: String = ""
         var nomUtilisateur: String = ""
         var motDePasse: String = ""
+        var idUtilisateur: Int = 0
 
         jsonRead.beginObject()
         while (jsonRead.hasNext()) {
@@ -81,6 +83,9 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
                 "nomUtilisateur" -> {
                     nomUtilisateur = jsonRead.nextString()
                 }
+                "idUtilisateur" -> {
+                    idUtilisateur = jsonRead.nextInt()
+                }
                 else -> {
                     jsonRead.skipValue()
                 }
@@ -88,10 +93,12 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
 
         }
         jsonRead.endObject()
-        return Utilisateur(
-            courriel,
-            nomUtilisateur,
-            motDePasse
+        return Pair(
+            idUtilisateur, Utilisateur(
+                courriel,
+                nomUtilisateur,
+                motDePasse
+            )
         )
     }
 
@@ -128,36 +135,36 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
     }
 
     private fun readPermissionJson(jsonRead: JsonReader): String {
-      /*  var idQuiz: Int = 0
-        var idUtilisateur: Int = 0
-        var score: Int = 0
+        /*  var idQuiz: Int = 0
+          var idUtilisateur: Int = 0
+          var score: Int = 0
 
-        jsonRead.beginObject()
-        while (jsonRead.hasNext()) {
-            var cle = jsonRead.nextName()
-            when (cle) {
-                "idQuiz" -> {
-                    idQuiz = jsonRead.nextInt()
-                }
-                "idUtilisateur" -> {
-                    idUtilisateur = jsonRead.nextInt()
-                }
-                "score" -> {
-                    score = jsonRead.nextInt()
-                }
-                else -> {
-                    jsonRead.skipValue()
-                }
-            }
+          jsonRead.beginObject()
+          while (jsonRead.hasNext()) {
+              var cle = jsonRead.nextName()
+              when (cle) {
+                  "idQuiz" -> {
+                      idQuiz = jsonRead.nextInt()
+                  }
+                  "idUtilisateur" -> {
+                      idUtilisateur = jsonRead.nextInt()
+                  }
+                  "score" -> {
+                      score = jsonRead.nextInt()
+                  }
+                  else -> {
+                      jsonRead.skipValue()
+                  }
+              }
 
-        }
-        jsonRead.endObject()
-        return PermissionScore(
-            idQuiz,
-            idUtilisateur,
-            score
+          }
+          jsonRead.endObject()
+          return PermissionScore(
+              idQuiz,
+              idUtilisateur,
+              score
 
-        )*/
+          )*/
         return ""
     }
 
@@ -176,15 +183,13 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
     }
 
     fun reponseJsonToQuiz(json: String): Map<Int, Quiz> {
-        var list = mutableListOf<Quiz>()
-        var jsonRead = JsonReader(StringReader(json))
         var mapQuiz = emptyMap<Int, Quiz>()
+        var jsonRead = JsonReader(StringReader(json))
 
         jsonRead.beginArray()
 
         while (jsonRead.hasNext()) {
             var pair = readQuizJson(jsonRead)
-            //list.add(readQuizJson(jsonRead))
             mapQuiz += (pair.first to pair.second)
         }
         jsonRead.endArray()

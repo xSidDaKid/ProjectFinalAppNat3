@@ -207,7 +207,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      */
     fun getListeQuiz(): List<Quiz> {
         var mapQuiz = sourceDeDonne.obtenirQuiz()
-        for (item in mapQuiz){
+        for (item in mapQuiz) {
             quizListe.add(item.value)
         }
         return quizListe
@@ -219,7 +219,10 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @return Liste des utilisateurs
      */
     fun getListeUtilisateur(): List<Utilisateur> {
-        utilisateurListe = sourceDeDonne.obtenirUtilisateurs()
+        var mapUser = sourceDeDonne.obtenirUtilisateurs()
+        for (item in mapUser) {
+            utilisateurListe.add(item.value)
+        }
         return utilisateurListe
     }
 

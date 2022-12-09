@@ -7,7 +7,7 @@ import com.example.quizzer.domaine.entité.Utilisateur
 interface ISourceDeDonées {
     // Dans le contexte ou on récupère les réponses sous forme d'un texte exclusivement
     fun obtenirReponsesBrutes(): String
-    fun obtenirUtilisateurs(): MutableList<Utilisateur>
+    fun obtenirUtilisateurs(): Map<Int, Utilisateur>
     fun obtenirPermissions(): MutableList<PermissionScore>
     fun obtenirQuiz(): Map<Int, Quiz>
 }
