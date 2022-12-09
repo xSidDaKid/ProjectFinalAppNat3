@@ -11,17 +11,17 @@ class ReponsesParDefaut:ISourceDeDonées{
         return question
     }
 
-    override fun obtenirUtilisateurs(): MutableList<Utilisateur> {
-        return mutableListOf()
+    override fun obtenirUtilisateurs(): Map<Int, Utilisateur> {
+        TODO("Not yet implemented")
     }
 
-    override fun obtenirPermissions(): MutableList<PermissionScore> {
-        Log.d("testapi","chercher PAR DEFAULT")
-        return mutableListOf()
+    override fun obtenirPermissions(): Map<Int, PermissionScore> {
+        TODO("Not yet implemented")
     }
 
-    override fun obtenirQuiz(): MutableList<Quiz> {
-        return mutableListOf()
+
+    override fun obtenirQuiz(): Map<Int, Quiz> {
+        TODO("Not yet implemented")
     }
 
     override fun postQuiz(quiz: Quiz, id: Int) {

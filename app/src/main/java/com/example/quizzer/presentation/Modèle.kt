@@ -29,7 +29,7 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
     var tourDesRéponses: Int = 0
     var quizListe = mutableListOf<Quiz>()
     var utilisateurListe = mutableListOf<Utilisateur>()
-    var mapPermission = mapOf<String,PermissionScore>()
+    var mapPermission = mapOf<String, PermissionScore>()
     var permissionListe = mutableListOf<PermissionScore>()
     var indexQuizListe : Int = 0
     init {
@@ -205,8 +205,24 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
      * @return Liste des quiz
      */
     fun getListeQuiz(): List<Quiz> {
-        quizListe=sourceDeDonne.obtenirQuiz()
+        var mapQuiz = sourceDeDonne.obtenirQuiz()
+        for (item in mapQuiz) {
+            quizListe.add(item.value)
+        }
         return quizListe
+    }
+
+    /**
+     * Méthode qui permet d'avoir la liste des utilisateurs
+     *
+     * @return Liste des utilisateurs
+     */
+    fun getListeUtilisateur(): List<Utilisateur> {
+        var mapUser = sourceDeDonne.obtenirUtilisateurs()
+        for (item in mapUser) {
+            utilisateurListe.add(item.value)
+        }
+        return utilisateurListe
     }
 
     fun getListeQuizSync(): List<Quiz> {
@@ -282,9 +298,9 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
     }
 
     fun getListePermissionParEmail(): MutableList<PermissionScore> {
-        var listeFiltré= mutableListOf<PermissionScore>()
-        for (permission in permissionListe){
-            if(permission.utilisateur.courriel== utilisateurConnecte.courriel){
+        var listeFiltré = mutableListOf<PermissionScore>()
+        for (permission in permissionListe) {
+            if (permission.utilisateur?.courriel == utilisateurConnecte.courriel) {
                 listeFiltré.add(permission)
             }
 
@@ -293,8 +309,11 @@ class Modèle(var sourceDeDonne:ISourceDeDonées = ReponsesParDefaut()){
     }
 
     fun chercherPermissions(): MutableList<PermissionScore> {
-        Log.d("testapi","chercherPermission")
-        permissionListe= sourceDeDonne.obtenirPermissions()
+        Log.d("testapi", "chercherPermission")
+        var mapPermissionScore = sourceDeDonne.obtenirPermissions()
+        for (item in mapPermissionScore) {
+            permissionListe.add(item.value)
+        }
         return permissionListe
     }
 
