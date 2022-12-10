@@ -41,7 +41,7 @@ class PresentateurListQuiz(
                 vue.afficherLoading()
                 var mapQuiz = job.await()
                 for (item in mapQuiz) {
-                    if (item.key == modèle.getIdUtilisateur()) {
+                    if (item.value.utilisateur == modèle.utilisateurConnecte) {
                         listequiz += item.value
                     }
                 }

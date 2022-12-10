@@ -204,6 +204,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         var reponseString: String = ""
         var titre: String = ""
         var idCreateurQuiz: Int = 0
+        var idQuiz: Int = 0
 
         jsonRead.beginObject()
         while (jsonRead.hasNext()) {
@@ -211,6 +212,9 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
             when (cle) {
                 "choix" -> {
                     choix = jsonRead.nextString()
+                }
+                "idQuiz" -> {
+                    idQuiz = jsonRead.nextInt()
                 }
                 "question" -> {
                     question = jsonRead.nextString()
@@ -232,11 +236,12 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         }
         jsonRead.endObject()
         return Pair(
-            idCreateurQuiz, Quiz(
+            idQuiz, Quiz(
                 titre,
                 question,
                 ObtenirReponses().trierReponses2(choix),
-                ObtenirReponses().trierReponses(reponseString)
+                ObtenirReponses().trierReponses(reponseString),
+                mapUser.getValue(idCreateurQuiz)
             )
         )
     }

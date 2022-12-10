@@ -6,7 +6,8 @@ class Quiz(
     var titre: String,
     var question: String,
     var choix: List<String>,
-    var reponses: List<Map<String, String>>
+    var reponses: List<Map<String, String>>,
+    var utilisateur: Utilisateur
 ) {
     /*var id: Int = 0
     var idCreateur: Int = 0
@@ -25,18 +26,18 @@ class Quiz(
         return this.choix[indice] as String
     }
 
-    fun getChoixPourJson():String{
-        var string:String=""
-        for(item in choix){
-            string+=item+","
+    fun getChoixPourJson(): String {
+        var string: String = ""
+        for (item in choix) {
+            string += item + ","
         }
         return string.dropLast(1)
     }
 
-    fun getReponsePourJson():String{
-        var string:String=""
-        for(item in reponses){
-            string+= item.toList().get(0).first+";"+item.toList().get(0).second+","
+    fun getReponsePourJson(): String {
+        var string: String = ""
+        for (item in reponses) {
+            string += item.toList().get(0).first + ";" + item.toList().get(0).second + ","
         }
 
         return string.dropLast(1)

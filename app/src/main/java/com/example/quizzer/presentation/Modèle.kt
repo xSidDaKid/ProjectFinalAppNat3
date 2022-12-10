@@ -26,8 +26,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     var permissionListe = mutableListOf<PermissionScore>()
     var indexQuizListe: Int = 0
 
-    var quizSelected = Quiz("", "", emptyList(), emptyList())
     var utilisateurConnecte = Utilisateur("", "", "")
+    var quizSelected = Quiz("", "", emptyList(), emptyList(), utilisateurConnecte)
 
     var mapQuiz = mapOf<Int, Quiz>()
     var mapUser = mapOf<Int, Utilisateur>()
@@ -114,7 +114,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
             compteur++
         }
 
-        var newQuiz = Quiz(titre, question, choix, reponseTrier)
+        var newQuiz = Quiz(titre, question, choix, reponseTrier, mapUser.getValue(getIdUtilisateur()))
         sourceDeDonne.postQuiz(newQuiz, 2)
         quizListe.add(newQuiz)
     }
