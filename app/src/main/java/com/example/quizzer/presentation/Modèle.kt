@@ -30,6 +30,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
 
     var mapQuiz = mapOf<Int, Quiz>()
     var mapUser = mapOf<Int, Utilisateur>()
+    var mapPermissionScore = mapOf<Int, PermissionScore>()
 
     init {
         var user1 = Utilisateur("a@mail.com", "bob", "mdp")
@@ -75,6 +76,16 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     fun getListeUtilisateur(): Map<Int, Utilisateur> {
         mapUser = sourceDeDonne.obtenirUtilisateurs()
         return mapUser
+    }
+
+    /**
+     * Méthode qui permet d'avoir la liste des permissions
+     *
+     * @return Liste des permissions
+     */
+    fun getListePermission(): Map<Int, PermissionScore> {
+        mapPermissionScore = sourceDeDonne.obtenirPermissions()
+        return mapPermissionScore
     }
 
     /**
