@@ -8,20 +8,16 @@ import com.example.quizzer.domaine.entité.Utilisateur
  */
 interface IContratVuePresentateurMenuPrincipal {
     interface IVueMenuPrincipal {
+        fun naviguerVersLogin()
         fun naviguerVersCreationQuiz()
-        fun naviguerVersDemarrerQuiz()
-        fun naviguerVersVoirPermission()
-        fun attacherÉcouteurCreerQuiz()
-        fun attacherÉcouteurDemarrerQuiz()
-        fun attacherÉcouteurVoirPermission()
         fun naviguerVersListeQuiz()
-        fun attacherÉcouteurListQuiz()
+        fun naviguerVersVoirPermission()
         fun naviguerVersListeScore()
-        fun attacherÉcouteurVoirScore()
         fun obtenirNomUtilisateur()
     }
 
     interface IPresentateurMenuPrincipal {
+        fun seDeconnecter()
         fun creerQuiz()
         fun voirPermissions()
         fun demarrerListeQuiz()

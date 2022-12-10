@@ -20,6 +20,7 @@
     <string name="nouveauQuiz">Créer nouveau quiz</string>
     <string name="rejoindreQuiz">Rejoindre un nouveau quiz</string>
     <string name="listeQuiz">Voir la liste de mes quiz</string>
+    <string name="logout">Déconnecter</string>
 
     <!-- Login -->
     <string name="username">Nom d\'utilisateur</string>

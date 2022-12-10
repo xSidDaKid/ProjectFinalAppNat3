@@ -13,9 +13,23 @@ class PresentateurMenuPrincipal(
     var vue: IVueMenuPrincipal = VueMenuPrincipal()
 ) : IPresentateurMenuPrincipal {
 
-    override fun getNomUtilisateur():String{
+    /**
+     * Méthode qui permet de se déconnecter
+     *
+     */
+    override fun seDeconnecter() {
+        vue.naviguerVersLogin()
+    }
+
+    /**
+     * Méthode qui permet d'avoir le nom de l'utilisateur
+     *
+     * @return Nom d'utilisateur
+     */
+    override fun getNomUtilisateur(): String {
         return modèle.getNomUtilisateur()
     }
+
     /**
      * Méthode qui permet de rediriger vers la page de création d'un quiz
      *
@@ -24,20 +38,28 @@ class PresentateurMenuPrincipal(
         vue.naviguerVersCreationQuiz()
     }
 
-
     /**
-     * TODO
+     * Méthode qui permet de rediriger vers la page de la liste des quiz
      *
      */
     override fun demarrerListeQuiz() {
-        vue.naviguerVersDemarrerQuiz()
+        vue.naviguerVersListeQuiz()
     }
 
+    /**
+     * Méthode qui permet de rediriger vers la page d'invitation
+     *
+     */
+    override fun voirPermissions() {
+        vue.naviguerVersVoirPermission()
+    }
+
+    /**
+     * Méthode qui permet de rediriger vers la page de score
+     *
+     */
     override fun voirScore() {
         vue.naviguerVersListeScore()
     }
 
-    override fun voirPermissions() {
-        vue.naviguerVersVoirPermission()
-    }
 }
