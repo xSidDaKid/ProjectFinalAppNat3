@@ -15,24 +15,30 @@ class PresentateurScore(var vue:IVueScore): IPresentateurScore{
 
     override fun getListePermission(): MutableList<PermissionScore> {
         Log.d("avant","avantapi")
-
+        var listePermisionScore = mutableListOf<PermissionScore>()
 
         GlobalScope.launch(Dispatchers.Main) {
 
             //Ce bloc est exécuté dans le fil IO
             var job = async(SupervisorJob() + Dispatchers.IO) {
                 //cette opération est longue
-                modèle.chercherPermissions()
+                //modèle.chercherPermissions()
+                modèle.getListePermission()
             }
 
             //en attendant la fin de la tâche,
             //l'exécution de cette coroutine est suspendue
             try{
-                var permission = job.await()
+                var mapPermission = job.await()
 
                 //lorsque la tâche est terminée, la coroutine
                 //reprend et on met à jour l'interface utilisateur
-                vue.initialiserListeScore(permission)
+                for (item in mapPermission) {
+                    if (item.key == modèle.getIdUtilisateur()) {
+                        listePermisionScore += item.value
+                    }
+                }
+                vue.initialiserListeScore(listePermisionScore)
 
             }
             catch(e: java.lang.Exception ){

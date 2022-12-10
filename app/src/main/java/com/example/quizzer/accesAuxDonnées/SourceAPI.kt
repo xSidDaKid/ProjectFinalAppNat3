@@ -161,7 +161,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         }
 
         return Pair(
-            1, PermissionScore(
+            idUtilisateur, PermissionScore(
                 mapUser.get(idUtilisateur),
                 mapQuiz.get(idQuiz),
                 score
