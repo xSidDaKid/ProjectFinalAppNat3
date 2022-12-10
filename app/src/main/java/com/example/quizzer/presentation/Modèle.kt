@@ -26,7 +26,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     var permissionListe = mutableListOf<PermissionScore>()
     var indexQuizListe: Int = 0
 
-    var quizSelectionner = Quiz("", "", emptyList(), emptyList())
+    var quizSelected = Quiz("", "", emptyList(), emptyList())
     var utilisateurConnecte = Utilisateur("", "", "")
 
     var mapQuiz = mapOf<Int, Quiz>()
@@ -140,8 +140,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @param mdp Mot de passe de l'utilisateur
      */
     fun ajouterPermission(quiz: Quiz, utilisateur: Utilisateur, score: Int) {
-        var newPermissionScore = PermissionScore(quiz, utilisateur, score)
-        sourceDeDonne.postPermissionScore(newUtilisateur)
+        var newPermissionScore = PermissionScore(utilisateur, quiz, score)
+        sourceDeDonne.postPermissionScore(newPermissionScore)
     }
 
     /**
@@ -189,7 +189,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
         indexQuizListe = quizIndex + 1
         for ((key, value) in mapQuiz) {
             if (key == indexQuizListe) {
-                quizSelectionner = value
+                quizSelected = value
             }
         }
     }
@@ -199,7 +199,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      *
      */
     fun getQuizSelectionner(): Quiz {
-        return quizSelectionner
+        return quizSelected
     }
 
     /**
