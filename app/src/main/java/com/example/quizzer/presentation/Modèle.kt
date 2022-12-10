@@ -114,8 +114,9 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
             compteur++
         }
 
-        var newQuiz = Quiz(titre, question, choix, reponseTrier, mapUser.getValue(getIdUtilisateur()))
-        sourceDeDonne.postQuiz(newQuiz, 2)
+        var newQuiz =
+            Quiz(titre, question, choix, reponseTrier, mapUser.getValue(getIdUtilisateur()))
+        sourceDeDonne.postQuiz(newQuiz, getIdUtilisateur())
         quizListe.add(newQuiz)
     }
 
@@ -333,14 +334,15 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
         return permissionListe
     }
 
+
+    /**
+    MÉTHODE INUTILISÉ
+     *//*
     fun getRéponseParIndex(index: Int, quiz: Quiz): Map<String, String> {
+
         return quiz.reponses.get(index)
     }
 
-    /*
-  /**
-  MÉTHODE INUTILISÉ
- */
     fun getReponseTrier(reponseBrut: String): List<Map<String, String>> {
         return ObtenirReponses().trierReponses(reponseBrut)
     }
@@ -359,7 +361,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
 
     fun veriferQuiz(choix: String, reponse: String): String {
         return VerificationReponseCreationQuiz().verificationReponseCreationQuiz(choix, reponse)
-    }*/
+    }
+*/
 }
 
 var modèle = Modèle()
