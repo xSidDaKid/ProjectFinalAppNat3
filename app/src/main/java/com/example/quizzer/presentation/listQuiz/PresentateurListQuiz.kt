@@ -42,7 +42,9 @@ class PresentateurListQuiz(
                 vue.afficherLoading()
                 var mapQuiz = job.await()
                 for (item in mapQuiz) {
-                    listequiz += item.value
+                    if (item.key == modèle.getIdUtilisateur()) {
+                        listequiz += item.value
+                    }
                 }
 
                 //lorsque la tâche est terminée, la coroutine

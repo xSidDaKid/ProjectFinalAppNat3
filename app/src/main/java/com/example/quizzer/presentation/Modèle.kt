@@ -54,40 +54,32 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     }
 
     /**
-     * Méthode qui permet d'initialiser un quiz a partir d'une liste
-     *
+     * API - GET
      */
-    fun initialiserQuizParDefaut(): Quiz? {
-        /*var newQuiz = Quiz(
-            0,
-            "Les fruits et leurs couleurs",
-            "Quelle est la couleur du fruit?",
-            listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
-            ObtenirReponses().obtenirReponses(ReponsesParDefaut())
-        )*/
-        //quizListe.add(newQuiz)
 
-        return mapQuiz.getValue(indexQuizListe + 1)
-    }
-
-    fun setIndexQuiz(quizIndex: Int) {
-        indexQuizListe = quizIndex
+    /**
+     * Méthode qui permet d'avoir la liste des quiz
+     *
+     * @return Liste des quiz
+     */
+    fun getListeQuiz(): Map<Int, Quiz> {
+        mapQuiz = sourceDeDonne.obtenirQuiz()
+        return mapQuiz
     }
 
     /**
-     * Méthode qui permet de valider une réponse et de changer le score de l'utilisateur
+     * Méthode qui permet d'avoir la liste des utilisateurs
      *
-     * @param reponse La réponse de l'utilisateur
-     * @param index
-     * @return
+     * @return Liste des utilisateurs
      */
-    fun soumettreRéponse(reponse: String, index: Int, quiz: Quiz): Boolean {
-        var verification = VerificationReponse().verificationReponse(reponse, index, quiz)
-        if (verification) {
-            quizScore.score++
-        }
-        return verification
+    fun getListeUtilisateur(): Map<Int, Utilisateur> {
+        mapUser = sourceDeDonne.obtenirUtilisateurs()
+        return mapUser
     }
+
+    /**
+     * API - POST
+     */
 
     /**
      * Méthode qui permet d'ajouter un nouveau quiz à la base de donnée
@@ -129,13 +121,91 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     }
 
     /**
-     * Méthode qui permet de mettre réponse dans un tableau (Map)
+     * UTILISATEUR - MÉTHODE POUR AVOIR LES INFOS DE L'UTILISATEUR
+     */
+
+    /**
+     * Avoir le ID de l'utilisateur
      *
-     * @param reponseBrut Réponse brut du créateur du quiz avec les , et :
+     * @return ID Utilisateur
+     */
+    fun getIdUtilisateur(): Int {
+        for ((key, value) in mapUser) {
+            if (utilisateurConnecte == value) {
+                return key
+            }
+        }
+        return 0
+    }
+
+    /**
+     * Méthode qui sauvegarde les informations sur l'utilisateur apres la connexion
+     *
+     * @param nomUtilisateur Nom de l'utilisateur
+     * @param password Mot de passe de l'utilisateur
+     * @return True s'il existe; False s'il n'existe pas
+     */
+    fun getUilisateur(utilisateur: Utilisateur) {
+        utilisateurConnecte = utilisateur
+    }
+
+    /**
+     * Méthode qui permet d'avoir le nom de l'utilisateur
+     *
+     * @return Nom d'utilisateur
+     */
+    fun getnomUtilisateur(): String {
+        return utilisateurConnecte.nomUtilisateur
+    }
+
+    /**
+     * MÉTHODE POUR INITIALISER UN QUIZ
+     */
+
+    /**
+     * Méthode qui permet d'initialiser un quiz a partir d'une liste
+     *
+     */
+    fun initialiserQuizParDefaut(): Quiz? {
+        /*var newQuiz = Quiz(
+            0,
+            "Les fruits et leurs couleurs",
+            "Quelle est la couleur du fruit?",
+            listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
+            ObtenirReponses().obtenirReponses(ReponsesParDefaut())
+        )*/
+        //quizListe.add(newQuiz)
+
+        return mapQuiz.getValue(indexQuizListe + 1)
+    }
+
+    fun setIndexQuiz(quizIndex: Int) {
+        indexQuizListe = quizIndex
+    }
+
+    /**
+     * Méthode qui permet de valider une réponse et de changer le score de l'utilisateur
+     *
+     * @param reponse La réponse de l'utilisateur
+     * @param index
      * @return
      */
-    fun getReponseTrier(reponseBrut: String): List<Map<String, String>> {
-        return ObtenirReponses().trierReponses(reponseBrut)
+    fun soumettreRéponse(reponse: String, index: Int, quiz: Quiz): Boolean {
+        var verification = VerificationReponse().verificationReponse(reponse, index, quiz)
+        if (verification) {
+            quizScore.score++
+        }
+        return verification
+    }
+
+    /**
+     * Méthode qui permet d'avoir le score de l'utilisateur
+     *
+     * @param quiz Quiz choisi
+     * @return Le score de l'utilisateur
+     */
+    fun getScore(quiz: Quiz): Int {
+        return quizScore.score
     }
 
     /**
@@ -187,48 +257,12 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     }
 
     /**
-     * Méthode qui permet d'avoir le score de l'utilisateur
      *
-     * @param quiz Quiz choisi
-     * @return Le score de l'utilisateur
+     * --------------------------------
      */
-    fun getScore(quiz: Quiz): Int {
-        return quizScore.score
-    }
-
-    /**
-     * Méthode qui permet d'avoir la liste des quiz
-     *
-     * @return Liste des quiz
-     */
-    fun getListeQuiz(): Map<Int, Quiz> {
-        mapQuiz = sourceDeDonne.obtenirQuiz()
-        return mapQuiz
-    }
-
-    /**
-     * Méthode qui permet d'avoir la liste des utilisateurs
-     *
-     * @return Liste des utilisateurs
-     */
-    fun getListeUtilisateur(): Map<Int, Utilisateur> {
-        mapUser = sourceDeDonne.obtenirUtilisateurs()
-        return mapUser
-    }
 
     fun getListeQuizSync(): List<Quiz> {
         return quizListe
-    }
-
-    /**
-     * Méthode qui sauvegarde les informations sur l'utilisateur apres la connexion
-     *
-     * @param nomUtilisateur Nom de l'utilisateur
-     * @param password Mot de passe de l'utilisateur
-     * @return True s'il existe; False s'il n'existe pas
-     */
-    fun getUilisateur(utilisateur: Utilisateur) {
-        utilisateurConnecte = utilisateur
     }
 
     fun getTousPermission(): Map<String, PermissionScore> {
@@ -241,31 +275,6 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      */
     fun reinitialiserReponse() {
         tourDesRéponses = 0
-    }
-
-    fun getRéponseParIndex(index: Int, quiz: Quiz): Map<String, String> {
-        return quiz.reponses.get(index)
-    }
-
-    fun getReponses(quiz: Quiz): List<Map<String, String>> {
-        return quiz.reponses
-    }
-
-    fun getChoix(quiz: Quiz): List<String> {
-        return quiz.choix
-    }
-
-
-    fun getnomUtilisateur(): String {
-        return utilisateurConnecte.nomUtilisateur
-    }
-
-    fun getPassword(utilisateur: Utilisateur): String {
-        return utilisateur.motDePasse
-    }
-
-    fun veriferQuiz(choix: String, reponse: String): String {
-        return VerificationReponseCreationQuiz().verificationReponseCreationQuiz(choix, reponse)
     }
 
     fun ajouterPermission(email: String, position: Int) {
@@ -301,6 +310,33 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
         return permissionListe
     }
 
+    fun getRéponseParIndex(index: Int, quiz: Quiz): Map<String, String> {
+        return quiz.reponses.get(index)
+    }
+
+    /*
+  /**
+  MÉTHODE INUTILISÉ
+ */
+    fun getReponseTrier(reponseBrut: String): List<Map<String, String>> {
+        return ObtenirReponses().trierReponses(reponseBrut)
+    }
+
+    fun getReponses(quiz: Quiz): List<Map<String, String>> {
+        return quiz.reponses
+    }
+
+    fun getChoix(quiz: Quiz): List<String> {
+        return quiz.choix
+    }
+
+    fun getPassword(utilisateur: Utilisateur): String {
+        return utilisateur.motDePasse
+    }
+
+    fun veriferQuiz(choix: String, reponse: String): String {
+        return VerificationReponseCreationQuiz().verificationReponseCreationQuiz(choix, reponse)
+    }*/
 }
 
 var modèle = Modèle()
