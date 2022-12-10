@@ -26,4 +26,8 @@ class ReponsesParDefaut : ISourceDeDonées {
         TODO("Not yet implemented")
     }
 
+    override fun postUtilisateur(utilisateur: Utilisateur) {
+        TODO("Not yet implemented")
+    }
+
 }

@@ -268,4 +268,32 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         queue.add(requête)
         Log.d("post", requête.toString())
     }
+
+    /**
+     * Méthode qui permet l'ajout d'un utilisateur à la BD
+     *
+     * @param quiz Le quiz a ajouté
+     * @param id ID de l'utilisateur
+     */
+    override fun postUtilisateur(utilisateur: Utilisateur) {
+        var courriel = utilisateur.courriel
+        var nomUtilisateur = utilisateur.nomUtilisateur
+        var motDePasse = utilisateur.motDePasse
+
+        val queue = Volley.newRequestQueue(ctx)
+        val requête = object : StringRequest(Request.Method.POST,
+            urlSource.toString() + "/AddUtilisateur/" + courriel + "/" + nomUtilisateur + "/" + motDePasse,
+            { response ->
+                var strResp = response.toString()
+                Log.d("API", strResp)
+            },
+            { error ->
+                Log.d("API", "error => ${error.networkResponse.statusCode}")
+            }
+        ) {}
+        queue.add(requête)
+        Log.d("postUtilisateur", requête.toString())
+    }
+
+
 }

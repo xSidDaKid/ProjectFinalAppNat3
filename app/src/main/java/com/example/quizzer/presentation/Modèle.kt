@@ -124,6 +124,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      */
     fun ajouterUtilisateur(email: String, username: String, mdp: String) {
         var newUtilisateur = Utilisateur(email, username, mdp)
+        sourceDeDonne.postUtilisateur(newUtilisateur)
         utilisateurListe.add(newUtilisateur)
     }
 
