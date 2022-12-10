@@ -6,10 +6,10 @@ interface IContratVuePresentateurScore {
     interface IVueScore{
         fun initialiserListeScore(liste:MutableList<PermissionScore>?)
         fun afficherMessageErreur(s: String)
+        fun afficherLoading()
     }
 
     interface IPresentateurScore{
-
         fun getListePermission(): MutableList<PermissionScore>
     }
 }

@@ -29,6 +29,7 @@ class PresentateurScore(var vue:IVueScore): IPresentateurScore{
             //en attendant la fin de la tâche,
             //l'exécution de cette coroutine est suspendue
             try{
+                vue.afficherLoading()
                 var mapPermission = job.await()
 
                 //lorsque la tâche est terminée, la coroutine

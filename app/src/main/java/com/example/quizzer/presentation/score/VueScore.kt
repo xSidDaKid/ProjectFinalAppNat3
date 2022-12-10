@@ -6,11 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.quizzer.R
@@ -24,18 +20,24 @@ import com.example.quizzer.presentation.registration.PrésentateurRegistration
  * Use the [ScoreFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class VueScore : Fragment(),IContratVuePresentateurScore.IVueScore {
+class VueScore : Fragment(), IContratVuePresentateurScore.IVueScore {
+
+    var présentateur: PresentateurScore? = null
 
     lateinit var navController: NavController;
-    var présentateur: PresentateurScore? = null
     lateinit var listScore: ListView
     lateinit var adapter: ArrayAdapter<PermissionScore>
+    lateinit var loading: ProgressBar
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_score, container, false)
-        présentateur = PresentateurScore( this)
+        présentateur = PresentateurScore(this)
         listScore = vue.findViewById(android.R.id.list)
+        loading = vue.findViewById(R.id.loading)
         return vue
     }
 
@@ -45,13 +47,22 @@ class VueScore : Fragment(),IContratVuePresentateurScore.IVueScore {
         initialiserListeScore(présentateur?.getListePermission())
     }
 
-    override fun initialiserListeScore(liste:MutableList<PermissionScore>?) {
-        adapter = ArrayAdapter<PermissionScore>(requireContext(), android.R.layout.simple_list_item_1, liste!!)
+    override fun initialiserListeScore(liste: MutableList<PermissionScore>?) {
+        adapter = ArrayAdapter<PermissionScore>(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            liste!!
+        )
         this.listScore.adapter = adapter
+        loading.setVisibility(View.GONE)
     }
 
     override fun afficherMessageErreur(s: String) {
         Toast.makeText(requireActivity(), s, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun afficherLoading() {
+        loading.setVisibility(View.VISIBLE)
     }
 
 
