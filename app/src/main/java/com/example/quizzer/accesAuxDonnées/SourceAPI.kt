@@ -156,7 +156,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         }
         jsonRead.endObject()
 
-        if (mapUser.get(idQuiz) == null) {
+        if (mapQuiz.size == 0) {
             obtenirQuiz()
         }
 
