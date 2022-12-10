@@ -9,7 +9,6 @@ import com.example.quizzer.domaine.entité.QuizUtilisateurScore
 import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.domaine.interacteur.ObtenirReponses
 import com.example.quizzer.domaine.interacteur.VerificationReponse
-import com.example.quizzer.domaine.interacteur.VerificationReponseCreationQuiz
 
 /**
  * Classe qui permet d'intéragir avec la base de donnée
@@ -20,13 +19,15 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     //private var utilisateur = Utilisateur()
 
 
-    var utilisateurConnecte = Utilisateur("", "", "")
     var tourDesRéponses: Int = 0
     var quizListe = mutableListOf<Quiz>()
     var utilisateurListe = mutableListOf<Utilisateur>()
     var mapPermission = mapOf<String, PermissionScore>()
     var permissionListe = mutableListOf<PermissionScore>()
     var indexQuizListe: Int = 0
+
+    var quizSelectionner = Quiz("", "", emptyList(), emptyList())
+    var utilisateurConnecte = Utilisateur("", "", "")
 
     var mapQuiz = mapOf<Int, Quiz>()
     var mapUser = mapOf<Int, Utilisateur>()
@@ -132,6 +133,18 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     }
 
     /**
+     * Méthode qui permet d'ajouter une nouvelle permission à la base de donnée
+     *
+     * @param email Email de l'utilisateur
+     * @param username Nom d'utilisateur de l'utilisateur
+     * @param mdp Mot de passe de l'utilisateur
+     */
+    fun ajouterPermission(quiz: Quiz, utilisateur: Utilisateur, score: Int) {
+        var newPermissionScore = PermissionScore(quiz, utilisateur, score)
+        sourceDeDonne.postPermissionScore(newUtilisateur)
+    }
+
+    /**
      * UTILISATEUR - MÉTHODE POUR AVOIR LES INFOS DE L'UTILISATEUR
      */
 
@@ -165,34 +178,33 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      *
      * @return Nom d'utilisateur
      */
-    fun getnomUtilisateur(): String {
+    fun getNomUtilisateur(): String {
         return utilisateurConnecte.nomUtilisateur
     }
 
     /**
-     * MÉTHODE POUR INITIALISER UN QUIZ
+     * QUIZ - MÉTHODE POUR AVOIR LES INFOS D'UN QUIZ
      */
+    fun getIDQuiz(quizIndex: Int) {
+        indexQuizListe = quizIndex + 1
+        for ((key, value) in mapQuiz) {
+            if (key == indexQuizListe) {
+                quizSelectionner = value
+            }
+        }
+    }
 
     /**
      * Méthode qui permet d'initialiser un quiz a partir d'une liste
      *
      */
-    fun initialiserQuizParDefaut(): Quiz? {
-        /*var newQuiz = Quiz(
-            0,
-            "Les fruits et leurs couleurs",
-            "Quelle est la couleur du fruit?",
-            listOf<String>("Jaune", "Rouge", "Orange", "Vert"),
-            ObtenirReponses().obtenirReponses(ReponsesParDefaut())
-        )*/
-        //quizListe.add(newQuiz)
-
-        return mapQuiz.getValue(indexQuizListe + 1)
+    fun getQuizSelectionner(): Quiz {
+        return quizSelectionner
     }
 
-    fun setIndexQuiz(quizIndex: Int) {
-        indexQuizListe = quizIndex
-    }
+    /**
+     * MÉTHODE POUR INITIALISER UN QUIZ
+     */
 
     /**
      * Méthode qui permet de valider une réponse et de changer le score de l'utilisateur

@@ -2,7 +2,6 @@ package com.example.quizzer.presentation.listQuiz
 
 import android.util.Log
 import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IPresentateurListQuiz
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IVueListQuiz
 import com.example.quizzer.presentation.modèle
@@ -66,7 +65,7 @@ class PresentateurListQuiz(
      * @param listePosition La position du quiz
      */
     override fun getQuiz(listePosition: Int) {
-        modèle.setIndexQuiz(listePosition)
+        modèle.getIDQuiz(listePosition)
         vue.naviguerVersQuiz()
     }
 

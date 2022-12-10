@@ -1,7 +1,6 @@
 package com.example.quizzer.presentation.quiz
 
 import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.modèle
 import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.IPrésentateurQuiz
 import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.IVueQuiz
@@ -58,7 +57,7 @@ class PrésentateurQuiz( var vue: IVueQuiz = VueQuiz()) : IPrésentateurQuiz {
      * @return Le quiz choisi
      */
     override fun réinitialiserQuiz(): Quiz? {
-        return modèle.initialiserQuizParDefaut()
+        return modèle.getQuizSelectionner()
     }
 
     /**
