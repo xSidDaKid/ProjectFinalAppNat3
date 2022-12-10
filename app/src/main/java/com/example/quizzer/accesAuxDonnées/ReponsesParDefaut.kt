@@ -30,4 +30,8 @@ class ReponsesParDefaut : ISourceDeDonées {
         TODO("Not yet implemented")
     }
 
+    override fun postPermissionScore(permissionScore: PermissionScore) {
+        TODO("Not yet implemented")
+    }
+
 }

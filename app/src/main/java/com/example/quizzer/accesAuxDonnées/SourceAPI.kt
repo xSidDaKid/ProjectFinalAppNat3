@@ -295,5 +295,45 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         Log.d("postUtilisateur", requête.toString())
     }
 
+    /**
+     * Méthode qui permet l'ajout d'un utilisateur à la BD
+     *
+     * @param quiz Le quiz a ajouté
+     * @param id ID de l'utilisateur
+     */
+    override fun postPermissionScore(permissionScore: PermissionScore) {
+        //AddPermission/{idQuiz}/{idUtilisateur}/{score}
+        var quiz = permissionScore.quiz
+        var idQuiz = 0
+        var utilisateur = permissionScore.utilisateur
+        var idUtilisateur = 0
+        var score = permissionScore.score
+
+        for ((key, value) in mapQuiz) {
+            if (quiz == value) {
+                idQuiz = key
+            }
+        }
+
+        for ((key, value) in mapUser) {
+            if (utilisateur == value) {
+                idUtilisateur = key
+            }
+        }
+
+        val queue = Volley.newRequestQueue(ctx)
+        val requête = object : StringRequest(Request.Method.POST,
+            urlSource.toString() + "/AddPermission/" + idQuiz + "/" + idUtilisateur + "/" + score,
+            { response ->
+                var strResp = response.toString()
+                Log.d("API", strResp)
+            },
+            { error ->
+                Log.d("API", "error => ${error.networkResponse.statusCode}")
+            }
+        ) {}
+        queue.add(requête)
+    }
+
 
 }

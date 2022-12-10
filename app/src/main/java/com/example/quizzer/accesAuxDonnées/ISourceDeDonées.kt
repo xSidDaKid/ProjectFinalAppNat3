@@ -12,4 +12,5 @@ interface ISourceDeDonées {
     fun obtenirQuiz(): Map<Int, Quiz>
     fun postQuiz(quiz: Quiz, id: Int)
     fun postUtilisateur(utilisateur: Utilisateur)
+    fun postPermissionScore(permissionScore: PermissionScore)
 }
