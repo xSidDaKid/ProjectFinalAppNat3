@@ -13,4 +13,5 @@ interface ISourceDeDonées {
     fun postQuiz(quiz: Quiz, id: Int)
     fun postUtilisateur(utilisateur: Utilisateur)
     fun postPermissionScore(permissionScore: PermissionScore)
+    fun updatePermissionScore(permissionScore: PermissionScore)
 }

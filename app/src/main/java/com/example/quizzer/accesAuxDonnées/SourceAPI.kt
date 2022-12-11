@@ -307,7 +307,6 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
      * @param id ID de l'utilisateur
      */
     override fun postPermissionScore(permissionScore: PermissionScore) {
-        //AddPermission/{idQuiz}/{idUtilisateur}/{score}
         var quiz = permissionScore.quiz
         var idQuiz = 0
         var utilisateur = permissionScore.utilisateur
@@ -329,6 +328,44 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         val queue = Volley.newRequestQueue(ctx)
         val requête = object : StringRequest(Request.Method.POST,
             urlSource.toString() + "/AddPermission/" + idQuiz + "/" + idUtilisateur + "/" + score,
+            { response ->
+                var strResp = response.toString()
+                Log.d("API", strResp)
+            },
+            { error ->
+                Log.d("API", "error => ${error.networkResponse.statusCode}")
+            }
+        ) {}
+        queue.add(requête)
+    }
+
+    /**
+     * Méthode qui permet de changer le score de l'utilisateur
+     *
+     * @param permissionScore Le score du quiz a changé
+     */
+    override fun updatePermissionScore(permissionScore: PermissionScore) {
+        var quiz = permissionScore.quiz
+        var idQuiz = 0
+        var utilisateur = permissionScore.utilisateur
+        var idUtilisateur = 0
+        var score = permissionScore.score
+
+        for ((key, value) in mapQuiz) {
+            if (quiz == value) {
+                idQuiz = key
+            }
+        }
+
+        for ((key, value) in mapUser) {
+            if (utilisateur == value) {
+                idUtilisateur = key
+            }
+        }
+
+        val queue = Volley.newRequestQueue(ctx)
+        val requête = object : StringRequest(Request.Method.PUT,
+            urlSource.toString() + "/UpdatePermission/" + score + "/" + idQuiz + "/" + idUtilisateur,
             { response ->
                 var strResp = response.toString()
                 Log.d("API", strResp)
