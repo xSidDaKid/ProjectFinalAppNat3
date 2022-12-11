@@ -91,6 +91,7 @@ class VueQuiz : Fragment(), IVueQuiz {
         if (text != "")
             button.text = text
         else
+            //présentateur?.updateScore()
             findNavController().navigate(R.id.vueMenuPrincipal)
     }
 
@@ -121,7 +122,7 @@ class VueQuiz : Fragment(), IVueQuiz {
      */
     override fun afficherScore(vue: View, quiz: Quiz) {
         var textScore = vue.findViewById<TextView>(R.id.scoreQuiz)
-        textScore.text = "Score: " + présentateur?.getScore(quiz).toString()
+        textScore.text = "Score: " + présentateur?.getScore().toString()
     }
 
     /**

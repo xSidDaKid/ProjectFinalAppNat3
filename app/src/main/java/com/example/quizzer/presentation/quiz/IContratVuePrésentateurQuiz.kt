@@ -17,6 +17,7 @@ interface IContratVuePrésentateurQuiz {
         fun afficherTitre(vue: View, quiz: Quiz)
         fun afficherScore(vue: View, quiz: Quiz)
         fun attacherÉcouteurQuitter(vue: View)
+
     }
 
     interface IPrésentateurQuiz {
@@ -26,7 +27,8 @@ interface IContratVuePrésentateurQuiz {
         fun réinitialiserQuiz(): Quiz?
         fun getQuestion(quiz: Quiz): String
         fun getTitre(quiz: Quiz): String
-        fun getScore(quiz: Quiz): Int
+        fun getScore(): Int
         fun quitter()
+        fun updateScore()
     }
 }

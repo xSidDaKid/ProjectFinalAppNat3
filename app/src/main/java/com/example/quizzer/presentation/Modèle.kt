@@ -5,7 +5,6 @@ import com.example.quizzer.accesAuxDonnées.ISourceDeDonées
 import com.example.quizzer.accesAuxDonnées.ReponsesParDefaut
 import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.domaine.entité.QuizUtilisateurScore
 import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.domaine.interacteur.ObtenirReponses
 import com.example.quizzer.domaine.interacteur.VerificationReponse
@@ -15,7 +14,7 @@ import com.example.quizzer.domaine.interacteur.VerificationReponse
  */
 class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
 
-    private var quizScore = QuizUtilisateurScore()
+    //private var quizScore = QuizUtilisateurScore()
     //private var utilisateur = Utilisateur()
 
 
@@ -28,6 +27,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
 
     var utilisateurConnecte = Utilisateur("", "", "")
     var quizSelected = Quiz("", "", emptyList(), emptyList(), utilisateurConnecte)
+    var permissionScoreUser = PermissionScore(utilisateurConnecte, quizSelected, 0)
 
     var mapQuiz = mapOf<Int, Quiz>()
     var mapUser = mapOf<Int, Utilisateur>()
@@ -130,7 +130,6 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     fun ajouterUtilisateur(email: String, username: String, mdp: String) {
         var newUtilisateur = Utilisateur(email, username, mdp)
         sourceDeDonne.postUtilisateur(newUtilisateur)
-        utilisateurListe.add(newUtilisateur)
     }
 
     /**
@@ -143,6 +142,15 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     fun ajouterPermission(quiz: Quiz, utilisateur: Utilisateur, score: Int) {
         var newPermissionScore = PermissionScore(utilisateur, quiz, score)
         sourceDeDonne.postPermissionScore(newPermissionScore)
+    }
+
+    /**
+     * API - PUT
+     */
+    fun updateScore() {
+        var newPermissionScore =
+            PermissionScore(utilisateurConnecte, quizSelected, permissionScoreUser.score)
+        sourceDeDonne.updatePermissionScore(newPermissionScore)
     }
 
     /**
@@ -204,6 +212,20 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     }
 
     /**
+     * PERMISSION_SCORE - MÉTHODE POUR AVOIR LES INFOS DE SUR LES PERMISSIONS ET SCORE
+     */
+
+    /**
+     * Méthode qui permet d'avoir le score de l'utilisateur
+     *
+     * @param quiz Quiz choisi
+     * @return Le score de l'utilisateur
+     */
+    fun getScore(): Int {
+        return permissionScoreUser.score
+    }
+
+    /**
      * MÉTHODE POUR INITIALISER UN QUIZ
      */
 
@@ -217,20 +239,11 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     fun soumettreRéponse(reponse: String, index: Int, quiz: Quiz): Boolean {
         var verification = VerificationReponse().verificationReponse(reponse, index, quiz)
         if (verification) {
-            quizScore.score++
+            permissionScoreUser.score++
         }
         return verification
     }
 
-    /**
-     * Méthode qui permet d'avoir le score de l'utilisateur
-     *
-     * @param quiz Quiz choisi
-     * @return Le score de l'utilisateur
-     */
-    fun getScore(quiz: Quiz): Int {
-        return quizScore.score
-    }
 
     /**
      * Méthode qui permet d'avoir la prochaine réponse

@@ -16,6 +16,7 @@ import kotlinx.coroutines.*
 class PresentateurListQuiz(
     var vue: IVueListQuiz = VueListQuiz()
 ) : IPresentateurListQuiz {
+    var listequiz = arrayOf<Quiz>()
 
     /**
      * Méthode qui permet de recevoir la liste des quiz du modèle
@@ -23,8 +24,6 @@ class PresentateurListQuiz(
      * @return La liste des quiz
      */
     override fun getListeQuiz(): Array<Quiz> {
-
-        var listequiz = arrayOf<Quiz>()
 
         GlobalScope.launch(Dispatchers.Main) {
 
@@ -65,7 +64,7 @@ class PresentateurListQuiz(
      * @param listePosition La position du quiz
      */
     override fun getQuiz(listePosition: Int) {
-        modèle.getIDQuiz(listePosition)
+        modèle.quizSelected = listequiz[listePosition]
         vue.naviguerVersQuiz()
     }
 

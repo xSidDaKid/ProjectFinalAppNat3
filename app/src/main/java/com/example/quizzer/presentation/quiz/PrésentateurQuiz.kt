@@ -86,8 +86,8 @@ class PrésentateurQuiz( var vue: IVueQuiz = VueQuiz()) : IPrésentateurQuiz {
      * @param quiz Le quiz choisi par l'utilisateur
      * @return Le nombre de bonne réponse
      */
-    override fun getScore(quiz: Quiz): Int {
-        return modèle.getScore(quiz)
+    override fun getScore(): Int {
+        return modèle.getScore()
     }
 
     /**
@@ -96,6 +96,10 @@ class PrésentateurQuiz( var vue: IVueQuiz = VueQuiz()) : IPrésentateurQuiz {
      */
     override fun quitter() {
         modèle.reinitialiserReponse()
+    }
+
+    override fun updateScore() {
+        modèle.updateScore()
     }
 
 }
