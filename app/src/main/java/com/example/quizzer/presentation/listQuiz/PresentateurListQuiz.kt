@@ -45,6 +45,7 @@ class PresentateurListQuiz(
                     }
                 }
 
+
                 //lorsque la tâche est terminée, la coroutine
                 //reprend et on met à jour l'interface utilisateur
                 vue.initialiserListeQuiz(listequiz)

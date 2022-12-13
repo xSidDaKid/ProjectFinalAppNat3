@@ -139,8 +139,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @param username Nom d'utilisateur de l'utilisateur
      * @param mdp Mot de passe de l'utilisateur
      */
-    fun ajouterPermission(quiz: Quiz, utilisateur: Utilisateur, score: Int) {
-        var newPermissionScore = PermissionScore(utilisateur, quiz, score)
+    fun ajouterPermission(quiz: Quiz, utilisateur: Utilisateur) {
+        var newPermissionScore = PermissionScore(utilisateur, quiz, 0)
         sourceDeDonne.postPermissionScore(newPermissionScore)
     }
 
@@ -308,19 +308,6 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      */
     fun reinitialiserReponse() {
         tourDesRéponses = 0
-    }
-
-    fun ajouterPermission(email: String, position: Int) {
-        var utilisateurTrouve: Utilisateur
-        var quizTrouve: Quiz
-        quizTrouve = quizListe.get(position)
-        for (utilisateur in utilisateurListe) {
-            if (utilisateur.courriel == email) {
-                utilisateurTrouve = utilisateur
-                var permission = PermissionScore(utilisateurTrouve, quizTrouve, 0)
-                permissionListe.add(permission)
-            }
-        }
     }
 
     fun getListePermissionParEmail(): MutableList<PermissionScore> {

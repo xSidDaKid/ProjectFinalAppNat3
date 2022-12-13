@@ -136,6 +136,7 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
      */
     private fun attacherÉcouteurVoirPermission() {
         btnPermission.setOnClickListener {
+            navController.popBackStack()
             présentateur?.voirPermissions()
         }
     }

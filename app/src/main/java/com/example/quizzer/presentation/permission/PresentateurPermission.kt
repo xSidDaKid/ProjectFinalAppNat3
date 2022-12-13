@@ -3,15 +3,16 @@ package com.example.quizzer.presentation.permission
 import android.util.Log
 import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.presentation.Modèle
+import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.presentation.modèle
 import com.example.quizzer.presentation.permission.IContratVuePresentateurPermission.IPresentateurPermission
 import com.example.quizzer.presentation.permission.IContratVuePresentateurPermission.IVuePermission
 import kotlinx.coroutines.*
 
 
-class PresentateurPermission( var vue:IVuePermission = VuePermission()) : IPresentateurPermission{
+class PresentateurPermission(var vue: IVuePermission = VuePermission()) : IPresentateurPermission {
     var listequiz = arrayOf<Quiz>()
+    var utilisateur = modèle.utilisateurConnecte
 
 
     override fun getTousPermissionsList(): Array<Pair<String, PermissionScore>> {
@@ -19,9 +20,15 @@ class PresentateurPermission( var vue:IVuePermission = VuePermission()) : IPrese
         return modèle.getTousPermission().toList().toTypedArray()
     }
 
-    override fun getPermission(position:Int): PermissionScore{
+    override fun getPermission(position: Int): PermissionScore {
         var liste = modèle.getTousPermission().toList().toTypedArray()
         return liste[position].second
+    }
+
+
+    override fun dialogPermission(position: Int) {
+
+        vue.montrerDialog(position)
     }
 
     fun getListeQuizSync(): Array<Quiz> {
@@ -58,13 +65,40 @@ class PresentateurPermission( var vue:IVuePermission = VuePermission()) : IPrese
         return listequiz
         //return modèle.getListeQuizSync().toTypedArray()
     }
-    override fun dialogPermission(position: Int) {
 
-        vue.montrerDialog(position)
+    override fun findUserChoisi(email: String, position: Int) {
+        GlobalScope.launch(Dispatchers.Main) {
+            var job = async(SupervisorJob() + Dispatchers.IO) {
+                modèle.getListeUtilisateur()
+            }
+
+            try {
+                vue.afficherLoading()
+                var mapUtilisateur = job.await()
+                for (item in mapUtilisateur) {
+                    if (item.value.courriel == email) {
+                        utilisateur = item.value
+                    }
+                    break
+                }
+
+                vue.creerPermission(position, utilisateur)
+
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                //vue.afficherMessageErreur(e.toString())
+            }
+        }
+
     }
 
-    override fun creerPermission(email: String, position: Int) {
-        modèle.ajouterPermission(email,position)
+    override fun findQuizChoisi(position: Int): Quiz {
+        return listequiz[position]
+
+    }
+
+    override fun ajoutPermission(quiz: Quiz, utilisateur: Utilisateur) {
+        modèle.ajouterPermission(quiz, utilisateur)
     }
 
 
