@@ -298,10 +298,6 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * --------------------------------
      */
 
-    fun getListeQuizSync(): List<Quiz> {
-        return quizListe
-    }
-
     fun getTousPermission(): Map<String, PermissionScore> {
         return mapPermission
     }

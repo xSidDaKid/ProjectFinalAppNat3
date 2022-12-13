@@ -13,6 +13,7 @@ interface IContratVuePresentateurListQuiz {
         fun naviguerVersQuiz()
         fun afficherMessageErreur(s: String)
         fun afficherLoading()
+        
     }
 
     interface IPresentateurListQuiz{

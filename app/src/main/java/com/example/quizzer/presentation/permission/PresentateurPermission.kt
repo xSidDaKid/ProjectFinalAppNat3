@@ -1,14 +1,17 @@
 package com.example.quizzer.presentation.permission
 
+import android.util.Log
 import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.modèle
 import com.example.quizzer.presentation.permission.IContratVuePresentateurPermission.IPresentateurPermission
 import com.example.quizzer.presentation.permission.IContratVuePresentateurPermission.IVuePermission
+import kotlinx.coroutines.*
 
 
 class PresentateurPermission( var vue:IVuePermission = VuePermission()) : IPresentateurPermission{
+    var listequiz = arrayOf<Quiz>()
 
 
     override fun getTousPermissionsList(): Array<Pair<String, PermissionScore>> {
@@ -21,12 +24,39 @@ class PresentateurPermission( var vue:IVuePermission = VuePermission()) : IPrese
         return liste[position].second
     }
 
-    override fun getListeQuiz(): Map<Int,Quiz> {
-        return modèle.getListeQuiz()
-    }
-
     fun getListeQuizSync(): Array<Quiz> {
-        return modèle.getListeQuizSync().toTypedArray()
+        GlobalScope.launch(Dispatchers.Main) {
+
+            //Ce bloc est exécuté dans le fil IO
+            var job = async(SupervisorJob() + Dispatchers.IO) {
+                //cette opération est longue
+                modèle.getListeQuiz()
+            }
+
+            //en attendant la fin de la tâche,
+            //l'exécution de cette coroutine est suspendue
+            try {
+                Log.d("testapiquiz", "debutAsync")
+                vue.afficherLoading()
+                var mapQuiz = job.await()
+                for (item in mapQuiz) {
+                    if (item.value.utilisateur == modèle.utilisateurConnecte) {
+                        listequiz += item.value
+                    }
+                }
+
+                //lorsque la tâche est terminée, la coroutine
+                //reprend et on met à jour l'interface utilisateur
+                vue.initialiserListeQuiz(listequiz)
+
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                //vue.afficherMessageErreur(e.toString())
+            }
+        }
+        Log.d("testapiquiz", listequiz.toString())
+        return listequiz
+        //return modèle.getListeQuizSync().toTypedArray()
     }
     override fun dialogPermission(position: Int) {
 

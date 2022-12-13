@@ -7,25 +7,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.permission.IContratVuePresentateurPermission.IVuePermission
 
 
 class VuePermission : Fragment(), IVuePermission {
     lateinit var navController: NavController;
-    var présentateur:PresentateurPermission?=null
+    var présentateur: PresentateurPermission? = null
 
     lateinit var listPermission: ListView
     lateinit var adapter: ArrayAdapter<Quiz>
+    lateinit var loading: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -33,7 +30,7 @@ class VuePermission : Fragment(), IVuePermission {
         val vue = inflater.inflate(R.layout.fragment_permission, container, false)
         présentateur = PresentateurPermission(this)
         listPermission = vue.findViewById(android.R.id.list)
-        initialiserListeQuiz()
+        loading = vue.findViewById(R.id.loading)
         attacherÉcouteurAuxQuiz()
         return vue
     }
@@ -41,15 +38,19 @@ class VuePermission : Fragment(), IVuePermission {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view)
+        initialiserListeQuiz(présentateur?.getListeQuizSync())
     }
 
-    fun initialiserListeQuiz() {
-        Log.d("testArray","creer array")
-        adapter = ArrayAdapter<Quiz>(requireContext(), android.R.layout.simple_list_item_1, présentateur!!.getListeQuizSync())
-        Log.d("testArray","creer array1")
+    override fun initialiserListeQuiz(liste: Array<Quiz>?) {
+        Log.d("testArray", "creer array")
+        adapter = ArrayAdapter<Quiz>(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            liste!!
+        )
         this.listPermission.adapter = adapter
-        Log.d("testArray","creer array2")
+        loading.setVisibility(View.GONE)
     }
 
     fun attacherÉcouteurAuxQuiz() {
@@ -59,26 +60,29 @@ class VuePermission : Fragment(), IVuePermission {
 
         }
     }
+    override fun afficherLoading() {
+        loading.setVisibility(View.VISIBLE)
+    }
 
-    fun afficherToast(message:String){
+    fun afficherToast(message: String) {
         Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
-    fun creerPermission(email:String,position: Int){
-        présentateur?.creerPermission(email,position)
+    fun creerPermission(email: String, position: Int) {
+        présentateur?.creerPermission(email, position)
     }
 
-    override fun montrerDialog(position:Int) {
+    override fun montrerDialog(position: Int) {
 
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Veuillez écrire le email")
-        var inputEmail:String=""
+        var inputEmail: String = ""
         val input = EditText(requireContext())
         input.inputType = InputType.TYPE_CLASS_TEXT
         builder.setView(input)
         builder.setPositiveButton(
             "Ajouter"
-        ) { dialog, which ->  creerPermission(input.text.toString(),position) }
+        ) { dialog, which -> creerPermission(input.text.toString(), position) }
         builder.setNegativeButton(
             "Annuler"
         ) { dialog, which -> dialog.cancel() }
