@@ -314,13 +314,13 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         var score = permissionScore.score
 
         for ((key, value) in mapQuiz) {
-            if (quiz == value) {
+            if (quiz!!.titre == value.titre) {
                 idQuiz = key
             }
         }
 
         for ((key, value) in mapUser) {
-            if (utilisateur == value) {
+            if (utilisateur!!.courriel == value.courriel) {
                 idUtilisateur = key
             }
         }

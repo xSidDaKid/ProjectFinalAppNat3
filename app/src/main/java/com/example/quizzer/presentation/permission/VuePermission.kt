@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.Quiz
+import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.presentation.permission.IContratVuePresentateurPermission.IVuePermission
 
 
@@ -60,17 +61,19 @@ class VuePermission : Fragment(), IVuePermission {
 
         }
     }
+
     override fun afficherLoading() {
-        loading.setVisibility(View.VISIBLE)
+        loading.visibility = View.VISIBLE
     }
 
-    fun afficherToast(message: String) {
+    /*fun afficherToast(message: String) {
         Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
     fun creerPermission(email: String, position: Int) {
+        présentateur?.findQuizChoisi(position)
         présentateur?.creerPermission(email, position)
-    }
+    }*/
 
     override fun montrerDialog(position: Int) {
 
@@ -82,7 +85,7 @@ class VuePermission : Fragment(), IVuePermission {
         builder.setView(input)
         builder.setPositiveButton(
             "Ajouter"
-        ) { dialog, which -> creerPermission(input.text.toString(), position) }
+        ) { dialog, which -> verifierEmail(input.text.toString(), position) }
         builder.setNegativeButton(
             "Annuler"
         ) { dialog, which -> dialog.cancel() }
@@ -117,5 +120,18 @@ class VuePermission : Fragment(), IVuePermission {
 
     }
 
+    private fun verifierEmail(email: String, position: Int) {
+        présentateur?.findUserChoisi(email, position)
+    }
+
+    override fun creerPermission(position: Int, user: Utilisateur) {
+        loading.visibility = View.GONE
+        if (user != null) {
+            var quiz = présentateur?.findQuizChoisi(position)
+            présentateur?.ajoutPermission(quiz!!, user)
+        } else {
+
+        }
+    }
 
 }
