@@ -19,7 +19,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
 
     var urlSource = URL("http://10.0.2.2:64473/Service1.svc")
     //var urlSource = URL("https://d669f856-a4c9-423f-8375-1a565c31c4e8.mock.pstmn.io")
-
+    var compteurID = 0
     var mapUser = emptyMap<Int, Utilisateur>()
     var mapQuiz = emptyMap<Int, Quiz>()
     var mapPermissionScore = emptyMap<Int, PermissionScore>()
@@ -135,6 +135,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         var idUtilisateur: Int = 0
         var score: Int = 0
 
+
         jsonRead.beginObject()
         while (jsonRead.hasNext()) {
             var cle = jsonRead.nextName()
@@ -152,7 +153,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
                     jsonRead.skipValue()
                 }
             }
-
+            compteurID++
         }
         jsonRead.endObject()
 
@@ -161,7 +162,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         }
 
         return Pair(
-            idUtilisateur, PermissionScore(
+            compteurID, PermissionScore(
                 mapUser.get(idUtilisateur),
                 mapQuiz.get(idQuiz),
                 score
