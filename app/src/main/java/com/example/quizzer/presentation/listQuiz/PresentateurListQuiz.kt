@@ -24,38 +24,26 @@ class PresentateurListQuiz(
      * @return La liste des quiz
      */
     override fun getListeQuiz(): Array<Quiz> {
-
         GlobalScope.launch(Dispatchers.Main) {
 
-            //Ce bloc est exécuté dans le fil IO
             var job = async(SupervisorJob() + Dispatchers.IO) {
-                //cette opération est longue
-                modèle.getListeQuiz()
+                modèle.getListePermission()
             }
 
-            //en attendant la fin de la tâche,
-            //l'exécution de cette coroutine est suspendue
             try {
-                Log.d("testapiquiz", "debutAsync")
                 vue.afficherLoading()
-                var mapQuiz = job.await()
-                for (item in mapQuiz) {
+                var mapPermission = job.await()
+
+                for (item in mapPermission) {
                     if (item.value.utilisateur == modèle.utilisateurConnecte) {
-                        listequiz += item.value
+                        listequiz += item.value.quiz!!
                     }
                 }
-
-
-                //lorsque la tâche est terminée, la coroutine
-                //reprend et on met à jour l'interface utilisateur
                 vue.initialiserListeQuiz(listequiz)
-
             } catch (e: java.lang.Exception) {
-                e.printStackTrace()
-                vue.afficherMessageErreur(e.toString())
+                vue.afficherMessageErreur("ici")
             }
         }
-        Log.d("testapiquiz", listequiz.toString())
         return listequiz
     }
 
