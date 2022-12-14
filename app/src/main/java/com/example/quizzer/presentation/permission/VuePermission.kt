@@ -134,4 +134,21 @@ class VuePermission : Fragment(), IVuePermission {
         }
     }
 
+    override fun montrerDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.listequizTitre))
+        builder.setMessage(getString(R.string.aucunInvitation))
+
+        builder.setPositiveButton(
+            "OK"
+        ) { dialog, which ->
+            Toast.makeText(
+                this.context,
+                getString(R.string.retourMenu), Toast.LENGTH_SHORT
+            ).show()
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
 }

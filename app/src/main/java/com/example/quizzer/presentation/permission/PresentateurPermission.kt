@@ -53,7 +53,11 @@ class PresentateurPermission(var vue: IVuePermission = VuePermission()) : IPrese
 
                 //lorsque la tâche est terminée, la coroutine
                 //reprend et on met à jour l'interface utilisateur
-                vue.initialiserListeQuiz(listequiz)
+                if (listequiz.isEmpty()) {
+                    vue.montrerDialog()
+                } else {
+                    vue.initialiserListeQuiz(listequiz)
+                }
 
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
@@ -85,7 +89,6 @@ class PresentateurPermission(var vue: IVuePermission = VuePermission()) : IPrese
 
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
-                //vue.afficherMessageErreur(e.toString())
             }
         }
 

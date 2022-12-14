@@ -10,6 +10,7 @@ interface IContratVuePresentateurPermission {
         fun initialiserListeQuiz(liste: Array<Quiz>?)
         fun afficherLoading()
         fun creerPermission(position: Int, user: Utilisateur)
+        fun montrerDialog()
     }
 
     interface IPresentateurPermission {
