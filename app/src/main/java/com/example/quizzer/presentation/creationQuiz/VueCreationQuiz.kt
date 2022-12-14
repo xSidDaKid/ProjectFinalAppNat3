@@ -1,6 +1,8 @@
 package com.example.quizzer.presentation.creationQuiz
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import androidx.navigation.Navigation
 import com.example.quizzer.R
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IVueCreation
 import com.google.android.material.textfield.TextInputEditText
+import java.util.*
 
 /**
  * Classe qui permet de montrer l'interface pour créer un quiz et envoyer les données au présentateur
@@ -113,5 +116,26 @@ class VueCreationQuiz : Fragment(), IVueCreation {
     override fun afficherMessageErreur(s: String) {
         Toast.makeText(requireActivity(), s, Toast.LENGTH_LONG).show()
         Log.d("erreur", s)
+    }
+
+    fun addEventToCalendar(){
+        val startMillis: Long = Calendar.getInstance().run {
+            set(2022, 12, 19, 7, 30)
+            timeInMillis
+        }
+        val endMillis: Long = Calendar.getInstance().run {
+            set(2022, 0, 19, 8, 30)
+            timeInMillis
+        }
+        val intent = Intent(Intent.ACTION_INSERT)
+            .setData(CalendarContract.Events.CONTENT_URI)
+            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
+            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endMillis)
+            .putExtra(CalendarContract.Events.TITLE, "Yoga")
+            .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
+            .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
+            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+            .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com")
+        startActivity(intent)
     }
 }
