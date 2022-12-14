@@ -158,9 +158,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         }
         jsonRead.endObject()
 
-        if (mapQuiz.size == 0) {
-            obtenirQuiz()
-        }
+        obtenirQuiz()
 
         return Pair(
             compteurID, PermissionScore(
