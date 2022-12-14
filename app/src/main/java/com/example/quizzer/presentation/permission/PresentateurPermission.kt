@@ -15,15 +15,15 @@ class PresentateurPermission(var vue: IVuePermission = VuePermission()) : IPrese
     var utilisateur = modèle.utilisateurConnecte
 
 
-    override fun getTousPermissionsList(): Array<Pair<String, PermissionScore>> {
+    /*override fun getTousPermissionsList(): Array<Pair<String, PermissionScore>> {
 
         return modèle.getTousPermission().toList().toTypedArray()
-    }
+    }*/
 
-    override fun getPermission(position: Int): PermissionScore {
+    /*override fun getPermission(position: Int): PermissionScore {
         var liste = modèle.getTousPermission().toList().toTypedArray()
         return liste[position].second
-    }
+    }*/
 
 
     override fun dialogPermission(position: Int) {

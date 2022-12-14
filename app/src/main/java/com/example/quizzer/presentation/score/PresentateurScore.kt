@@ -42,7 +42,7 @@ class PresentateurScore(var vue:IVueScore): IPresentateurScore{
 
 
 
-        return modèle.getListePermissionParEmail()
+        return listePermisionScore
     }
 
 }

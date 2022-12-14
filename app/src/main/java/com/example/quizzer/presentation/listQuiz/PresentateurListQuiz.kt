@@ -1,6 +1,5 @@
 package com.example.quizzer.presentation.listQuiz
 
-import android.util.Log
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IPresentateurListQuiz
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IVueListQuiz
@@ -33,16 +32,17 @@ class PresentateurListQuiz(
             try {
                 vue.afficherLoading()
                 var mapPermission = job.await()
-
-                for (item in mapPermission) {
-                    if (item.value.utilisateur == modèle.utilisateurConnecte) {
-                        listequiz += item.value.quiz!!
+                if (listequiz.isEmpty()) {
+                    for (item in mapPermission) {
+                        if (item.value.utilisateur == modèle.utilisateurConnecte) {
+                            listequiz += item.value.quiz!!
+                        }
                     }
-                }
-                if (listequiz.size == 0) {
-                    vue.afficherMessageErreur("")
-                } else {
-                    vue.initialiserListeQuiz(listequiz)
+                    if (mapPermission.isEmpty()) {
+                        vue.afficherMessageErreur("")
+                    } else {
+                        vue.initialiserListeQuiz(listequiz)
+                    }
                 }
             } catch (e: java.lang.Exception) {
                 vue.afficherMessageErreur("ici")
