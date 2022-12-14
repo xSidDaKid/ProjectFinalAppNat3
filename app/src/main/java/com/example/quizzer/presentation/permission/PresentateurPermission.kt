@@ -1,7 +1,6 @@
 package com.example.quizzer.presentation.permission
 
 import android.util.Log
-import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.presentation.modèle

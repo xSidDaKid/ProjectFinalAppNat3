@@ -2,13 +2,13 @@ package com.example.quizzer.domaine.interacteur
 
 import com.example.quizzer.accesAuxDonnées.ISourceDeDonées
 
-class ObtenirReponses() {
+class ObtenirReponses {
 
     fun obtenirReponses(sourceDeDonées: ISourceDeDonées): List<Map<String, String>> {
 
-         var reponses = trierReponses(sourceDeDonées.obtenirReponsesBrutes())
-         return reponses
-     }
+        var reponses = trierReponses(sourceDeDonées.obtenirReponsesBrutes())
+        return reponses
+    }
 
     fun trierReponses(reponses: String): List<Map<String, String>> {
         var premierFiltre = reponses.split(",")
@@ -21,6 +21,7 @@ class ObtenirReponses() {
         }
         return réponsesTriés
     }
+
     fun trierReponses2(reponseBrut: String): List<String> {
         var réponsesTriés: List<String> = emptyList()
         réponsesTriés += reponseBrut.trim().split(",")

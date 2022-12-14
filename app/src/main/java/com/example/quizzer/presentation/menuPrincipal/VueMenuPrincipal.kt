@@ -19,7 +19,7 @@ import com.example.quizzer.presentation.menuPrincipal.IContratVuePresentateurMen
  */
 class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
 
-    lateinit var navController: NavController;
+    lateinit var navController: NavController
     lateinit var btnDeconnecter: Button
     lateinit var btnCreerQuiz: Button
     lateinit var btnListeQuiz: Button
@@ -55,7 +55,7 @@ class VueMenuPrincipal : Fragment(), IVueMenuPrincipal {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view)
     }
 
     /**

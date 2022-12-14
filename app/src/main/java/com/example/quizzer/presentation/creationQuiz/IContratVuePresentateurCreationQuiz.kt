@@ -1,8 +1,6 @@
 package com.example.quizzer.presentation.creationQuiz
 
 import android.view.View
-import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.domaine.entité.Utilisateur
 
 /**
  * Interface qui permet à la vue de communiquer avec le présentateur et au présentateur de communiquer avec le modèle

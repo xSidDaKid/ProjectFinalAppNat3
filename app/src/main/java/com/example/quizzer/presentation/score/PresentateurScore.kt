@@ -3,18 +3,16 @@ package com.example.quizzer.presentation.score
 
 import android.util.Log
 import com.example.quizzer.domaine.entité.PermissionScore
-import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.modèle
 import com.example.quizzer.presentation.score.IContratVuePresentateurScore.IPresentateurScore
 import com.example.quizzer.presentation.score.IContratVuePresentateurScore.IVueScore
 import kotlinx.coroutines.*
 
 
-class PresentateurScore(var vue:IVueScore): IPresentateurScore{
+class PresentateurScore(var vue: IVueScore) : IPresentateurScore {
 
     override fun getListePermission(): MutableList<PermissionScore> {
-        Log.d("avant","avantapi")
+        Log.d("avant", "avantapi")
         var listePermisionScore = mutableListOf<PermissionScore>()
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -23,7 +21,7 @@ class PresentateurScore(var vue:IVueScore): IPresentateurScore{
                 modèle.getListePermission()
             }
 
-            try{
+            try {
                 vue.afficherLoading()
                 var mapPermission = job.await()
 
@@ -34,9 +32,8 @@ class PresentateurScore(var vue:IVueScore): IPresentateurScore{
                 }
                 vue.initialiserListeScore(listePermisionScore)
 
-            }
-            catch(e: java.lang.Exception ){
-                vue.afficherMessageErreur( "ici")
+            } catch (e: java.lang.Exception) {
+                vue.afficherMessageErreur("ici")
             }
         }
 

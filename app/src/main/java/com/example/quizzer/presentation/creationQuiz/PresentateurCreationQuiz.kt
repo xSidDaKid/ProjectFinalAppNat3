@@ -1,8 +1,5 @@
 package com.example.quizzer.presentation.creationQuiz
 
-import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.domaine.entité.Utilisateur
-import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IPresentateurCreation
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IVueCreation
 import com.example.quizzer.presentation.modèle
@@ -27,7 +24,7 @@ class PresentateurCreationQuiz(var vue: IVueCreation = VueCreationQuiz()) :
      */
     override fun traiterCreationQuiz(
         titre: String, question: String, choix: List<String>, reponse: List<String>
-    ){
+    ) {
         var quiz = modèle.quizSelected
         GlobalScope.launch(Dispatchers.Main) {
 

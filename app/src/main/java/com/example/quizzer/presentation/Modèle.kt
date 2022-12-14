@@ -106,7 +106,12 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @param choix Choix du Quiz
      * @param reponse Réponses à associer à un quiz
      */
-    fun ajouterQuiz(titre: String, question: String, choix: List<String>, reponse: List<String>) :Quiz {
+    fun ajouterQuiz(
+        titre: String,
+        question: String,
+        choix: List<String>,
+        reponse: List<String>
+    ): Quiz {
         var compteur = 0
         var reponseTrier: List<Map<String, String>> = emptyList()
 
@@ -316,7 +321,6 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
     fun reinitialiserReponse() {
         tourDesRéponses = 0
     }
-
 
 
     /**

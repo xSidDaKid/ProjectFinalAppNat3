@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.quizzer.R
-import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IVueCreation
 import com.google.android.material.textfield.TextInputEditText
 
@@ -22,7 +20,7 @@ import com.google.android.material.textfield.TextInputEditText
  */
 class VueCreationQuiz : Fragment(), IVueCreation {
 
-    lateinit var navController: NavController;
+    lateinit var navController: NavController
     lateinit var btnCreer: Button
 
     var présentateur: PresentateurCreationQuiz? = null
@@ -42,7 +40,7 @@ class VueCreationQuiz : Fragment(), IVueCreation {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view)
     }
 
     /**
@@ -92,27 +90,28 @@ class VueCreationQuiz : Fragment(), IVueCreation {
             )
 
             if (titre == "") {
-                vue.findViewById<TextInputEditText>(R.id.titre).setError("Invalide")
+                vue.findViewById<TextInputEditText>(R.id.titre).error = "Invalide"
             } else if (question == "") {
-                vue.findViewById<TextInputEditText>(R.id.question).setError("Invalide")
+                vue.findViewById<TextInputEditText>(R.id.question).error = "Invalide"
             } else if (choix.contains("")) {
-                vue.findViewById<TextInputEditText>(R.id.choix0).setError("Invalide")
-                vue.findViewById<TextInputEditText>(R.id.choix1).setError("Invalide")
-                vue.findViewById<TextInputEditText>(R.id.choix2).setError("Invalide")
-                vue.findViewById<TextInputEditText>(R.id.choix3).setError("Invalide")
+                vue.findViewById<TextInputEditText>(R.id.choix0).error = "Invalide"
+                vue.findViewById<TextInputEditText>(R.id.choix1).error = "Invalide"
+                vue.findViewById<TextInputEditText>(R.id.choix2).error = "Invalide"
+                vue.findViewById<TextInputEditText>(R.id.choix3).error = "Invalide"
             } else if (reponse.contains("")) {
-                vue.findViewById<TextInputEditText>(R.id.reponse0).setError("Invalide")
-                vue.findViewById<TextInputEditText>(R.id.reponse1).setError("Invalide")
-                vue.findViewById<TextInputEditText>(R.id.reponse2).setError("Invalide")
-                vue.findViewById<TextInputEditText>(R.id.reponse3).setError("Invalide")
+                vue.findViewById<TextInputEditText>(R.id.reponse0).error = "Invalide"
+                vue.findViewById<TextInputEditText>(R.id.reponse1).error = "Invalide"
+                vue.findViewById<TextInputEditText>(R.id.reponse2).error = "Invalide"
+                vue.findViewById<TextInputEditText>(R.id.reponse3).error = "Invalide"
             } else {
                 présentateur?.traiterCreationQuiz(titre, question, choix, reponse)
                 présentateur?.ajoutPermission()
             }
         }
     }
+
     override fun afficherMessageErreur(s: String) {
         Toast.makeText(requireActivity(), s, Toast.LENGTH_LONG).show()
-        Log.d("erreur",s)
+        Log.d("erreur", s)
     }
 }

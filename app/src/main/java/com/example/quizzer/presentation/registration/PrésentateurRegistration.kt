@@ -1,6 +1,5 @@
 package com.example.quizzer.presentation.registration
 
-import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.modèle
 import com.example.quizzer.presentation.registration.IContratVueRegistration.IPrésentateurRegistration
 import com.example.quizzer.presentation.registration.IContratVueRegistration.IVueRegistration

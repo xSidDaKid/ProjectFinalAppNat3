@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.quizzer.R
-import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.registration.IContratVueRegistration.IVueRegistration
 import com.google.android.material.textfield.TextInputEditText
 
@@ -19,7 +18,7 @@ import com.google.android.material.textfield.TextInputEditText
  *
  */
 class VueRegistration : Fragment(), IVueRegistration {
-    lateinit var navController: NavController;
+    lateinit var navController: NavController
     var présentateur: PrésentateurRegistration? = null
     lateinit var txtConnexion: TextView
     lateinit var btnEnregistrer: Button
@@ -28,7 +27,7 @@ class VueRegistration : Fragment(), IVueRegistration {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_registration, container, false)
-        présentateur = PrésentateurRegistration( this)
+        présentateur = PrésentateurRegistration(this)
 
         txtConnexion = vue.findViewById<TextView>(R.id.connexion)
         btnEnregistrer = vue.findViewById<Button>(R.id.btnEnregistrer)
@@ -40,7 +39,7 @@ class VueRegistration : Fragment(), IVueRegistration {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view)
     }
 
     /**
@@ -66,18 +65,18 @@ class VueRegistration : Fragment(), IVueRegistration {
                 vue.findViewById<TextInputEditText>(R.id.confirmerPassword).text.toString()
 
             if (email == "") {
-                vue.findViewById<TextInputEditText>(R.id.email).setError("Invalide")
+                vue.findViewById<TextInputEditText>(R.id.email).error = "Invalide"
             } else if (username == "") {
-                vue.findViewById<TextInputEditText>(R.id.nomUtilisateur).setError("Invalide")
+                vue.findViewById<TextInputEditText>(R.id.nomUtilisateur).error = "Invalide"
             } else if (mdp == "") {
-                vue.findViewById<TextInputEditText>(R.id.password).setError("Invalide")
+                vue.findViewById<TextInputEditText>(R.id.password).error = "Invalide"
             } else if (confirmationMdp == "") {
-                vue.findViewById<TextInputEditText>(R.id.confirmerPassword).setError("Invalide")
+                vue.findViewById<TextInputEditText>(R.id.confirmerPassword).error = "Invalide"
             } else if (mdp != confirmationMdp) {
-                vue.findViewById<TextInputEditText>(R.id.password)
-                    .setError("Les mots de passe ne correspondent pas")
-                vue.findViewById<TextInputEditText>(R.id.confirmerPassword)
-                    .setError("Les mots de passe ne correspondent pas")
+                vue.findViewById<TextInputEditText>(R.id.password).error =
+                    "Les mots de passe ne correspondent pas"
+                vue.findViewById<TextInputEditText>(R.id.confirmerPassword).error =
+                    "Les mots de passe ne correspondent pas"
             } else {
                 présentateur?.traiterLogin(email, username, mdp)
             }

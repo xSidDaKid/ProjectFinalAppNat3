@@ -11,16 +11,12 @@ import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentController
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IVueListQuiz
-import kotlin.system.exitProcess
 
 /**
  * Vue liste quiz qui permet d'afficher les données et permet d'informer le Présenteur à la suite d'une action de l'utilisateur
@@ -50,7 +46,7 @@ class VueListQuiz : Fragment(), IVueListQuiz {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view)
         initialiserListeQuiz(présentateur?.getListeQuiz())
     }
 
@@ -59,7 +55,7 @@ class VueListQuiz : Fragment(), IVueListQuiz {
      *
      */
     override fun naviguerVersQuiz() {
-        findNavController().popBackStack(R.id.vueMenuPrincipal,false)
+        findNavController().popBackStack(R.id.vueMenuPrincipal, false)
         findNavController().navigate(R.id.quizFragment)
     }
 
@@ -67,14 +63,14 @@ class VueListQuiz : Fragment(), IVueListQuiz {
      * Méthode qui permet d'afficher la liste des quiz
      *
      */
-    override fun initialiserListeQuiz(liste:Array<Quiz>?) {
+    override fun initialiserListeQuiz(liste: Array<Quiz>?) {
         adapter = ArrayAdapter<Quiz>(
             requireContext(),
             android.R.layout.simple_list_item_1,
             liste!!
         )
         this.listQuiz.adapter = adapter
-        loading.setVisibility(View.GONE)
+        loading.visibility = View.GONE
     }
 
     /**
@@ -91,12 +87,12 @@ class VueListQuiz : Fragment(), IVueListQuiz {
 
     override fun afficherMessageErreur(s: String) {
         Toast.makeText(requireActivity(), s, Toast.LENGTH_LONG).show()
-        Log.d("erreur",s)
+        Log.d("erreur", s)
         montrerDialog()
     }
 
     override fun afficherLoading() {
-        loading.setVisibility(View.VISIBLE)
+        loading.visibility = View.VISIBLE
     }
 
     private fun montrerDialog() {
@@ -106,8 +102,11 @@ class VueListQuiz : Fragment(), IVueListQuiz {
 
         builder.setPositiveButton(
             "OK"
-        ) { dialog, which ->Toast.makeText(this.context,
-            getString(R.string.retourMenu), Toast.LENGTH_SHORT).show()
+        ) { dialog, which ->
+            Toast.makeText(
+                this.context,
+                getString(R.string.retourMenu), Toast.LENGTH_SHORT
+            ).show()
             dialog.dismiss()
         }
         builder.show()

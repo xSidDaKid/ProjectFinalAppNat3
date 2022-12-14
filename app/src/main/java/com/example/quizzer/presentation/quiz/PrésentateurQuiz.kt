@@ -11,7 +11,7 @@ import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.IVueQu
  * @property modèle Objet qui permet de recevoir les données de l'API
  * @property vue Vue Quiz
  */
-class PrésentateurQuiz( var vue: IVueQuiz = VueQuiz()) : IPrésentateurQuiz {
+class PrésentateurQuiz(var vue: IVueQuiz = VueQuiz()) : IPrésentateurQuiz {
 
 /*    fun envoyerChoix(): List<String> {
         return modèle.getChoix()
