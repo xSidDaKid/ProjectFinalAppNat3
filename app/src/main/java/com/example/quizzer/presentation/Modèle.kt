@@ -106,7 +106,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @param choix Choix du Quiz
      * @param reponse Réponses à associer à un quiz
      */
-    fun ajouterQuiz(titre: String, question: String, choix: List<String>, reponse: List<String>) {
+    fun ajouterQuiz(titre: String, question: String, choix: List<String>, reponse: List<String>) :Quiz {
         var compteur = 0
         var reponseTrier: List<Map<String, String>> = emptyList()
 
@@ -122,7 +122,9 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
         var newQuiz =
             Quiz(titre, question, choix, reponseTrier, mapUser.getValue(getIdUtilisateur()))
         sourceDeDonne.postQuiz(newQuiz, getIdUtilisateur())
+        quizSelected = newQuiz
         //quizListe.add(newQuiz)
+        return newQuiz
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.example.quizzer.presentation.creationQuiz
 
+import com.example.quizzer.domaine.entité.Quiz
+import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IPresentateurCreation
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IVueCreation
@@ -25,28 +27,40 @@ class PresentateurCreationQuiz(var vue: IVueCreation = VueCreationQuiz()) :
      */
     override fun traiterCreationQuiz(
         titre: String, question: String, choix: List<String>, reponse: List<String>
-    ) {
-
+    ){
+        var quiz = modèle.quizSelected
         GlobalScope.launch(Dispatchers.Main) {
 
             //Ce bloc est exécuté dans le fil IO
             var job = async(SupervisorJob() + Dispatchers.IO) {
                 //cette opération est longue
-                modèle.ajouterQuiz(titre, question, choix, reponse)
+                quiz = modèle.ajouterQuiz(titre, question, choix, reponse)
             }
 
 
-            try{
+            try {
 
-                vue.afficherMessageErreur( "Ajout réussi")
+                vue.afficherMessageErreur("Ajout réussi")
 
-            }
-            catch(e: java.lang.Exception ){
-                vue.afficherMessageErreur( "ici")
+            } catch (e: java.lang.Exception) {
+                vue.afficherMessageErreur("ici")
             }
         }
+    }
 
-        vue.naviguerVersMenu()
+    override fun ajoutPermission() {
+        GlobalScope.launch(Dispatchers.Main) {
+            var job = async(SupervisorJob() + Dispatchers.IO) {
+                modèle.ajouterPermission(modèle.quizSelected, modèle.utilisateurConnecte)
+            }
+            try {
+                job.await()
+                vue.afficherMessageErreur("Ajout réussi")
+            } catch (e: java.lang.Exception) {
+                vue.afficherMessageErreur("ici")
+            }
+            vue.naviguerVersMenu()
+        }
     }
 
 }

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.quizzer.R
+import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IVueCreation
 import com.google.android.material.textfield.TextInputEditText
@@ -106,6 +107,7 @@ class VueCreationQuiz : Fragment(), IVueCreation {
                 vue.findViewById<TextInputEditText>(R.id.reponse3).setError("Invalide")
             } else {
                 présentateur?.traiterCreationQuiz(titre, question, choix, reponse)
+                présentateur?.ajoutPermission()
             }
         }
     }

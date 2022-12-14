@@ -314,6 +314,10 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         var idUtilisateur = 0
         var score = permissionScore.score
 
+        if (mapQuiz.size == 0) {
+            obtenirQuiz()
+        }
+
         for ((key, value) in mapQuiz) {
             if (quiz!!.titre == value.titre) {
                 idQuiz = key
@@ -338,6 +342,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
             }
         ) {}
         queue.add(requête)
+        //Thread.sleep(100)
     }
 
     /**
