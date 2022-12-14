@@ -44,4 +44,7 @@
 
     <!-- Alerte -->
     <string name="internet">Pas d\'internet</string>
+    <string name="listequizTitre">Aucun Quiz</string>
+    <string name="contenuAlerteListe">Vous devez soit créer un quiz sinon vous faire inviter à un quiz par quelqu\'un qui a déjà créé un quiz</string>
+    <string name="retourMenu">Please return to the menu</string>
 </resources>

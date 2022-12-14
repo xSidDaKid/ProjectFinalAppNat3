@@ -1,5 +1,6 @@
 package com.example.quizzer.presentation.listQuiz
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IVueListQuiz
+import kotlin.system.exitProcess
 
 /**
  * Vue liste quiz qui permet d'afficher les données et permet d'informer le Présenteur à la suite d'une action de l'utilisateur
@@ -73,8 +75,9 @@ class VueListQuiz : Fragment(), IVueListQuiz {
         )
         this.listQuiz.adapter = adapter
         loading.setVisibility(View.GONE)
-        Log.d("Test1", "Initializing list quiz")
-        Log.d("testapiquiz","liste")
+        if (this.listQuiz.checkedItemCount == 0){
+            montrerDialog()
+        }
     }
 
     /**
@@ -97,4 +100,19 @@ class VueListQuiz : Fragment(), IVueListQuiz {
     override fun afficherLoading() {
         loading.setVisibility(View.VISIBLE)
     }
+
+    private fun montrerDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.listequizTitre))
+        builder.setMessage(getString(R.string.contenuAlerteListe))
+
+        builder.setPositiveButton(
+            "OK"
+        ) { dialog, which ->Toast.makeText(this.context,
+            getString(R.string.retourMenu), Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
 }
