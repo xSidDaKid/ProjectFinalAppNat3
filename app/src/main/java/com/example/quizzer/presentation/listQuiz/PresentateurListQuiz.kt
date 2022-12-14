@@ -32,18 +32,17 @@ class PresentateurListQuiz(
             try {
                 vue.afficherLoading()
                 var mapPermission = job.await()
-                if (listequiz.isEmpty()) {
                     for (item in mapPermission) {
                         if (item.value.utilisateur == modèle.utilisateurConnecte) {
                             listequiz += item.value.quiz!!
                         }
                     }
-                    if (mapPermission.isEmpty()) {
+                    if (listequiz.isEmpty()) {
                         vue.afficherMessageErreur("")
                     } else {
                         vue.initialiserListeQuiz(listequiz)
                     }
-                }
+
             } catch (e: java.lang.Exception) {
                 vue.afficherMessageErreur("ici")
             }

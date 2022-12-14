@@ -126,8 +126,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
 
         var newQuiz =
             Quiz(titre, question, choix, reponseTrier, mapUser.getValue(getIdUtilisateur()))
-        sourceDeDonne.postQuiz(newQuiz, getIdUtilisateur())
         quizSelected = newQuiz
+        sourceDeDonne.postQuiz(newQuiz, getIdUtilisateur())
         //quizListe.add(newQuiz)
         return newQuiz
     }
@@ -152,7 +152,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @param mdp Mot de passe de l'utilisateur
      */
     fun ajouterPermission(quiz: Quiz, utilisateur: Utilisateur) {
-        var newPermissionScore = PermissionScore(utilisateur, quiz, 0)
+        var newPermissionScore = PermissionScore(utilisateur, quizSelected, 0)
         sourceDeDonne.postPermissionScore(newPermissionScore)
     }
 
