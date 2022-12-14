@@ -18,8 +18,9 @@
     <!-- Menu Principal -->
     <string name="bonjour">Hello, </string>
     <string name="nouveauQuiz">Create new quiz</string>
-    <string name="rejoindreQuiz">Join a new quiz</string>
     <string name="listeQuiz">List of my quizzes</string>
+    <string name="rejoindreQuiz">Invite to my quiz</string>
+    <string name="scoreBtn">See my scores</string>
     <string name="logout">Logout</string>
 
     <!-- Login -->
@@ -39,9 +40,7 @@
     <string name="confirmerMDP">Confirm Password</string>
     <string name="compteExistant">Do you already have an account? Click here</string>
 
-    <string name="listePermission">See my invitations</string>
     <string name="ajouter">Add</string>
-    <string name="scoreBtn">See my scores</string>
 
     <!-- Alerte -->
     <string name="internet">No internet</string>

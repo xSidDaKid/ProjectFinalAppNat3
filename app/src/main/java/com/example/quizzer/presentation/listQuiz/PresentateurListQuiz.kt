@@ -39,7 +39,11 @@ class PresentateurListQuiz(
                         listequiz += item.value.quiz!!
                     }
                 }
-                vue.initialiserListeQuiz(listequiz)
+                if (listequiz.size == 0) {
+                    vue.afficherMessageErreur("")
+                } else {
+                    vue.initialiserListeQuiz(listequiz)
+                }
             } catch (e: java.lang.Exception) {
                 vue.afficherMessageErreur("ici")
             }

@@ -75,9 +75,6 @@ class VueListQuiz : Fragment(), IVueListQuiz {
         )
         this.listQuiz.adapter = adapter
         loading.setVisibility(View.GONE)
-        if (this.listQuiz.checkedItemCount == 0){
-            montrerDialog()
-        }
     }
 
     /**
@@ -95,6 +92,7 @@ class VueListQuiz : Fragment(), IVueListQuiz {
     override fun afficherMessageErreur(s: String) {
         Toast.makeText(requireActivity(), s, Toast.LENGTH_LONG).show()
         Log.d("erreur",s)
+        montrerDialog()
     }
 
     override fun afficherLoading() {
