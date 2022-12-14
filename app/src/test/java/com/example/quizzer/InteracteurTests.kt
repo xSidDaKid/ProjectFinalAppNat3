@@ -10,11 +10,7 @@ import org.junit.Assert
 import org.junit.Test
 
 class InteracteurTests {
-    @Test
-    fun addition_isCorrect() {
-        Assert.assertEquals(4, 2 + 2)
-    }
-
+/**
     @Test
     fun `Étant donné une source de donné prédéfinie, lorsqu'on obtiens les réponses, on reçois une liste des maps avec nos réponses`() {
         var cobayeSource = object : ISourceDeDonées{
@@ -59,4 +55,5 @@ class InteracteurTests {
         var résultalt_attendu = true
         Assert.assertEquals(résultalt_attendu,résultat_obtenu)
     }
+    **/
 }
