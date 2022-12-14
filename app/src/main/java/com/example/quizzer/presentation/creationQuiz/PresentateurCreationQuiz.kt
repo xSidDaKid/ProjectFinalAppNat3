@@ -48,7 +48,7 @@ class PresentateurCreationQuiz(var vue: IVueCreation = VueCreationQuiz()) :
     override fun ajoutPermission() {
         GlobalScope.launch(Dispatchers.Main) {
             var job = async(SupervisorJob() + Dispatchers.IO) {
-                modèle.ajouterPermission(modèle.quizSelected, modèle.utilisateurConnecte)
+                modèle.ajouterPermission(modèle.utilisateurConnecte)
             }
             try {
                 job.await()

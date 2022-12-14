@@ -97,7 +97,8 @@ class PresentateurPermission(var vue: IVuePermission = VuePermission()) : IPrese
     }
 
     override fun ajoutPermission(quiz: Quiz, utilisateur: Utilisateur) {
-        modèle.ajouterPermission(quiz, utilisateur)
+        modèle.quizSelected = quiz
+        modèle.ajouterPermission(utilisateur)
     }
 
 

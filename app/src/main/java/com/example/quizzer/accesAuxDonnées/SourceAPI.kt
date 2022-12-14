@@ -320,6 +320,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         for ((key, value) in mapQuiz) {
             if (quiz!!.titre == value.titre) {
                 idQuiz = key
+                break
             } else {
                 idQuiz = key + 1
             }

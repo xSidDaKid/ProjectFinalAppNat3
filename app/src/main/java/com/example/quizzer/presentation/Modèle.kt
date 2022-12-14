@@ -151,7 +151,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @param username Nom d'utilisateur de l'utilisateur
      * @param mdp Mot de passe de l'utilisateur
      */
-    fun ajouterPermission(quiz: Quiz, utilisateur: Utilisateur) {
+    fun ajouterPermission(utilisateur: Utilisateur) {
         var newPermissionScore = PermissionScore(utilisateur, quizSelected, 0)
         sourceDeDonne.postPermissionScore(newPermissionScore)
     }
