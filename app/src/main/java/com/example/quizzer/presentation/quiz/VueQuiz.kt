@@ -86,11 +86,12 @@ class VueQuiz : Fragment(), IVueQuiz {
     override fun prochaineRéponse(vue: View, quiz: Quiz) {
         var button = vue.findViewById(R.id.reponseQuiz) as Button
         var text = présentateur?.envoyerProchaineRéponse(quiz)
-        if (text != "")
+        if (text != "") {
             button.text = text
-        else
-        //présentateur?.updateScore()
+        }else {
+            présentateur?.updateScore()
             findNavController().navigate(R.id.vueMenuPrincipal)
+        }
     }
 
     /**

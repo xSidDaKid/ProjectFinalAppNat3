@@ -1,6 +1,11 @@
 package com.example.quizzer.presentation.creationQuiz
 
+import android.Manifest
+import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.util.Log
@@ -9,6 +14,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -37,6 +44,9 @@ class VueCreationQuiz : Fragment(), IVueCreation {
 
         btnCreer = vue.findViewById<Button>(R.id.btnCreer)
         attacherÉcouteurQuiz(vue)
+        if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) !=          PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(requireActivity(),  arrayOf<String>(Manifest.permission.ACCESS_COARSE_LOCATION), 1);
+        ActivityCompat.requestPermissions(requireActivity(),  arrayOf(Manifest.permission.WRITE_CALENDAR), 1);
         return vue
     }
 
@@ -118,24 +128,90 @@ class VueCreationQuiz : Fragment(), IVueCreation {
         Log.d("erreur", s)
     }
 
-    fun addEventToCalendar(){
+    override fun addEventToCalendar(){
+
+        val calID: Long? = 3
+        Log.d("calendar",calID.toString())
         val startMillis: Long = Calendar.getInstance().run {
-            set(2022, 12, 19, 7, 30)
+            set(2022, 12, 15, 7, 30)
             timeInMillis
         }
         val endMillis: Long = Calendar.getInstance().run {
-            set(2022, 0, 19, 8, 30)
+            set(2022, 12, 15, 8, 45)
             timeInMillis
         }
-        val intent = Intent(Intent.ACTION_INSERT)
-            .setData(CalendarContract.Events.CONTENT_URI)
-            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
-            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endMillis)
-            .putExtra(CalendarContract.Events.TITLE, "Yoga")
-            .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
-            .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
-            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
-            .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com")
-        startActivity(intent)
+
+
+        val values = ContentValues().apply {
+            put(CalendarContract.Events.DTSTART, startMillis)
+            put(CalendarContract.Events.DTEND, endMillis)
+            put(CalendarContract.Events.TITLE, "Jazzercise")
+            put(CalendarContract.Events.DESCRIPTION, "Group workout")
+            put(CalendarContract.Events.CALENDAR_ID, calID)
+            put(CalendarContract.Events.EVENT_TIMEZONE, "America/Los_Angeles")
+        }
+        val uri: Uri = requireActivity().contentResolver.insert(CalendarContract.Events.CONTENT_URI, values)!!
+
+// get the event ID that is the last element in the Uri
+        val eventID: Long = uri.lastPathSegment!!.toLong()
+        Log.d("calendar",eventID.toString())
+
+//        val startMillis: Long = Calendar.getInstance().run {
+//            set(2022, 12, 19, 7, 30)
+//            timeInMillis
+//        }
+//        val endMillis: Long = Calendar.getInstance().run {
+//            set(2022, 0, 19, 8, 30)
+//            timeInMillis
+//        }
+//        val intent = Intent(Intent.ACTION_INSERT)
+//            .setData(CalendarContract.Events.CONTENT_URI)
+//            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
+//            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endMillis)
+//            .putExtra(CalendarContract.Events.TITLE, "Yoga")
+//            .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
+//            .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
+//            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+//            .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com")
+//        startActivity(intent)
+    }
+    private fun getCalendarId(context: Context) : Long? {
+        val projection = arrayOf(CalendarContract.Calendars._ID, CalendarContract.Calendars.CALENDAR_DISPLAY_NAME)
+
+        var calCursor = context.contentResolver.query(
+            CalendarContract.Calendars.CONTENT_URI,
+            projection,
+            CalendarContract.Calendars.VISIBLE + " = 1 AND " + CalendarContract.Calendars.IS_PRIMARY + "=1",
+            null,
+            CalendarContract.Calendars._ID + " ASC"
+        )
+
+        if (calCursor != null && calCursor.count <= 0) {
+            calCursor = context.contentResolver.query(
+                CalendarContract.Calendars.CONTENT_URI,
+                projection,
+                CalendarContract.Calendars.VISIBLE + " = 1",
+                null,
+                CalendarContract.Calendars._ID + " ASC"
+            )
+        }
+
+        if (calCursor != null) {
+            if (calCursor.moveToFirst()) {
+                val calName: String
+                val calID: String
+                val nameCol = calCursor.getColumnIndex(projection[1])
+                val idCol = calCursor.getColumnIndex(projection[0])
+
+                calName = calCursor.getString(nameCol)
+                calID = calCursor.getString(idCol)
+
+                Log.d("calendar","Calendar name = $calName Calendar ID = $calID")
+
+                calCursor.close()
+                return calID.toLong()
+            }
+        }
+        return null
     }
 }
