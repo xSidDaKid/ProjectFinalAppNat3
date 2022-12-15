@@ -14,6 +14,7 @@
     <string name="hintReponse">Reponse:Choix,Reponse:Choix,...</string>
     <string name="hint">Séparer les réponses par une virgule</string>
     <string name="creer">Créer</string>
+    <string name="newQuiz">Créer un nouveau quiz</string>
 
     <!-- Menu Principal -->
     <string name="bonjour">Bonjour, </string>
