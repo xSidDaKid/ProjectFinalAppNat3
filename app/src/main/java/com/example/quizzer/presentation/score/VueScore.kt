@@ -44,10 +44,6 @@ class VueScore : Fragment(), IContratVuePresentateurScore.IVueScore {
     }
 
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        initialiserListeScore(présentateur?.getListePermission())
-    }
 
     override fun initialiserListeScore(liste: MutableList<PermissionScore>?) {
         adapter = ArrayAdapter<PermissionScore>(
