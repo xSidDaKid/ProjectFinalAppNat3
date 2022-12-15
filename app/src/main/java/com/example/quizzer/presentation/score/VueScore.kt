@@ -40,14 +40,14 @@ class VueScore : Fragment(), IContratVuePresentateurScore.IVueScore {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        présentateur?.getListePermission()
-    }
-
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
         initialiserListeScore(présentateur?.getListePermission())
     }
+
+
+    /*override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        initialiserListeScore(présentateur?.getListePermission())
+    }*/
 
     override fun initialiserListeScore(liste: MutableList<PermissionScore>?) {
         adapter = ArrayAdapter<PermissionScore>(

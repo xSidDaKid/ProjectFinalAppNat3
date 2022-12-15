@@ -89,7 +89,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
         if (mapPermissionScore.isEmpty()) {
             mapPermissionScore = sourceDeDonne.obtenirPermissions()
         } else {
-            return mapPermissionScore
+            return sourceDeDonne.obtenirPermissions()
         }
         return mapPermissionScore
     }

@@ -119,7 +119,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
 
     fun reponseJsonToPermission(json: String): Map<Int, PermissionScore> {
         var jsonRead = JsonReader(StringReader(json))
-
+        mapPermissionScore = emptyMap()
         jsonRead.beginArray()
 
         while (jsonRead.hasNext()) {
@@ -360,7 +360,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         var score = permissionScore.score
 
         for ((key, value) in mapQuiz) {
-            if (quiz == value) {
+            if (quiz!!.titre == value.titre) {
                 idQuiz = key
             }
         }
