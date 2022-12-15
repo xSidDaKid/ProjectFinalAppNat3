@@ -150,6 +150,7 @@ class VueCreationQuiz : Fragment(), IVueCreation {
             put(CalendarContract.Events.CALENDAR_ID, calID)
             put(CalendarContract.Events.EVENT_TIMEZONE, "America/Los_Angeles")
         }
+        Log.d("calendar","we are before hte URI")
         val uri: Uri = requireActivity().contentResolver.insert(CalendarContract.Events.CONTENT_URI, values)!!
 
 // get the event ID that is the last element in the Uri

@@ -35,6 +35,7 @@ class VueQuiz : Fragment(), IVueQuiz {
         afficherQuestion(vue, quiz)
         afficherTitre(vue, quiz)
         attacherÉcouteurQuitter(vue)
+        afficherScore(vue, quiz)
         return vue
     }
 

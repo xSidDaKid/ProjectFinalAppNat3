@@ -252,6 +252,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
         var verification = VerificationReponse().verificationReponse(reponse, index, quiz)
         if (verification) {
             permissionScoreUser.score++
+        }else{
+            permissionScoreUser.score--
         }
         return verification
     }

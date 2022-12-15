@@ -1,5 +1,6 @@
 package com.example.quizzer.presentation.listQuiz
 
+import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IPresentateurListQuiz
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IVueListQuiz
@@ -16,7 +17,7 @@ class PresentateurListQuiz(
     var vue: IVueListQuiz = VueListQuiz()
 ) : IPresentateurListQuiz {
     var listequiz = arrayOf<Quiz>()
-
+    var mapPerm = emptyMap<Int,PermissionScore>()
     /**
      * Méthode qui permet de recevoir la liste des quiz du modèle
      *
@@ -32,6 +33,7 @@ class PresentateurListQuiz(
             try {
                 vue.afficherLoading()
                 var mapPermission = job.await()
+                mapPerm=mapPermission
                     for (item in mapPermission) {
                         if (item.value.utilisateur == modèle.utilisateurConnecte) {
                             listequiz += item.value.quiz!!
@@ -57,6 +59,11 @@ class PresentateurListQuiz(
      */
     override fun getQuiz(listePosition: Int) {
         modèle.quizSelected = listequiz[listePosition]
+        for (item in mapPerm) {
+            if (item.value.quiz == modèle.quizSelected) {
+                modèle.permissionScoreUser.score = item.value.score
+            }
+        }
         vue.naviguerVersQuiz()
     }
 
