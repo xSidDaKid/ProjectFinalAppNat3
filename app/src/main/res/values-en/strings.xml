@@ -14,6 +14,7 @@
     <string name="hintReponse">Answer:Choice,Answer:Choice,...</string>
     <string name="hint">Separate answers with a comma</string>
     <string name="creer">Create</string>
+    <string name="newQuiz">Create a new quiz</string>
 
     <!-- Menu Principal -->
     <string name="bonjour">Hello, </string>
