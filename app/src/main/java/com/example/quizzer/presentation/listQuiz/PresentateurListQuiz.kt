@@ -59,11 +59,7 @@ class PresentateurListQuiz(
      */
     override fun getQuiz(listePosition: Int) {
         modèle.quizSelected = listequiz[listePosition]
-        for (item in mapPerm) {
-            if (item.value.quiz == modèle.quizSelected) {
-                modèle.permissionScoreUser.score = item.value.score
-            }
-        }
+        modèle.permissionScoreUser.score=0
         vue.naviguerVersQuiz()
     }
 

@@ -21,7 +21,7 @@ class VueQuiz : Fragment(), IVueQuiz {
     //lateinit var navController: NavController;
     var présentateur: PrésentateurQuiz? = null
     lateinit var btnQuitter: Button
-
+    var meilleurScore:Int? = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -29,6 +29,7 @@ class VueQuiz : Fragment(), IVueQuiz {
         présentateur = PrésentateurQuiz(this)
         var quiz = présentateur?.réinitialiserQuiz()
         btnQuitter = vue.findViewById<Button>(R.id.btnQuitter)
+        meilleurScore=présentateur?.getScore()
         initialiserTexteBouttons(vue)
         attacherÉcouteurChoix(vue, quiz!!)
         prochaineRéponse(vue, quiz)
@@ -90,7 +91,7 @@ class VueQuiz : Fragment(), IVueQuiz {
         if (text != "") {
             button.text = text
         }else {
-            présentateur?.updateScore()
+            présentateur?.updateScore(meilleurScore!!)
             findNavController().navigate(R.id.vueMenuPrincipal)
         }
     }
