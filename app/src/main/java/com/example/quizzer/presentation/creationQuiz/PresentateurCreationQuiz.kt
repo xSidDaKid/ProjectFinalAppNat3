@@ -1,5 +1,6 @@
 package com.example.quizzer.presentation.creationQuiz
 
+import android.util.Log
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IPresentateurCreation
 import com.example.quizzer.presentation.creationQuiz.IContratVuePresentateurCreationQuiz.IVueCreation
 import com.example.quizzer.presentation.modèle
@@ -38,9 +39,11 @@ class PresentateurCreationQuiz(var vue: IVueCreation = VueCreationQuiz()) :
             try {
 
                 vue.afficherMessageErreur("Ajout réussi")
-                vue.addEventToCalendar(titre)
+                vue.ajouterQuizCalendrier(titre, modèle.utilisateurConnecte.courriel)
+                vue.afficherMessage("Ajout calendrier")
             } catch (e: java.lang.Exception) {
-                vue.afficherMessageErreur("ici")
+                vue.afficherMessageErreur(e.toString())
+                Log.d("Calendar",e.toString())
             }
         }
     }

@@ -128,6 +128,20 @@ class VueCreationQuiz : Fragment(), IVueCreation {
         Log.d("erreur", s)
     }
 
+    //Parmet d'ajouter un Quizz dans le calendrier utilise le titre du quiz ainsi que l'email de l'utilisateur connecté
+    override  fun ajouterQuizCalendrier(titre:String,email:String){
+
+        var intent = Intent(Intent.ACTION_INSERT)
+        intent.setData(CalendarContract.Events.CONTENT_URI)
+        intent.putExtra(CalendarContract.Events.TITLE,titre.toString())
+        intent.putExtra(CalendarContract.Events.DESCRIPTION,"Exercice Quizzer.")
+        intent.putExtra(CalendarContract.Events.ALL_DAY,"true")
+        intent.putExtra(Intent.EXTRA_EMAIL,email)
+
+        startActivity(intent)
+    }
+
+
     override fun addEventToCalendar(titre:String){
 
         val calID: Long? = 3
