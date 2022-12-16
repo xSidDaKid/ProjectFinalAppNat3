@@ -267,6 +267,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      */
     fun getProchaineRéponse(quiz: Quiz): String {
         var réponseString = ""
+        quiz.reponses.shuffled()
         if (tourDesRéponses >= quiz.reponses.size) {
             tourDesRéponses = 0
         } else {

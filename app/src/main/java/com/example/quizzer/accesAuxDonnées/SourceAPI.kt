@@ -43,7 +43,12 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
             promesse,
             promesse
         )
+        try {
+        println("a: "+requête.toString())
         queue.add(requête)
+        }catch (e: java.lang.Exception){
+            Log.d("GetUser", requête.toString())
+        }
         return reponseJsonToUser(promesse.get())
     }
 
