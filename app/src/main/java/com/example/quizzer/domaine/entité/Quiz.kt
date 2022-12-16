@@ -23,7 +23,7 @@ class Quiz(
         titre = ""
     }*/
     fun getChoix(indice: Int): String {
-        return this.choix[indice] as String
+        return this.choix[indice]
     }
 
     fun getChoixPourJson(): String {

@@ -18,7 +18,7 @@ import com.example.quizzer.presentation.permission.IContratVuePresentateurPermis
 
 
 class VuePermission : Fragment(), IVuePermission {
-    lateinit var navController: NavController;
+    lateinit var navController: NavController
     var présentateur: PresentateurPermission? = null
 
     lateinit var listPermission: ListView
@@ -51,7 +51,7 @@ class VuePermission : Fragment(), IVuePermission {
             liste!!
         )
         this.listPermission.adapter = adapter
-        loading.setVisibility(View.GONE)
+        loading.visibility = View.GONE
     }
 
     fun attacherÉcouteurAuxQuiz() {
@@ -132,6 +132,23 @@ class VuePermission : Fragment(), IVuePermission {
         } else {
 
         }
+    }
+
+    override fun montrerDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.listequizTitre))
+        builder.setMessage(getString(R.string.aucunInvitation))
+
+        builder.setPositiveButton(
+            "OK"
+        ) { dialog, which ->
+            Toast.makeText(
+                this.context,
+                getString(R.string.retourMenu), Toast.LENGTH_SHORT
+            ).show()
+            dialog.dismiss()
+        }
+        builder.show()
     }
 
 }

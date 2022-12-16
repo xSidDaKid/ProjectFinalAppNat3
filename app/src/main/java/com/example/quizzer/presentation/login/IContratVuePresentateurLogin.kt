@@ -1,7 +1,6 @@
 package com.example.quizzer.presentation.login
 
 import android.view.View
-import com.example.quizzer.domaine.entité.Utilisateur
 
 /**
  * Interface qui permet à la vue de communiquer avec le présentateur et au présentateur de communiquer avec le modèle
@@ -14,7 +13,7 @@ interface IContratVuePresentateurLogin {
         fun attacherÉcouteurLogin(vue: View)
         fun attacherÉcouteurEnregistrement()
         fun initialiserListeUtilisateur()
-        fun checkInternet():Boolean
+        fun checkInternet(): Boolean
 
     }
 

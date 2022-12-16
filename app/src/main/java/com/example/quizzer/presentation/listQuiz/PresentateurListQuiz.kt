@@ -1,6 +1,6 @@
 package com.example.quizzer.presentation.listQuiz
 
-import android.util.Log
+import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IPresentateurListQuiz
 import com.example.quizzer.presentation.listQuiz.IContratVuePresentateurListQuiz.IVueListQuiz
@@ -17,45 +17,38 @@ class PresentateurListQuiz(
     var vue: IVueListQuiz = VueListQuiz()
 ) : IPresentateurListQuiz {
     var listequiz = arrayOf<Quiz>()
-
+    var mapPerm = emptyMap<Int,PermissionScore>()
     /**
      * Méthode qui permet de recevoir la liste des quiz du modèle
      *
      * @return La liste des quiz
      */
     override fun getListeQuiz(): Array<Quiz> {
-
         GlobalScope.launch(Dispatchers.Main) {
 
-            //Ce bloc est exécuté dans le fil IO
             var job = async(SupervisorJob() + Dispatchers.IO) {
-                //cette opération est longue
-                modèle.getListeQuiz()
+                modèle.getListePermission()
             }
 
-            //en attendant la fin de la tâche,
-            //l'exécution de cette coroutine est suspendue
             try {
-                Log.d("testapiquiz", "debutAsync")
                 vue.afficherLoading()
-                var mapQuiz = job.await()
-                for (item in mapQuiz) {
-                    if (item.value.utilisateur == modèle.utilisateurConnecte) {
-                        listequiz += item.value
+                var mapPermission = job.await()
+                mapPerm=mapPermission
+                    for (item in mapPermission) {
+                        if (item.value.utilisateur == modèle.utilisateurConnecte) {
+                            listequiz += item.value.quiz!!
+                        }
                     }
-                }
-
-
-                //lorsque la tâche est terminée, la coroutine
-                //reprend et on met à jour l'interface utilisateur
-                vue.initialiserListeQuiz(listequiz)
+                    if (listequiz.isEmpty()) {
+                        vue.afficherMessageErreur("")
+                    } else {
+                        vue.initialiserListeQuiz(listequiz)
+                    }
 
             } catch (e: java.lang.Exception) {
-                e.printStackTrace()
-                vue.afficherMessageErreur(e.toString())
+                vue.afficherMessageErreur("ici")
             }
         }
-        Log.d("testapiquiz", listequiz.toString())
         return listequiz
     }
 
@@ -66,6 +59,7 @@ class PresentateurListQuiz(
      */
     override fun getQuiz(listePosition: Int) {
         modèle.quizSelected = listequiz[listePosition]
+        modèle.permissionScoreUser.score=0
         vue.naviguerVersQuiz()
     }
 

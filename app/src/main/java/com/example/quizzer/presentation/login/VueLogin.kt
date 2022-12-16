@@ -28,7 +28,7 @@ import kotlin.system.exitProcess
  */
 class VueLogin : Fragment(), IVueLogin {
 
-    lateinit var navController: NavController;
+    lateinit var navController: NavController
     lateinit var btnLogin: Button
     lateinit var txtEnregistrer: TextView
     var présentateur: PresentateurLogin? = null
@@ -68,7 +68,7 @@ class VueLogin : Fragment(), IVueLogin {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view)
     }
 
     /**
@@ -105,9 +105,9 @@ class VueLogin : Fragment(), IVueLogin {
             if (présentateur?.verifierConnexion(nomUtilisateur, password) == true) {
                 présentateur?.traiterMenu()
             } else {
-                vue.findViewById<TextInputEditText>(R.id.username).setError("Invalide")
-                vue.findViewById<TextInputEditText>(R.id.password).setError("Invalide")
-                navController = Navigation.findNavController(vue);
+                vue.findViewById<TextInputEditText>(R.id.username).error = "Invalide"
+                vue.findViewById<TextInputEditText>(R.id.password).error = "Invalide"
+                navController = Navigation.findNavController(vue)
             }
         }
     }

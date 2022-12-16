@@ -13,6 +13,7 @@ interface IContratVuePresentateurCreationQuiz {
         fun afficherMessage(message: String)
         fun attacherÉcouteurQuiz(vue: View)
         fun afficherMessageErreur(string: String)
+        fun addEventToCalendar(titre: String)
     }
 
     interface IPresentateurCreation {
@@ -22,5 +23,7 @@ interface IContratVuePresentateurCreationQuiz {
             choix: List<String>,
             reponse: List<String>
         )
+
+        fun ajoutPermission()
     }
 }

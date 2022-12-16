@@ -14,12 +14,14 @@
     <string name="hintReponse">Answer:Choice,Answer:Choice,...</string>
     <string name="hint">Separate answers with a comma</string>
     <string name="creer">Create</string>
+    <string name="newQuiz">Create a new quiz</string>
 
     <!-- Menu Principal -->
     <string name="bonjour">Hello, </string>
     <string name="nouveauQuiz">Create new quiz</string>
-    <string name="rejoindreQuiz">Join a new quiz</string>
     <string name="listeQuiz">List of my quizzes</string>
+    <string name="rejoindreQuiz">Invite to my quiz</string>
+    <string name="scoreBtn">See my scores</string>
     <string name="logout">Logout</string>
 
     <!-- Login -->
@@ -39,10 +41,12 @@
     <string name="confirmerMDP">Confirm Password</string>
     <string name="compteExistant">Do you already have an account? Click here</string>
 
-    <string name="listePermission">See my invitations</string>
     <string name="ajouter">Add</string>
-    <string name="scoreBtn">See my scores</string>
 
     <!-- Alerte -->
     <string name="internet">No internet</string>
+    <string name="listequizTitre">No Quizzes</string>
+    <string name="contenuAlerteListe">You must either create a quiz or get invited to a quiz by someone who already made a quiz</string>
+    <string name="retourMenu">Please return to the menu</string>
+    <string name="aucunInvitation">You need to create a quiz to invite someone</string>
 </resources>

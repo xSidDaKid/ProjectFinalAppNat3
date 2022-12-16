@@ -29,6 +29,6 @@ interface IContratVuePrésentateurQuiz {
         fun getTitre(quiz: Quiz): String
         fun getScore(): Int
         fun quitter()
-        fun updateScore()
+        fun updateScore(meilleurScore:Int)
     }
 }

@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.presentation.Modèle
 import com.example.quizzer.presentation.quiz.IContratVuePrésentateurQuiz.IVueQuiz
 
 /**
@@ -23,20 +21,22 @@ class VueQuiz : Fragment(), IVueQuiz {
     //lateinit var navController: NavController;
     var présentateur: PrésentateurQuiz? = null
     lateinit var btnQuitter: Button
-
+    var meilleurScore:Int? = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val vue = inflater.inflate(R.layout.fragment_quiz, container, false)
-        présentateur = PrésentateurQuiz( this)
+        présentateur = PrésentateurQuiz(this)
         var quiz = présentateur?.réinitialiserQuiz()
         btnQuitter = vue.findViewById<Button>(R.id.btnQuitter)
+        meilleurScore=présentateur?.getScore()
         initialiserTexteBouttons(vue)
         attacherÉcouteurChoix(vue, quiz!!)
-        prochaineRéponse(vue, quiz!!)
-        afficherQuestion(vue, quiz!!)
-        afficherTitre(vue, quiz!!)
+        prochaineRéponse(vue, quiz)
+        afficherQuestion(vue, quiz)
+        afficherTitre(vue, quiz)
         attacherÉcouteurQuitter(vue)
+        afficherScore(vue, quiz)
         return vue
     }
 
@@ -88,11 +88,12 @@ class VueQuiz : Fragment(), IVueQuiz {
     override fun prochaineRéponse(vue: View, quiz: Quiz) {
         var button = vue.findViewById(R.id.reponseQuiz) as Button
         var text = présentateur?.envoyerProchaineRéponse(quiz)
-        if (text != "")
+        if (text != "") {
             button.text = text
-        else
-            //présentateur?.updateScore()
+        }else {
+            présentateur?.updateScore(meilleurScore!!)
             findNavController().navigate(R.id.vueMenuPrincipal)
+        }
     }
 
     /**

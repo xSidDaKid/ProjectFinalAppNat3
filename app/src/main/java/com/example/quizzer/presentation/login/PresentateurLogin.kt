@@ -1,11 +1,9 @@
 package com.example.quizzer.presentation.login
 
 import android.util.Log
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.domaine.entité.Utilisateur
-import com.example.quizzer.presentation.Modèle
-import com.example.quizzer.presentation.login.IContratVuePresentateurLogin.*
+import com.example.quizzer.presentation.login.IContratVuePresentateurLogin.IPresentateurLogin
+import com.example.quizzer.presentation.login.IContratVuePresentateurLogin.IVueLogin
 import com.example.quizzer.presentation.modèle
 import kotlinx.coroutines.*
 

@@ -14,12 +14,14 @@
     <string name="hintReponse">Reponse:Choix,Reponse:Choix,...</string>
     <string name="hint">Séparer les réponses par une virgule</string>
     <string name="creer">Créer</string>
+    <string name="newQuiz">Créer un nouveau quiz</string>
 
     <!-- Menu Principal -->
     <string name="bonjour">Bonjour, </string>
     <string name="nouveauQuiz">Créer nouveau quiz</string>
-    <string name="rejoindreQuiz">Rejoindre un nouveau quiz</string>
     <string name="listeQuiz">Voir la liste de mes quiz</string>
+    <string name="rejoindreQuiz">Inviter à mon quiz</string>
+    <string name="scoreBtn">Voir mes points</string>
     <string name="logout">Déconnecter</string>
 
     <!-- Login -->
@@ -38,10 +40,13 @@
     <string name="email">Adresse courriel</string>
     <string name="confirmerMDP">Confirmer Mot de Passe</string>
     <string name="compteExistant">Avez-vous déjà un compte? Cliquez ici</string>
-    <string name="listePermission">Voir mes permissions</string>
+
     <string name="ajouter">Ajouter</string>
-    <string name="scoreBtn">voir mes points</string>
 
     <!-- Alerte -->
     <string name="internet">Pas d\'internet</string>
+    <string name="listequizTitre">Aucun Quiz</string>
+    <string name="contenuAlerteListe">Vous devez soit créer un quiz sinon vous faire inviter à un quiz par quelqu\'un qui a déjà créé un quiz</string>
+    <string name="retourMenu">Please return to the menu</string>
+    <string name="aucunInvitation">Vous devez créer un quiz pour pouvoir inviter quelqu\'un</string>
 </resources>

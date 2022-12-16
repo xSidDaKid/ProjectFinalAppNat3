@@ -1,19 +1,15 @@
 package com.example.quizzer.presentation.score
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.quizzer.R
 import com.example.quizzer.domaine.entité.PermissionScore
-import com.example.quizzer.domaine.entité.Quiz
-import com.example.quizzer.presentation.Modèle
-import com.example.quizzer.presentation.registration.PrésentateurRegistration
 
 /**
  * A simple [Fragment] subclass.
@@ -24,7 +20,7 @@ class VueScore : Fragment(), IContratVuePresentateurScore.IVueScore {
 
     var présentateur: PresentateurScore? = null
 
-    lateinit var navController: NavController;
+    lateinit var navController: NavController
     lateinit var listScore: ListView
     lateinit var adapter: ArrayAdapter<PermissionScore>
     lateinit var loading: ProgressBar
@@ -43,10 +39,10 @@ class VueScore : Fragment(), IContratVuePresentateurScore.IVueScore {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view)
         initialiserListeScore(présentateur?.getListePermission())
     }
-
+    
     override fun initialiserListeScore(liste: MutableList<PermissionScore>?) {
         adapter = ArrayAdapter<PermissionScore>(
             requireContext(),
@@ -54,7 +50,7 @@ class VueScore : Fragment(), IContratVuePresentateurScore.IVueScore {
             liste!!
         )
         this.listScore.adapter = adapter
-        loading.setVisibility(View.GONE)
+        loading.visibility = View.GONE
     }
 
     override fun afficherMessageErreur(s: String) {
@@ -62,7 +58,7 @@ class VueScore : Fragment(), IContratVuePresentateurScore.IVueScore {
     }
 
     override fun afficherLoading() {
-        loading.setVisibility(View.VISIBLE)
+        loading.visibility = View.VISIBLE
     }
 
 

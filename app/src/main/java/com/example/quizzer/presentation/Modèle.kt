@@ -1,6 +1,5 @@
 package com.example.quizzer.presentation
 
-import android.util.Log
 import com.example.quizzer.accesAuxDonnées.ISourceDeDonées
 import com.example.quizzer.accesAuxDonnées.ReponsesParDefaut
 import com.example.quizzer.domaine.entité.PermissionScore
@@ -14,24 +13,26 @@ import com.example.quizzer.domaine.interacteur.VerificationReponse
  */
 class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
 
-    //private var quizScore = QuizUtilisateurScore()
-    //private var utilisateur = Utilisateur()
-
-
-    var tourDesRéponses: Int = 0
+    /*private var quizScore = QuizUtilisateurScore()
+    private var utilisateur = Utilisateur()
     var quizListe = mutableListOf<Quiz>()
     var utilisateurListe = mutableListOf<Utilisateur>()
-    var mapPermission = mapOf<String, PermissionScore>()
-    var permissionListe = mutableListOf<PermissionScore>()
-    var indexQuizListe: Int = 0
+    var mapPermission = mapOf<String, PermissionScore>()*/
 
+    //Entite
     var utilisateurConnecte = Utilisateur("", "", "")
     var quizSelected = Quiz("", "", emptyList(), emptyList(), utilisateurConnecte)
     var permissionScoreUser = PermissionScore(utilisateurConnecte, quizSelected, 0)
 
+    //Map des API
     var mapQuiz = mapOf<Int, Quiz>()
     var mapUser = mapOf<Int, Utilisateur>()
     var mapPermissionScore = mapOf<Int, PermissionScore>()
+
+    //Variable pour initialiser un quiz
+    var tourDesRéponses: Int = 0
+    var permissionListe = mutableListOf<PermissionScore>()
+    var indexQuizListe: Int = 0
 
     init {
         var user1 = Utilisateur("a@mail.com", "bob", "mdp")
@@ -85,7 +86,11 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @return Liste des permissions
      */
     fun getListePermission(): Map<Int, PermissionScore> {
-        mapPermissionScore = sourceDeDonne.obtenirPermissions()
+        if (mapPermissionScore.isEmpty()) {
+            mapPermissionScore = sourceDeDonne.obtenirPermissions()
+        } else {
+            return sourceDeDonne.obtenirPermissions()
+        }
         return mapPermissionScore
     }
 
@@ -101,7 +106,12 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @param choix Choix du Quiz
      * @param reponse Réponses à associer à un quiz
      */
-    fun ajouterQuiz(titre: String, question: String, choix: List<String>, reponse: List<String>) {
+    fun ajouterQuiz(
+        titre: String,
+        question: String,
+        choix: List<String>,
+        reponse: List<String>
+    ): Quiz {
         var compteur = 0
         var reponseTrier: List<Map<String, String>> = emptyList()
 
@@ -116,8 +126,10 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
 
         var newQuiz =
             Quiz(titre, question, choix, reponseTrier, mapUser.getValue(getIdUtilisateur()))
+        quizSelected = newQuiz
         sourceDeDonne.postQuiz(newQuiz, getIdUtilisateur())
-        quizListe.add(newQuiz)
+        //quizListe.add(newQuiz)
+        return newQuiz
     }
 
     /**
@@ -139,8 +151,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * @param username Nom d'utilisateur de l'utilisateur
      * @param mdp Mot de passe de l'utilisateur
      */
-    fun ajouterPermission(quiz: Quiz, utilisateur: Utilisateur) {
-        var newPermissionScore = PermissionScore(utilisateur, quiz, 0)
+    fun ajouterPermission(utilisateur: Utilisateur) {
+        var newPermissionScore = PermissionScore(utilisateur, quizSelected, 0)
         sourceDeDonne.postPermissionScore(newPermissionScore)
     }
 
@@ -240,6 +252,8 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
         var verification = VerificationReponse().verificationReponse(reponse, index, quiz)
         if (verification) {
             permissionScoreUser.score++
+        }else{
+            permissionScoreUser.score--
         }
         return verification
     }
@@ -298,9 +312,9 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
      * --------------------------------
      */
 
-    fun getTousPermission(): Map<String, PermissionScore> {
-        return mapPermission
-    }
+    /* fun getTousPermission(): Map<String, PermissionScore> {
+         return mapPermission
+     }*/
 
     /**
      * Méthode qui permet de réinitialiser le tour des réponses
@@ -310,6 +324,11 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
         tourDesRéponses = 0
     }
 
+
+    /**
+    MÉTHODE INUTILISÉ
+     */
+    /*
     fun getListePermissionParEmail(): MutableList<PermissionScore> {
         var listeFiltré = mutableListOf<PermissionScore>()
         for (permission in permissionListe) {
@@ -321,7 +340,7 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
         return listeFiltré
     }
 
-    fun chercherPermissions(): MutableList<PermissionScore> {
+   fun chercherPermissions(): MutableList<PermissionScore> {
         Log.d("testapi", "chercherPermission")
         var mapPermissionScore = sourceDeDonne.obtenirPermissions()
         for (item in mapPermissionScore) {
@@ -329,11 +348,6 @@ class Modèle(var sourceDeDonne: ISourceDeDonées = ReponsesParDefaut()) {
         }
         return permissionListe
     }
-
-
-    /**
-    MÉTHODE INUTILISÉ
-     *//*
     fun getRéponseParIndex(index: Int, quiz: Quiz): Map<String, String> {
 
         return quiz.reponses.get(index)

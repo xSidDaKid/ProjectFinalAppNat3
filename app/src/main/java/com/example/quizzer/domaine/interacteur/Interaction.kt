@@ -1,4 +1,3 @@
 package com.example.quizzer.domaine.interacteur
 
-class Interaction {
-}
+class Interaction

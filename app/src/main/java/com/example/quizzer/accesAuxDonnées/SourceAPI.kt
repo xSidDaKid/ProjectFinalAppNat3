@@ -18,8 +18,9 @@ import java.net.URL
 class SourceAPI(var ctx: Context) : ISourceDeDonées {
 
     var urlSource = URL("http://10.0.2.2:64473/Service1.svc")
-    //var urlSource = URL("https://d669f856-a4c9-423f-8375-1a565c31c4e8.mock.pstmn.io")
 
+    //var urlSource = URL("https://d669f856-a4c9-423f-8375-1a565c31c4e8.mock.pstmn.io")
+    var compteurID = 0
     var mapUser = emptyMap<Int, Utilisateur>()
     var mapQuiz = emptyMap<Int, Quiz>()
     var mapPermissionScore = emptyMap<Int, PermissionScore>()
@@ -118,7 +119,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
 
     fun reponseJsonToPermission(json: String): Map<Int, PermissionScore> {
         var jsonRead = JsonReader(StringReader(json))
-
+        mapPermissionScore = emptyMap()
         jsonRead.beginArray()
 
         while (jsonRead.hasNext()) {
@@ -134,6 +135,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         var idQuiz: Int = 0
         var idUtilisateur: Int = 0
         var score: Int = 0
+
 
         jsonRead.beginObject()
         while (jsonRead.hasNext()) {
@@ -152,16 +154,14 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
                     jsonRead.skipValue()
                 }
             }
-
+            compteurID++
         }
         jsonRead.endObject()
 
-        if (mapQuiz.size == 0) {
-            obtenirQuiz()
-        }
+        obtenirQuiz()
 
         return Pair(
-            idUtilisateur, PermissionScore(
+            compteurID, PermissionScore(
                 mapUser.get(idUtilisateur),
                 mapQuiz.get(idQuiz),
                 score
@@ -315,9 +315,16 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         var idUtilisateur = 0
         var score = permissionScore.score
 
+        if (mapQuiz.size == 0) {
+            obtenirQuiz()
+        }
+
         for ((key, value) in mapQuiz) {
             if (quiz!!.titre == value.titre) {
                 idQuiz = key
+                break
+            } else {
+                idQuiz = key + 1
             }
         }
 
@@ -339,6 +346,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
             }
         ) {}
         queue.add(requête)
+        //Thread.sleep(100)
     }
 
     /**
@@ -354,7 +362,7 @@ class SourceAPI(var ctx: Context) : ISourceDeDonées {
         var score = permissionScore.score
 
         for ((key, value) in mapQuiz) {
-            if (quiz == value) {
+            if (quiz!!.titre == value.titre) {
                 idQuiz = key
             }
         }

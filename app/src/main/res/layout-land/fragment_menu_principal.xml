@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,11 +39,9 @@
                 android:textSize="40dp" />
         </LinearLayout>
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,12 +49,31 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnCreerQuiz"
-                    android:layout_width="300dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/orange"
-                    android:text="@string/nouveauQuiz" />
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btnCreerQuiz"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/orange"
+                        android:text="@string/nouveauQuiz" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/listeQuiz"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/orange"
+                        android:text="@string/listeQuiz" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -66,44 +82,33 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/listeQuiz"
-                    android:layout_width="300dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/orange"
-                    android:text="@string/listeQuiz" />
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btnPermission"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/orange"
+                        android:text="@string/rejoindreQuiz" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btnScore"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/orange"
+                        android:text="@string/scoreBtn" />
+                </LinearLayout>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnPermission"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/orange"
-                    android:text="@string/rejoindreQuiz" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnScore"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/orange"
-                    android:text="@string/scoreBtn" />
-            </LinearLayout>
-
-        </LinearLayout>
+        </TableLayout>
     </LinearLayout>
-
 </FrameLayout>

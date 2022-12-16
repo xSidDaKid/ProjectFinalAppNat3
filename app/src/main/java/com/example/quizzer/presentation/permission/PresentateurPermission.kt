@@ -1,7 +1,6 @@
 package com.example.quizzer.presentation.permission
 
 import android.util.Log
-import com.example.quizzer.domaine.entité.PermissionScore
 import com.example.quizzer.domaine.entité.Quiz
 import com.example.quizzer.domaine.entité.Utilisateur
 import com.example.quizzer.presentation.modèle
@@ -15,15 +14,15 @@ class PresentateurPermission(var vue: IVuePermission = VuePermission()) : IPrese
     var utilisateur = modèle.utilisateurConnecte
 
 
-    override fun getTousPermissionsList(): Array<Pair<String, PermissionScore>> {
+    /*override fun getTousPermissionsList(): Array<Pair<String, PermissionScore>> {
 
         return modèle.getTousPermission().toList().toTypedArray()
-    }
+    }*/
 
-    override fun getPermission(position: Int): PermissionScore {
+    /*override fun getPermission(position: Int): PermissionScore {
         var liste = modèle.getTousPermission().toList().toTypedArray()
         return liste[position].second
-    }
+    }*/
 
 
     override fun dialogPermission(position: Int) {
@@ -54,7 +53,11 @@ class PresentateurPermission(var vue: IVuePermission = VuePermission()) : IPrese
 
                 //lorsque la tâche est terminée, la coroutine
                 //reprend et on met à jour l'interface utilisateur
-                vue.initialiserListeQuiz(listequiz)
+                if (listequiz.isEmpty()) {
+                    vue.montrerDialog()
+                } else {
+                    vue.initialiserListeQuiz(listequiz)
+                }
 
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
@@ -86,7 +89,6 @@ class PresentateurPermission(var vue: IVuePermission = VuePermission()) : IPrese
 
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
-                //vue.afficherMessageErreur(e.toString())
             }
         }
 
@@ -98,7 +100,8 @@ class PresentateurPermission(var vue: IVuePermission = VuePermission()) : IPrese
     }
 
     override fun ajoutPermission(quiz: Quiz, utilisateur: Utilisateur) {
-        modèle.ajouterPermission(quiz, utilisateur)
+        modèle.quizSelected = quiz
+        modèle.ajouterPermission(utilisateur)
     }
 
 

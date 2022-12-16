@@ -2,8 +2,8 @@ package com.example.quizzer.domaine.entité
 
 class QuizUtilisateurScore {
     //var utilisateur = Utilisateur().id
-    var quiz=1
-    var score=0
+    var quiz = 1
+    var score = 0
 
 
 }
