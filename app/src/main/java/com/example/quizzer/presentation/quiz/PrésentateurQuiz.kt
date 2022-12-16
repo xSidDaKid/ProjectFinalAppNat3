@@ -98,8 +98,10 @@ class PrésentateurQuiz(var vue: IVueQuiz = VueQuiz()) : IPrésentateurQuiz {
         modèle.reinitialiserReponse()
     }
 
-    override fun updateScore() {
-        modèle.updateScore()
+    override fun updateScore(meilleurScore:Int) {
+        if(meilleurScore< modèle.getScore()) {
+            modèle.updateScore()
+        }
     }
 
 }

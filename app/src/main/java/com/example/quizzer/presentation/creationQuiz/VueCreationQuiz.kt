@@ -128,7 +128,7 @@ class VueCreationQuiz : Fragment(), IVueCreation {
         Log.d("erreur", s)
     }
 
-    override fun addEventToCalendar(){
+    override fun addEventToCalendar(titre:String){
 
         val calID: Long? = 3
         Log.d("calendar",calID.toString())
@@ -145,8 +145,8 @@ class VueCreationQuiz : Fragment(), IVueCreation {
         val values = ContentValues().apply {
             put(CalendarContract.Events.DTSTART, startMillis)
             put(CalendarContract.Events.DTEND, endMillis)
-            put(CalendarContract.Events.TITLE, "Jazzercise")
-            put(CalendarContract.Events.DESCRIPTION, "Group workout")
+            put(CalendarContract.Events.TITLE, titre)
+            put(CalendarContract.Events.DESCRIPTION, "Nouveau quiz!")
             put(CalendarContract.Events.CALENDAR_ID, calID)
             put(CalendarContract.Events.EVENT_TIMEZONE, "America/Los_Angeles")
         }

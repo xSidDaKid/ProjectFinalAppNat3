@@ -38,7 +38,7 @@ class PresentateurCreationQuiz(var vue: IVueCreation = VueCreationQuiz()) :
             try {
 
                 vue.afficherMessageErreur("Ajout réussi")
-                vue.addEventToCalendar()
+                vue.addEventToCalendar(titre)
             } catch (e: java.lang.Exception) {
                 vue.afficherMessageErreur("ici")
             }
